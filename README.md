@@ -1,36 +1,81 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Escritura en Tiempo Real
 
-## Getting Started
+Una plataforma que permite a los escritores compartir su proceso creativo en tiempo real con sus lectores. Los lectores pueden ver cómo se forma el texto letra por letra, experimentando el proceso de escritura en vivo.
 
-First, run the development server:
+## Características
+
+- 📝 Modo Escritor: Interfaz limpia y simple para escribir sin distracciones
+- 👀 Modo Lector: Visualización en tiempo real del proceso de escritura
+- ⚡ Actualizaciones instantáneas usando AWS AppSync
+- 🎨 Animaciones suaves de escritura
+- 🌓 Modo claro/oscuro
+- 📱 Diseño responsivo
+
+## Tecnologías
+
+- Next.js 14
+- TypeScript
+- Tailwind CSS
+- AWS Amplify
+- AWS AppSync
+- GraphQL
+
+## Configuración Local
+
+1. Clona el repositorio:
+
+```bash
+git clone [URL_DEL_REPOSITORIO]
+cd escritura-en-tiempo-real
+```
+
+2. Instala las dependencias:
+
+```bash
+npm install
+```
+
+3. Configura las variables de entorno:
+   Crea un archivo `.env.local` con las siguientes variables:
+
+```
+NEXT_PUBLIC_AWS_REGION=us-east-1
+NEXT_PUBLIC_APPSYNC_ENDPOINT=your-appsync-endpoint
+NEXT_PUBLIC_APPSYNC_API_KEY=your-api-key
+```
+
+4. Inicia el servidor de desarrollo:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+5. Abre [http://localhost:3000](http://localhost:3000) en tu navegador.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Estructura del Proyecto
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+src/
+  ├── app/                    # Páginas de la aplicación
+  │   ├── page.tsx           # Página principal
+  │   ├── writer/            # Modo escritor
+  │   └── reader/            # Modo lector
+  ├── components/            # Componentes React
+  │   ├── Editor.tsx        # Componente de edición
+  │   └── Viewer.tsx        # Componente de visualización
+  ├── graphql/              # Esquemas y operaciones GraphQL
+  └── aws-exports.ts        # Configuración de AWS
+```
 
-## Learn More
+## Despliegue
 
-To learn more about Next.js, take a look at the following resources:
+El proyecto está configurado para ser desplegado en AWS Amplify. Sigue estos pasos:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Configura tu cuenta de AWS y el CLI de Amplify
+2. Inicializa Amplify en el proyecto
+3. Configura AppSync y las variables de entorno
+4. Despliega usando el comando `amplify push`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Licencia
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT
