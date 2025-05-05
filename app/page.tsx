@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useSession, signIn } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import AuthButton from './components/AuthButton';
 
 export default function Home() {
@@ -11,9 +11,14 @@ export default function Home() {
     <div className="min-h-screen bg-gray-900 text-white">
       <nav className="bg-gray-800 p-4">
         <div className="container mx-auto flex justify-between items-center">
-          <Link href="/" className="text-xl font-bold">
-            Escritura en Vivo
-          </Link>
+          <div className="flex items-center space-x-4">
+            <Link href="/" className="text-xl font-bold">
+              Escritura en Vivo
+            </Link>
+            <Link href="/escritores" className="text-gray-300 hover:text-white">
+              Escritores
+            </Link>
+          </div>
           <AuthButton />
         </div>
       </nav>
@@ -26,6 +31,12 @@ export default function Home() {
           <p className="text-xl text-gray-300 mb-8">
             Una plataforma para compartir tu proceso creativo en tiempo real
           </p>
+          <Link
+            href="/escritores"
+            className="inline-block px-6 py-3 bg-purple-600 rounded-md hover:bg-purple-700 transition mb-8"
+          >
+            Explorar Escritores
+          </Link>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
@@ -53,7 +64,7 @@ export default function Home() {
           ) : (
             <div className="col-span-2 text-center">
               <p className="text-xl mb-4">
-                Inicia sesión o regístrate para comenzar
+                Inicia sesión o regístrate para acceder a todas las funcionalidades
               </p>
               <div className="flex justify-center gap-4">
                 <Link
@@ -62,12 +73,12 @@ export default function Home() {
                 >
                   Registrarse
                 </Link>
-                <button
-                  onClick={() => signIn()}
+                <Link
+                  href="/auth/login"
                   className="px-6 py-3 bg-green-600 rounded-md hover:bg-green-700 transition"
                 >
                   Iniciar Sesión
-                </button>
+                </Link>
               </div>
             </div>
           )}
