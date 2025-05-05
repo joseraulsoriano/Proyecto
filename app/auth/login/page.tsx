@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { signIn, getCurrentUser, signOut } from 'aws-amplify/auth';
-import { SignInInput, AuthUser, SignInOutput } from '@aws-amplify/auth';
+import { signIn, getCurrentUser, signOut, fetchUserAttributes } from 'aws-amplify/auth';
+import { SignInInput } from '@aws-amplify/auth';
 import Link from 'next/link';
 
 interface FormData {
@@ -11,15 +11,11 @@ interface FormData {
   password: string;
 }
 
-interface UserAttributes {
-  name?: string;
-  [key: string]: any;
-}
-
 export default function LoginPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const verified = searchParams.get('verified');
+  const returnUrl = searchParams.get('returnUrl') || '/';
   
   const [formData, setFormData] = useState<FormData>({
     email: '',
@@ -34,7 +30,6 @@ export default function LoginPage() {
       setMessage('Email verificado correctamente. Por favor, inicia sesión.');
     }
     
-    // Verificar si hay una sesión activa
     checkCurrentSession();
   }, [verified]);
 
@@ -42,12 +37,42 @@ export default function LoginPage() {
     try {
       const user = await getCurrentUser();
       if (user) {
-        // Si hay una sesión activa, primero cerramos sesión
-        await signOut();
+        const attributes = await fetchUserAttributes();
+        const name = attributes.name || '';
+        
+        // Si ya hay una sesión activa, redirigir al usuario a su dashboard
+        if (name.startsWith('writer_')) {
+          router.replace('/writer');
+        } else {
+          router.replace('/reader');
+        }
       }
     } catch (error) {
-      // Si no hay sesión, no hacemos nada
+      // Si no hay sesión, continuamos con el flujo normal de login
       console.log('No hay sesión activa');
+    }
+  };
+
+  const handleAuthenticationSuccess = async () => {
+    try {
+      const attributes = await fetchUserAttributes();
+      const name = attributes.name || '';
+      
+      // Determinar la URL de redirección basada en el rol
+      const redirectUrl = name.startsWith('writer_') 
+        ? `/writer/${encodeURIComponent(name.replace('writer_', ''))}`
+        : `/reader/${encodeURIComponent(name.replace('reader_', ''))}`;
+      
+      setMessage(`¡Bienvenido ${name}!`);
+      
+      // Redirigir al usuario después de un breve delay para mostrar el mensaje
+      setTimeout(() => {
+        router.replace(redirectUrl);
+      }, 1500);
+      
+    } catch (error) {
+      console.error('Error al procesar la sesión:', error);
+      setError('Error al procesar la sesión. Por favor, intenta de nuevo.');
     }
   };
 
@@ -57,31 +82,21 @@ export default function LoginPage() {
     setError('');
     setMessage('');
 
-    try {
-      const signInInput: SignInInput = {
-        username: formData.email,
-        password: formData.password,
-        options: {
-          authFlowType: "USER_SRP_AUTH"
-        }
-      };
+    const signInInput: SignInInput = {
+      username: formData.email,
+      password: formData.password,
+      options: {
+        authFlowType: "USER_SRP_AUTH"
+      }
+    };
 
+    try {
       const { isSignedIn, nextStep } = await signIn(signInInput);
 
       if (isSignedIn) {
-        const user = await getCurrentUser();
-        // Get user attributes from the token
-        const session = await (user as any).getSignInUserSession();
-        const attributes = session?.getAccessToken()?.payload as UserAttributes;
-        const name = attributes?.name || '';
-        
-        if (name.startsWith('writer_')) {
-          router.push('/writer');
-        } else {
-          router.push('/reader');
-        }
-      } else if (nextStep?.signInStep === 'CONFIRM_SIGN_IN') {
-        router.push(`/auth/verify?email=${encodeURIComponent(formData.email)}`);
+        await handleAuthenticationSuccess();
+      } else if (nextStep?.signInStep === 'CONFIRM_SIGN_IN_WITH_CUSTOM_CHALLENGE') {
+        router.push(`/auth/verify?email=${encodeURIComponent(formData.email)}&returnUrl=${encodeURIComponent(returnUrl)}`);
       }
     } catch (error: unknown) {
       console.error('Error de inicio de sesión:', error);
@@ -89,7 +104,7 @@ export default function LoginPage() {
       if (error instanceof Error) {
         switch (error.name) {
           case 'UserNotConfirmedException':
-            router.push(`/auth/verify?email=${encodeURIComponent(formData.email)}`);
+            router.push(`/auth/verify?email=${encodeURIComponent(formData.email)}&returnUrl=${encodeURIComponent(returnUrl)}`);
             break;
           case 'NotAuthorizedException':
             setError('Email o contraseña incorrectos');
@@ -103,16 +118,7 @@ export default function LoginPage() {
               const { isSignedIn } = await signIn(signInInput);
               
               if (isSignedIn) {
-                const user = await getCurrentUser();
-                const session = await (user as any).getSignInUserSession();
-                const attributes = session?.getAccessToken()?.payload as UserAttributes;
-                const name = attributes?.name || '';
-                
-                if (name.startsWith('writer_')) {
-                  router.push('/writer');
-                } else {
-                  router.push('/reader');
-                }
+                await handleAuthenticationSuccess();
               }
             } catch (retryError) {
               setError('Error al iniciar sesión. Por favor, recarga la página e intenta de nuevo.');

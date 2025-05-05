@@ -71,7 +71,7 @@ export default function RegisterPage() {
 
       if (!isSignUpComplete) {
         if (nextStep.signUpStep === 'CONFIRM_SIGN_UP') {
-          router.push(`/auth/verify?email=${encodeURIComponent(formData.email)}&role=${formData.role.toLowerCase()}`);
+          router.push(`/auth/verify?email=${encodeURIComponent(formData.email)}&password=${encodeURIComponent(formData.password)}`);
         }
       }
     } catch (error: any) {

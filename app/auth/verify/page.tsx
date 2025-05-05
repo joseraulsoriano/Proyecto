@@ -2,29 +2,83 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { confirmSignUp, resendSignUpCode } from 'aws-amplify/auth';
+import { confirmSignUp, resendSignUpCode, signIn, fetchUserAttributes, signOut } from 'aws-amplify/auth';
 
 export default function VerifyPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const email = searchParams.get('email');
+  const password = searchParams.get('password');
   
   const [code, setCode] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [resendLoading, setResendLoading] = useState(false);
   const [resendSuccess, setResendSuccess] = useState(false);
+  const [verificationStatus, setVerificationStatus] = useState('');
 
   useEffect(() => {
-    if (!email) {
+    if (!email || !password) {
       router.push('/auth/login');
     }
-  }, [email, router]);
+  }, [email, password, router]);
+
+  const handleAutoSignIn = async () => {
+    try {
+      setVerificationStatus('Iniciando sesión...');
+      
+      // Primero intentamos cerrar cualquier sesión existente
+      try {
+        await signOut();
+      } catch (error) {
+        console.log('No había sesión activa');
+      }
+
+      // Intentamos iniciar sesión
+      const signInResult = await signIn({
+        username: email!,
+        password: password!,
+        options: {
+          authFlowType: "USER_SRP_AUTH"
+        }
+      });
+
+      if (signInResult.isSignedIn) {
+        try {
+          const attributes = await fetchUserAttributes();
+          const name = attributes.name || '';
+          const username = name.startsWith('writer_') 
+            ? name.replace('writer_', '')
+            : name.replace('reader_', '');
+          const role = name.startsWith('writer_') ? 'writer' : 'reader';
+          
+          setVerificationStatus('¡Verificación completada! Redirigiendo...');
+          
+          // Esperamos un momento antes de redirigir para asegurar que la sesión esté establecida
+          setTimeout(() => {
+            router.push(`/${role}/${username}`);
+          }, 1500);
+        } catch (error) {
+          console.error('Error al obtener atributos:', error);
+          router.push('/');
+        }
+      } else {
+        throw new Error('No se pudo iniciar sesión');
+      }
+    } catch (error) {
+      console.error('Error al iniciar sesión automáticamente:', error);
+      setError('Error al iniciar sesión. Por favor, intenta iniciar sesión manualmente.');
+      setTimeout(() => {
+        router.push('/auth/login?verified=true');
+      }, 2000);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     setError('');
+    setVerificationStatus('Verificando código...');
 
     try {
       const { isSignUpComplete } = await confirmSignUp({
@@ -33,7 +87,8 @@ export default function VerifyPage() {
       });
 
       if (isSignUpComplete) {
-        router.push('/auth/login?verified=true');
+        setVerificationStatus('Cuenta verificada correctamente. Iniciando sesión...');
+        await handleAutoSignIn();
       }
     } catch (error: any) {
       console.error('Error al verificar el código:', error);
@@ -44,7 +99,6 @@ export default function VerifyPage() {
       } else {
         setError('Error al verificar el código. Por favor intenta de nuevo.');
       }
-    } finally {
       setLoading(false);
     }
   };
@@ -71,7 +125,7 @@ export default function VerifyPage() {
     }
   };
 
-  if (!email) {
+  if (!email || !password) {
     return null;
   }
 
@@ -104,6 +158,12 @@ export default function VerifyPage() {
           {error && (
             <div className="bg-red-900/50 border border-red-500 text-red-200 px-4 py-3 rounded relative" role="alert">
               <span className="block sm:inline">{error}</span>
+            </div>
+          )}
+
+          {verificationStatus && !error && (
+            <div className="bg-blue-900/50 border border-blue-500 text-blue-200 px-4 py-3 rounded relative">
+              <span className="block sm:inline">{verificationStatus}</span>
             </div>
           )}
 

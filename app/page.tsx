@@ -2,9 +2,36 @@
 
 import Link from "next/link";
 import { useAuthenticator } from '@aws-amplify/ui-react';
+import { useEffect, useState } from 'react';
+import { fetchUserAttributes } from 'aws-amplify/auth';
 
 export default function Home() {
   const { user, signOut } = useAuthenticator((context) => [context.user]);
+  const [userInfo, setUserInfo] = useState({ name: '', role: '' });
+
+  useEffect(() => {
+    const getUserInfo = async () => {
+      if (user) {
+        try {
+          const attributes = await fetchUserAttributes();
+          const name = attributes.name || '';
+          const role = name.startsWith('writer_') ? 'Escritor' : 'Lector';
+          const username = name.startsWith('writer_') 
+            ? name.replace('writer_', '')
+            : name.replace('reader_', '');
+          
+          setUserInfo({ 
+            name: username,
+            role: role
+          });
+        } catch (error) {
+          console.error('Error al obtener atributos del usuario:', error);
+        }
+      }
+    };
+
+    getUserInfo();
+  }, [user]);
 
   return (
     <div className="min-h-screen bg-[#0f1623] text-white">
@@ -13,35 +40,76 @@ export default function Home() {
           <Link href="/" className="text-xl font-semibold">
             Escritura en Vivo
           </Link>
-          <div className="flex gap-2 sm:gap-4">
-            {!user ? (
-              <>
-                <Link
-                  href="/auth/login"
-                  className="px-4 py-2 text-sm font-medium bg-blue-600 text-white rounded hover:bg-blue-700 transition"
-                >
-                  Iniciar Sesión
-                </Link>
-                <Link
-                  href="/auth/register"
-                  className="px-4 py-2 text-sm font-medium bg-gray-600 text-white rounded hover:bg-gray-700 transition"
-                >
-                  Crear Cuenta
-                </Link>
-              </>
-            ) : (
-              <button
-                onClick={signOut}
-                className="px-4 py-2 text-sm font-medium bg-red-600 text-white rounded hover:bg-red-700 transition"
-              >
-                Cerrar Sesión
-              </button>
+          <div className="flex items-center gap-4">
+            {user && (
+              <span className="text-sm text-gray-300">
+                ¡Bienvenido, <span className="font-semibold text-white">{userInfo.name}</span>!
+                <span className="ml-2 px-2 py-1 bg-blue-600 rounded-full text-xs">
+                  {userInfo.role}
+                </span>
+              </span>
             )}
+            <div className="flex gap-2 sm:gap-4">
+              {!user ? (
+                <>
+                  <Link
+                    href="/auth/login"
+                    className="px-4 py-2 text-sm font-medium bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+                  >
+                    Iniciar Sesión
+                  </Link>
+                  <Link
+                    href="/auth/register"
+                    className="px-4 py-2 text-sm font-medium bg-gray-600 text-white rounded hover:bg-gray-700 transition"
+                  >
+                    Crear Cuenta
+                  </Link>
+                </>
+              ) : (
+                <button
+                  onClick={signOut}
+                  className="px-4 py-2 text-sm font-medium bg-red-600 text-white rounded hover:bg-red-700 transition"
+                >
+                  Cerrar Sesión
+                </button>
+              )}
+            </div>
           </div>
         </div>
       </header>
 
       <main className="container mx-auto px-4 pt-24 pb-16 text-center">
+        {user && (
+          <div className="mb-12 bg-[#1a2231]/50 backdrop-blur-sm rounded-lg p-6 max-w-2xl mx-auto">
+            <div className="flex items-center justify-center gap-4 mb-4">
+              <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center">
+                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+              </div>
+              <div className="text-left">
+                <h2 className="text-2xl font-bold text-white">
+                  Sesión Activa
+                </h2>
+                <p className="text-gray-400">
+                  Has iniciado sesión como <span className="text-white font-semibold">{userInfo.name}</span>
+                </p>
+              </div>
+            </div>
+            <div className="flex justify-center items-center gap-3 text-sm">
+              <span className="px-3 py-1.5 bg-blue-600/20 border border-blue-500/50 rounded-full text-blue-400">
+                Rol: {userInfo.role}
+              </span>
+              <Link
+                href={userInfo.role === 'Escritor' ? '/writer' : '/reader'}
+                className="px-3 py-1.5 bg-green-600/20 border border-green-500/50 rounded-full text-green-400 hover:bg-green-600/30 transition-colors"
+              >
+                Ir a {userInfo.role === 'Escritor' ? 'Escribir' : 'Leer'} →
+              </Link>
+            </div>
+          </div>
+        )}
+
         <h1 className="text-4xl sm:text-5xl font-bold mb-4 sm:mb-6">
           Escritura en Tiempo Real
         </h1>
