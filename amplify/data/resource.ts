@@ -7,17 +7,48 @@ specifies that any unauthenticated user can "create", "read", "update",
 and "delete" any "Todo" records.
 =========================================================================*/
 const schema = a.schema({
-  WritingSession: a
+  User: a
     .model({
-      content: a.string(),
-      title: a.string(),
-      authorId: a.string(),
-      lastModified: a.datetime(),
-      isActive: a.boolean(),
+      email: a.string(),
+      username: a.string(),
+      role: a.enum(['WRITER', 'READER']),
+      bio: a.string(),
+      sessions: a.hasMany('WritingSession', 'authorId'),
+      readingSessions: a.hasMany('ReadingSession', 'readerId'),
     })
     .authorization((allow) => [
-      allow.guest().to(['read']),
-      allow.owner().to(['create', 'update', 'delete'])
+      allow.owner().to(['read', 'update', 'delete']),
+      allow.authenticated().to(['read'])
+    ]),
+
+  WritingSession: a
+    .model({
+      title: a.string(),
+      content: a.string(),
+      lastModified: a.datetime(),
+      isActive: a.boolean(),
+      authorId: a.string(),
+      author: a.belongsTo('User', 'authorId'),
+      readers: a.hasMany('ReadingSession', 'writingSessionId'),
+      isPublic: a.boolean(),
+    })
+    .authorization((allow) => [
+      allow.owner().to(['create', 'read', 'update', 'delete']),
+      allow.authenticated().to(['read'])
+    ]),
+
+  ReadingSession: a
+    .model({
+      readerId: a.string(),
+      writingSessionId: a.string(),
+      reader: a.belongsTo('User', 'readerId'),
+      writingSession: a.belongsTo('WritingSession', 'writingSessionId'),
+      lastReadAt: a.datetime(),
+      isAnonymous: a.boolean(),
+    })
+    .authorization((allow) => [
+      allow.owner().to(['create', 'read', 'update', 'delete']),
+      allow.authenticated().to(['create', 'read'])
     ]),
 });
 

@@ -349,7 +349,7 @@
   }
  },
  "Resources": {
-  "WritingSessionTable": {
+  "UserTable": {
    "Type": "Custom::AmplifyDynamoDBTable",
    "Properties": {
     "ServiceToken": {
@@ -359,7 +359,7 @@
      "Fn::Join": [
       "",
       [
-       "WritingSession-",
+       "User-",
        {
         "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId"
        },
@@ -371,46 +371,12 @@
      {
       "attributeName": "id",
       "attributeType": "S"
-     },
-     {
-      "attributeName": "authorId",
-      "attributeType": "S"
      }
     ],
     "keySchema": [
      {
       "attributeName": "id",
       "keyType": "HASH"
-     }
-    ],
-    "globalSecondaryIndexes": [
-     {
-      "indexName": "gsi-User.sessions",
-      "keySchema": [
-       {
-        "attributeName": "authorId",
-        "keyType": "HASH"
-       }
-      ],
-      "projection": {
-       "projectionType": "ALL"
-      },
-      "provisionedThroughput": {
-       "Fn::If": [
-        "ShouldUsePayPerRequestBilling",
-        {
-         "Ref": "AWS::NoValue"
-        },
-        {
-         "ReadCapacityUnits": {
-          "Ref": "DynamoDBModelTableReadIOPS"
-         },
-         "WriteCapacityUnits": {
-          "Ref": "DynamoDBModelTableWriteIOPS"
-         }
-        }
-       ]
-      }
      }
     ],
     "provisionedThroughput": {
@@ -462,10 +428,10 @@
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete",
    "Metadata": {
-    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/WritingSessionTable/Default/Default"
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/UserTable/Default/Default"
    }
   },
-  "WritingSessionIAMRoleAB3A3871": {
+  "UserIAMRole93CEE926": {
    "Type": "AWS::IAM::Role",
    "Properties": {
     "AssumeRolePolicyDocument": {
@@ -509,7 +475,7 @@
               "Fn::Join": [
                "",
                [
-                "WritingSession-",
+                "User-",
                 {
                  "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId"
                 },
@@ -528,7 +494,7 @@
               "Fn::Join": [
                "",
                [
-                "WritingSession-",
+                "User-",
                 {
                  "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId"
                 },
@@ -551,7 +517,7 @@
      "Fn::Join": [
       "",
       [
-       "WritingSessionIAMRold5d6e1-",
+       "UserIAMRole0e5381-",
        {
         "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId"
        },
@@ -577,10 +543,10 @@
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete",
    "Metadata": {
-    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/WritingSessionIAMRole/Resource"
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/UserIAMRole/Resource"
    }
   },
-  "WritingSessionDataSource": {
+  "UserDataSource": {
    "Type": "AWS::AppSync::DataSource",
    "Properties": {
     "ApiId": {
@@ -604,7 +570,7 @@
              ":",
              {
               "Fn::GetAtt": [
-               "WritingSessionTable",
+               "UserTable",
                "TableArn"
               ]
              }
@@ -617,25 +583,25 @@
       ]
      }
     },
-    "Name": "WritingSessionTable",
+    "Name": "UserTable",
     "ServiceRoleArn": {
      "Fn::GetAtt": [
-      "WritingSessionIAMRoleAB3A3871",
+      "UserIAMRole93CEE926",
       "Arn"
      ]
     },
     "Type": "AMAZON_DYNAMODB"
    },
    "DependsOn": [
-    "WritingSessionIAMRoleAB3A3871"
+    "UserIAMRole93CEE926"
    ],
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete",
    "Metadata": {
-    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/WritingSessionDataSource/Resource"
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/UserDataSource/Resource"
    }
   },
-  "QuerygetWritingSessionauth0FunctionQuerygetWritingSessionauth0FunctionAppSyncFunctionF53CF709": {
+  "QuerygetUserauth0FunctionQuerygetUserauth0FunctionAppSyncFunction9E6250B0": {
    "Type": "AWS::AppSync::FunctionConfiguration",
    "Properties": {
     "ApiId": {
@@ -645,7 +611,7 @@
      "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPINONEDS802F5DFCName"
     },
     "FunctionVersion": "2018-05-29",
-    "Name": "QuerygetWritingSessionauth0Function",
+    "Name": "QuerygetUserauth0Function",
     "RequestMappingTemplateS3Location": {
      "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/ad19b8203207ee9640ec6de0a766ea38d67ea787852a8f5d32b2423f33bdbb9d.vtl"
     },
@@ -654,10 +620,10 @@
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete",
    "Metadata": {
-    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/QuerygetWritingSessionauth0Function/QuerygetWritingSessionauth0Function.AppSyncFunction"
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/QuerygetUserauth0Function/QuerygetUserauth0Function.AppSyncFunction"
    }
   },
-  "QuerygetWritingSessionpostAuth0FunctionQuerygetWritingSessionpostAuth0FunctionAppSyncFunctionB9E97365": {
+  "QuerygetUserpostAuth0FunctionQuerygetUserpostAuth0FunctionAppSyncFunction2792AC60": {
    "Type": "AWS::AppSync::FunctionConfiguration",
    "Properties": {
     "ApiId": {
@@ -667,7 +633,7 @@
      "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPINONEDS802F5DFCName"
     },
     "FunctionVersion": "2018-05-29",
-    "Name": "QuerygetWritingSessionpostAuth0Function",
+    "Name": "QuerygetUserpostAuth0Function",
     "RequestMappingTemplateS3Location": {
      "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/c1721bcd774e27c514d3454b5be4f9bdd094c0161b57ddf053d618e3b0086a77.vtl"
     },
@@ -676,10 +642,10 @@
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete",
    "Metadata": {
-    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/QuerygetWritingSessionpostAuth0Function/QuerygetWritingSessionpostAuth0Function.AppSyncFunction"
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/QuerygetUserpostAuth0Function/QuerygetUserpostAuth0Function.AppSyncFunction"
    }
   },
-  "QueryGetWritingSessionDataResolverFnQueryGetWritingSessionDataResolverFnAppSyncFunctionB0A11053": {
+  "QueryGetUserDataResolverFnQueryGetUserDataResolverFnAppSyncFunction36A3E4CF": {
    "Type": "AWS::AppSync::FunctionConfiguration",
    "Properties": {
     "ApiId": {
@@ -687,12 +653,12 @@
     },
     "DataSourceName": {
      "Fn::GetAtt": [
-      "WritingSessionDataSource",
+      "UserDataSource",
       "Name"
      ]
     },
     "FunctionVersion": "2018-05-29",
-    "Name": "QueryGetWritingSessionDataResolverFn",
+    "Name": "QueryGetUserDataResolverFn",
     "RequestMappingTemplateS3Location": {
      "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/08f4d557693d96c1a4efba0f9dc91330e4b19772fd5477c156468843e3d9cb5e.vtl"
     },
@@ -701,39 +667,39 @@
     }
    },
    "DependsOn": [
-    "WritingSessionDataSource"
+    "UserDataSource"
    ],
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete",
    "Metadata": {
-    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/QueryGetWritingSessionDataResolverFn/QueryGetWritingSessionDataResolverFn.AppSyncFunction"
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/QueryGetUserDataResolverFn/QueryGetUserDataResolverFn.AppSyncFunction"
    }
   },
-  "GetWritingSessionResolver": {
+  "GetUserResolver": {
    "Type": "AWS::AppSync::Resolver",
    "Properties": {
     "ApiId": {
      "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId"
     },
-    "FieldName": "getWritingSession",
+    "FieldName": "getUser",
     "Kind": "PIPELINE",
     "PipelineConfig": {
      "Functions": [
       {
        "Fn::GetAtt": [
-        "QuerygetWritingSessionauth0FunctionQuerygetWritingSessionauth0FunctionAppSyncFunctionF53CF709",
+        "QuerygetUserauth0FunctionQuerygetUserauth0FunctionAppSyncFunction9E6250B0",
         "FunctionId"
        ]
       },
       {
        "Fn::GetAtt": [
-        "QuerygetWritingSessionpostAuth0FunctionQuerygetWritingSessionpostAuth0FunctionAppSyncFunctionB9E97365",
+        "QuerygetUserpostAuth0FunctionQuerygetUserpostAuth0FunctionAppSyncFunction2792AC60",
         "FunctionId"
        ]
       },
       {
        "Fn::GetAtt": [
-        "QueryGetWritingSessionDataResolverFnQueryGetWritingSessionDataResolverFnAppSyncFunctionB0A11053",
+        "QueryGetUserDataResolverFnQueryGetUserDataResolverFnAppSyncFunction36A3E4CF",
         "FunctionId"
        ]
       }
@@ -743,7 +709,7 @@
      "Fn::Join": [
       "",
       [
-       "$util.qr($ctx.stash.put(\"typeName\", \"Query\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"getWritingSession\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"AMAZON_DYNAMODB\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+       "$util.qr($ctx.stash.put(\"typeName\", \"Query\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"getUser\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"AMAZON_DYNAMODB\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
        {
         "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId"
        },
@@ -762,7 +728,7 @@
                ":",
                {
                 "Fn::GetAtt": [
-                 "WritingSessionTable",
+                 "UserTable",
                  "TableArn"
                 ]
                }
@@ -812,10 +778,10 @@
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete",
    "Metadata": {
-    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/queryGetWritingSessionResolver"
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/queryGetUserResolver"
    }
   },
-  "QuerylistWritingSessionsauth0FunctionQuerylistWritingSessionsauth0FunctionAppSyncFunction92D03D84": {
+  "QuerylistUsersauth0FunctionQuerylistUsersauth0FunctionAppSyncFunctionA1FF61AB": {
    "Type": "AWS::AppSync::FunctionConfiguration",
    "Properties": {
     "ApiId": {
@@ -825,7 +791,7 @@
      "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPINONEDS802F5DFCName"
     },
     "FunctionVersion": "2018-05-29",
-    "Name": "QuerylistWritingSessionsauth0Function",
+    "Name": "QuerylistUsersauth0Function",
     "RequestMappingTemplateS3Location": {
      "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/ad19b8203207ee9640ec6de0a766ea38d67ea787852a8f5d32b2423f33bdbb9d.vtl"
     },
@@ -834,10 +800,10 @@
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete",
    "Metadata": {
-    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/QuerylistWritingSessionsauth0Function/QuerylistWritingSessionsauth0Function.AppSyncFunction"
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/QuerylistUsersauth0Function/QuerylistUsersauth0Function.AppSyncFunction"
    }
   },
-  "QuerylistWritingSessionspostAuth0FunctionQuerylistWritingSessionspostAuth0FunctionAppSyncFunctionD2548B0B": {
+  "QuerylistUserspostAuth0FunctionQuerylistUserspostAuth0FunctionAppSyncFunction37C5583D": {
    "Type": "AWS::AppSync::FunctionConfiguration",
    "Properties": {
     "ApiId": {
@@ -847,7 +813,7 @@
      "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPINONEDS802F5DFCName"
     },
     "FunctionVersion": "2018-05-29",
-    "Name": "QuerylistWritingSessionspostAuth0Function",
+    "Name": "QuerylistUserspostAuth0Function",
     "RequestMappingTemplateS3Location": {
      "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/c1721bcd774e27c514d3454b5be4f9bdd094c0161b57ddf053d618e3b0086a77.vtl"
     },
@@ -856,10 +822,10 @@
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete",
    "Metadata": {
-    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/QuerylistWritingSessionspostAuth0Function/QuerylistWritingSessionspostAuth0Function.AppSyncFunction"
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/QuerylistUserspostAuth0Function/QuerylistUserspostAuth0Function.AppSyncFunction"
    }
   },
-  "QueryListWritingSessionsDataResolverFnQueryListWritingSessionsDataResolverFnAppSyncFunction2E32084C": {
+  "QueryListUsersDataResolverFnQueryListUsersDataResolverFnAppSyncFunction83574EBA": {
    "Type": "AWS::AppSync::FunctionConfiguration",
    "Properties": {
     "ApiId": {
@@ -867,12 +833,12 @@
     },
     "DataSourceName": {
      "Fn::GetAtt": [
-      "WritingSessionDataSource",
+      "UserDataSource",
       "Name"
      ]
     },
     "FunctionVersion": "2018-05-29",
-    "Name": "QueryListWritingSessionsDataResolverFn",
+    "Name": "QueryListUsersDataResolverFn",
     "RequestMappingTemplateS3Location": {
      "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/9fcbe070ecd3023c5bf5b966fa9584757db9762eef123bad0820bd87591b2174.vtl"
     },
@@ -881,39 +847,39 @@
     }
    },
    "DependsOn": [
-    "WritingSessionDataSource"
+    "UserDataSource"
    ],
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete",
    "Metadata": {
-    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/QueryListWritingSessionsDataResolverFn/QueryListWritingSessionsDataResolverFn.AppSyncFunction"
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/QueryListUsersDataResolverFn/QueryListUsersDataResolverFn.AppSyncFunction"
    }
   },
-  "ListWritingSessionResolver": {
+  "ListUserResolver": {
    "Type": "AWS::AppSync::Resolver",
    "Properties": {
     "ApiId": {
      "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId"
     },
-    "FieldName": "listWritingSessions",
+    "FieldName": "listUsers",
     "Kind": "PIPELINE",
     "PipelineConfig": {
      "Functions": [
       {
        "Fn::GetAtt": [
-        "QuerylistWritingSessionsauth0FunctionQuerylistWritingSessionsauth0FunctionAppSyncFunction92D03D84",
+        "QuerylistUsersauth0FunctionQuerylistUsersauth0FunctionAppSyncFunctionA1FF61AB",
         "FunctionId"
        ]
       },
       {
        "Fn::GetAtt": [
-        "QuerylistWritingSessionspostAuth0FunctionQuerylistWritingSessionspostAuth0FunctionAppSyncFunctionD2548B0B",
+        "QuerylistUserspostAuth0FunctionQuerylistUserspostAuth0FunctionAppSyncFunction37C5583D",
         "FunctionId"
        ]
       },
       {
        "Fn::GetAtt": [
-        "QueryListWritingSessionsDataResolverFnQueryListWritingSessionsDataResolverFnAppSyncFunction2E32084C",
+        "QueryListUsersDataResolverFnQueryListUsersDataResolverFnAppSyncFunction83574EBA",
         "FunctionId"
        ]
       }
@@ -923,7 +889,7 @@
      "Fn::Join": [
       "",
       [
-       "$util.qr($ctx.stash.put(\"typeName\", \"Query\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"listWritingSessions\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"AMAZON_DYNAMODB\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+       "$util.qr($ctx.stash.put(\"typeName\", \"Query\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"listUsers\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"AMAZON_DYNAMODB\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
        {
         "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId"
        },
@@ -942,7 +908,7 @@
                ":",
                {
                 "Fn::GetAtt": [
-                 "WritingSessionTable",
+                 "UserTable",
                  "TableArn"
                 ]
                }
@@ -992,10 +958,10 @@
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete",
    "Metadata": {
-    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/queryListWritingSessionsResolver"
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/queryListUsersResolver"
    }
   },
-  "MutationcreateWritingSessioninit0FunctionMutationcreateWritingSessioninit0FunctionAppSyncFunctionA4A72AE1": {
+  "MutationcreateUserinit0FunctionMutationcreateUserinit0FunctionAppSyncFunctionEDF87EC6": {
    "Type": "AWS::AppSync::FunctionConfiguration",
    "Properties": {
     "ApiId": {
@@ -1005,7 +971,7 @@
      "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPINONEDS802F5DFCName"
     },
     "FunctionVersion": "2018-05-29",
-    "Name": "MutationcreateWritingSessioninit0Function",
+    "Name": "MutationcreateUserinit0Function",
     "RequestMappingTemplateS3Location": {
      "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/a183ddccbd956316c38ef97177b8f088ef0826f62023323f5ae6053d348ccffc.vtl"
     },
@@ -1014,10 +980,10 @@
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete",
    "Metadata": {
-    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/MutationcreateWritingSessioninit0Function/MutationcreateWritingSessioninit0Function.AppSyncFunction"
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/MutationcreateUserinit0Function/MutationcreateUserinit0Function.AppSyncFunction"
    }
   },
-  "MutationcreateWritingSessionauth0FunctionMutationcreateWritingSessionauth0FunctionAppSyncFunction859AD4BC": {
+  "MutationcreateUserauth0FunctionMutationcreateUserauth0FunctionAppSyncFunction30556A6C": {
    "Type": "AWS::AppSync::FunctionConfiguration",
    "Properties": {
     "ApiId": {
@@ -1027,19 +993,19 @@
      "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPINONEDS802F5DFCName"
     },
     "FunctionVersion": "2018-05-29",
-    "Name": "MutationcreateWritingSessionauth0Function",
+    "Name": "MutationcreateUserauth0Function",
     "RequestMappingTemplateS3Location": {
-     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/77d84caa2ad3eb1436bed6f03709b78808e2e19d8141c36273ca5bd8b8c8cc4e.vtl"
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/6918fc77b37b3c1c97b34e35c75d9cf7680c23c67d7dc4615249e631e3695402.vtl"
     },
     "ResponseMappingTemplate": "$util.toJson({})"
    },
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete",
    "Metadata": {
-    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/MutationcreateWritingSessionauth0Function/MutationcreateWritingSessionauth0Function.AppSyncFunction"
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/MutationcreateUserauth0Function/MutationcreateUserauth0Function.AppSyncFunction"
    }
   },
-  "MutationcreateWritingSessionpostAuth0FunctionMutationcreateWritingSessionpostAuth0FunctionAppSyncFunction01532472": {
+  "MutationcreateUserpostAuth0FunctionMutationcreateUserpostAuth0FunctionAppSyncFunction176E20CB": {
    "Type": "AWS::AppSync::FunctionConfiguration",
    "Properties": {
     "ApiId": {
@@ -1049,7 +1015,7 @@
      "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPINONEDS802F5DFCName"
     },
     "FunctionVersion": "2018-05-29",
-    "Name": "MutationcreateWritingSessionpostAuth0Function",
+    "Name": "MutationcreateUserpostAuth0Function",
     "RequestMappingTemplateS3Location": {
      "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/c1721bcd774e27c514d3454b5be4f9bdd094c0161b57ddf053d618e3b0086a77.vtl"
     },
@@ -1058,10 +1024,10 @@
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete",
    "Metadata": {
-    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/MutationcreateWritingSessionpostAuth0Function/MutationcreateWritingSessionpostAuth0Function.AppSyncFunction"
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/MutationcreateUserpostAuth0Function/MutationcreateUserpostAuth0Function.AppSyncFunction"
    }
   },
-  "MutationCreateWritingSessionDataResolverFnMutationCreateWritingSessionDataResolverFnAppSyncFunction0E752CBE": {
+  "MutationCreateUserDataResolverFnMutationCreateUserDataResolverFnAppSyncFunction22E7974E": {
    "Type": "AWS::AppSync::FunctionConfiguration",
    "Properties": {
     "ApiId": {
@@ -1069,59 +1035,59 @@
     },
     "DataSourceName": {
      "Fn::GetAtt": [
-      "WritingSessionDataSource",
+      "UserDataSource",
       "Name"
      ]
     },
     "FunctionVersion": "2018-05-29",
-    "Name": "MutationCreateWritingSessionDataResolverFn",
+    "Name": "MutationCreateUserDataResolverFn",
     "RequestMappingTemplateS3Location": {
-     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/f80ec52b68aeadc95c6b34c235e8ace85ad9b88e7c9930294e89727e91169c2b.vtl"
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/2a8e840a12b4e9d428fcf697121b3906e4bbeb570cf4fdd1d361db41eb54d0e9.vtl"
     },
     "ResponseMappingTemplateS3Location": {
      "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/f4a52b72209a9dfa197b5e7367a5c378c5bb86de6e29ddd9e48b49a3fe54b249.vtl"
     }
    },
    "DependsOn": [
-    "WritingSessionDataSource"
+    "UserDataSource"
    ],
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete",
    "Metadata": {
-    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/MutationCreateWritingSessionDataResolverFn/MutationCreateWritingSessionDataResolverFn.AppSyncFunction"
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/MutationCreateUserDataResolverFn/MutationCreateUserDataResolverFn.AppSyncFunction"
    }
   },
-  "CreateWritingSessionResolver": {
+  "CreateUserResolver": {
    "Type": "AWS::AppSync::Resolver",
    "Properties": {
     "ApiId": {
      "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId"
     },
-    "FieldName": "createWritingSession",
+    "FieldName": "createUser",
     "Kind": "PIPELINE",
     "PipelineConfig": {
      "Functions": [
       {
        "Fn::GetAtt": [
-        "MutationcreateWritingSessioninit0FunctionMutationcreateWritingSessioninit0FunctionAppSyncFunctionA4A72AE1",
+        "MutationcreateUserinit0FunctionMutationcreateUserinit0FunctionAppSyncFunctionEDF87EC6",
         "FunctionId"
        ]
       },
       {
        "Fn::GetAtt": [
-        "MutationcreateWritingSessionauth0FunctionMutationcreateWritingSessionauth0FunctionAppSyncFunction859AD4BC",
+        "MutationcreateUserauth0FunctionMutationcreateUserauth0FunctionAppSyncFunction30556A6C",
         "FunctionId"
        ]
       },
       {
        "Fn::GetAtt": [
-        "MutationcreateWritingSessionpostAuth0FunctionMutationcreateWritingSessionpostAuth0FunctionAppSyncFunction01532472",
+        "MutationcreateUserpostAuth0FunctionMutationcreateUserpostAuth0FunctionAppSyncFunction176E20CB",
         "FunctionId"
        ]
       },
       {
        "Fn::GetAtt": [
-        "MutationCreateWritingSessionDataResolverFnMutationCreateWritingSessionDataResolverFnAppSyncFunction0E752CBE",
+        "MutationCreateUserDataResolverFnMutationCreateUserDataResolverFnAppSyncFunction22E7974E",
         "FunctionId"
        ]
       }
@@ -1131,7 +1097,7 @@
      "Fn::Join": [
       "",
       [
-       "$util.qr($ctx.stash.put(\"typeName\", \"Mutation\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"createWritingSession\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"AMAZON_DYNAMODB\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+       "$util.qr($ctx.stash.put(\"typeName\", \"Mutation\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"createUser\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"AMAZON_DYNAMODB\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
        {
         "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId"
        },
@@ -1150,7 +1116,7 @@
                ":",
                {
                 "Fn::GetAtt": [
-                 "WritingSessionTable",
+                 "UserTable",
                  "TableArn"
                 ]
                }
@@ -1200,10 +1166,10 @@
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete",
    "Metadata": {
-    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/mutationCreateWritingSessionResolver"
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/mutationCreateUserResolver"
    }
   },
-  "MutationupdateWritingSessioninit0FunctionMutationupdateWritingSessioninit0FunctionAppSyncFunction024F69E3": {
+  "MutationupdateUserinit0FunctionMutationupdateUserinit0FunctionAppSyncFunctionC2E8A924": {
    "Type": "AWS::AppSync::FunctionConfiguration",
    "Properties": {
     "ApiId": {
@@ -1213,7 +1179,7 @@
      "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPINONEDS802F5DFCName"
     },
     "FunctionVersion": "2018-05-29",
-    "Name": "MutationupdateWritingSessioninit0Function",
+    "Name": "MutationupdateUserinit0Function",
     "RequestMappingTemplateS3Location": {
      "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/06db846fd14e6fc371f22b12b5545ba8e2dbfeda85d8c8d586c71c282166657b.vtl"
     },
@@ -1222,10 +1188,10 @@
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete",
    "Metadata": {
-    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/MutationupdateWritingSessioninit0Function/MutationupdateWritingSessioninit0Function.AppSyncFunction"
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/MutationupdateUserinit0Function/MutationupdateUserinit0Function.AppSyncFunction"
    }
   },
-  "MutationupdateWritingSessionauth0FunctionMutationupdateWritingSessionauth0FunctionAppSyncFunction9E579EE0": {
+  "MutationupdateUserauth0FunctionMutationupdateUserauth0FunctionAppSyncFunctionDF95DA65": {
    "Type": "AWS::AppSync::FunctionConfiguration",
    "Properties": {
     "ApiId": {
@@ -1233,29 +1199,29 @@
     },
     "DataSourceName": {
      "Fn::GetAtt": [
-      "WritingSessionDataSource",
+      "UserDataSource",
       "Name"
      ]
     },
     "FunctionVersion": "2018-05-29",
-    "Name": "MutationupdateWritingSessionauth0Function",
+    "Name": "MutationupdateUserauth0Function",
     "RequestMappingTemplateS3Location": {
      "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/1f5fed297da9c32ae3af922bf3a38ccf23b956078887d16891ec06c20c64722c.vtl"
     },
     "ResponseMappingTemplateS3Location": {
-     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/95ca06cb53a9175496916d5eff6a0afac8b39a09ac0723c915025f8cd1515d78.vtl"
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/39de6f6a9756c01231562f915848374eba4045bc3159fadb9fa3fb80c2d67fb9.vtl"
     }
    },
    "DependsOn": [
-    "WritingSessionDataSource"
+    "UserDataSource"
    ],
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete",
    "Metadata": {
-    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/MutationupdateWritingSessionauth0Function/MutationupdateWritingSessionauth0Function.AppSyncFunction"
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/MutationupdateUserauth0Function/MutationupdateUserauth0Function.AppSyncFunction"
    }
   },
-  "MutationupdateWritingSessionpostAuth0FunctionMutationupdateWritingSessionpostAuth0FunctionAppSyncFunctionD3D33706": {
+  "MutationupdateUserpostAuth0FunctionMutationupdateUserpostAuth0FunctionAppSyncFunctionD4B80000": {
    "Type": "AWS::AppSync::FunctionConfiguration",
    "Properties": {
     "ApiId": {
@@ -1265,7 +1231,7 @@
      "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPINONEDS802F5DFCName"
     },
     "FunctionVersion": "2018-05-29",
-    "Name": "MutationupdateWritingSessionpostAuth0Function",
+    "Name": "MutationupdateUserpostAuth0Function",
     "RequestMappingTemplateS3Location": {
      "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/c1721bcd774e27c514d3454b5be4f9bdd094c0161b57ddf053d618e3b0086a77.vtl"
     },
@@ -1274,10 +1240,10 @@
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete",
    "Metadata": {
-    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/MutationupdateWritingSessionpostAuth0Function/MutationupdateWritingSessionpostAuth0Function.AppSyncFunction"
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/MutationupdateUserpostAuth0Function/MutationupdateUserpostAuth0Function.AppSyncFunction"
    }
   },
-  "MutationUpdateWritingSessionDataResolverFnMutationUpdateWritingSessionDataResolverFnAppSyncFunction5CC3767D": {
+  "MutationUpdateUserDataResolverFnMutationUpdateUserDataResolverFnAppSyncFunction6ADF3910": {
    "Type": "AWS::AppSync::FunctionConfiguration",
    "Properties": {
     "ApiId": {
@@ -1285,12 +1251,12 @@
     },
     "DataSourceName": {
      "Fn::GetAtt": [
-      "WritingSessionDataSource",
+      "UserDataSource",
       "Name"
      ]
     },
     "FunctionVersion": "2018-05-29",
-    "Name": "MutationUpdateWritingSessionDataResolverFn",
+    "Name": "MutationUpdateUserDataResolverFn",
     "RequestMappingTemplateS3Location": {
      "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/474bf0776ec2164a13191d1a0a9e057154931e4918fea5086f49850d02a5371b.vtl"
     },
@@ -1299,45 +1265,45 @@
     }
    },
    "DependsOn": [
-    "WritingSessionDataSource"
+    "UserDataSource"
    ],
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete",
    "Metadata": {
-    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/MutationUpdateWritingSessionDataResolverFn/MutationUpdateWritingSessionDataResolverFn.AppSyncFunction"
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/MutationUpdateUserDataResolverFn/MutationUpdateUserDataResolverFn.AppSyncFunction"
    }
   },
-  "UpdateWritingSessionResolver": {
+  "UpdateUserResolver": {
    "Type": "AWS::AppSync::Resolver",
    "Properties": {
     "ApiId": {
      "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId"
     },
-    "FieldName": "updateWritingSession",
+    "FieldName": "updateUser",
     "Kind": "PIPELINE",
     "PipelineConfig": {
      "Functions": [
       {
        "Fn::GetAtt": [
-        "MutationupdateWritingSessioninit0FunctionMutationupdateWritingSessioninit0FunctionAppSyncFunction024F69E3",
+        "MutationupdateUserinit0FunctionMutationupdateUserinit0FunctionAppSyncFunctionC2E8A924",
         "FunctionId"
        ]
       },
       {
        "Fn::GetAtt": [
-        "MutationupdateWritingSessionauth0FunctionMutationupdateWritingSessionauth0FunctionAppSyncFunction9E579EE0",
+        "MutationupdateUserauth0FunctionMutationupdateUserauth0FunctionAppSyncFunctionDF95DA65",
         "FunctionId"
        ]
       },
       {
        "Fn::GetAtt": [
-        "MutationupdateWritingSessionpostAuth0FunctionMutationupdateWritingSessionpostAuth0FunctionAppSyncFunctionD3D33706",
+        "MutationupdateUserpostAuth0FunctionMutationupdateUserpostAuth0FunctionAppSyncFunctionD4B80000",
         "FunctionId"
        ]
       },
       {
        "Fn::GetAtt": [
-        "MutationUpdateWritingSessionDataResolverFnMutationUpdateWritingSessionDataResolverFnAppSyncFunction5CC3767D",
+        "MutationUpdateUserDataResolverFnMutationUpdateUserDataResolverFnAppSyncFunction6ADF3910",
         "FunctionId"
        ]
       }
@@ -1347,7 +1313,7 @@
      "Fn::Join": [
       "",
       [
-       "$util.qr($ctx.stash.put(\"typeName\", \"Mutation\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"updateWritingSession\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"AMAZON_DYNAMODB\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+       "$util.qr($ctx.stash.put(\"typeName\", \"Mutation\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"updateUser\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"AMAZON_DYNAMODB\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
        {
         "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId"
        },
@@ -1366,7 +1332,7 @@
                ":",
                {
                 "Fn::GetAtt": [
-                 "WritingSessionTable",
+                 "UserTable",
                  "TableArn"
                 ]
                }
@@ -1416,10 +1382,10 @@
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete",
    "Metadata": {
-    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/mutationUpdateWritingSessionResolver"
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/mutationUpdateUserResolver"
    }
   },
-  "MutationdeleteWritingSessionauth0FunctionMutationdeleteWritingSessionauth0FunctionAppSyncFunction51D99232": {
+  "MutationdeleteUserauth0FunctionMutationdeleteUserauth0FunctionAppSyncFunction9B900ACD": {
    "Type": "AWS::AppSync::FunctionConfiguration",
    "Properties": {
     "ApiId": {
@@ -1427,12 +1393,12 @@
     },
     "DataSourceName": {
      "Fn::GetAtt": [
-      "WritingSessionDataSource",
+      "UserDataSource",
       "Name"
      ]
     },
     "FunctionVersion": "2018-05-29",
-    "Name": "MutationdeleteWritingSessionauth0Function",
+    "Name": "MutationdeleteUserauth0Function",
     "RequestMappingTemplateS3Location": {
      "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/1f5fed297da9c32ae3af922bf3a38ccf23b956078887d16891ec06c20c64722c.vtl"
     },
@@ -1441,15 +1407,15 @@
     }
    },
    "DependsOn": [
-    "WritingSessionDataSource"
+    "UserDataSource"
    ],
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete",
    "Metadata": {
-    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/MutationdeleteWritingSessionauth0Function/MutationdeleteWritingSessionauth0Function.AppSyncFunction"
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/MutationdeleteUserauth0Function/MutationdeleteUserauth0Function.AppSyncFunction"
    }
   },
-  "MutationdeleteWritingSessionpostAuth0FunctionMutationdeleteWritingSessionpostAuth0FunctionAppSyncFunctionF275A2A3": {
+  "MutationdeleteUserpostAuth0FunctionMutationdeleteUserpostAuth0FunctionAppSyncFunction9B804910": {
    "Type": "AWS::AppSync::FunctionConfiguration",
    "Properties": {
     "ApiId": {
@@ -1459,7 +1425,7 @@
      "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPINONEDS802F5DFCName"
     },
     "FunctionVersion": "2018-05-29",
-    "Name": "MutationdeleteWritingSessionpostAuth0Function",
+    "Name": "MutationdeleteUserpostAuth0Function",
     "RequestMappingTemplateS3Location": {
      "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/c1721bcd774e27c514d3454b5be4f9bdd094c0161b57ddf053d618e3b0086a77.vtl"
     },
@@ -1468,10 +1434,10 @@
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete",
    "Metadata": {
-    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/MutationdeleteWritingSessionpostAuth0Function/MutationdeleteWritingSessionpostAuth0Function.AppSyncFunction"
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/MutationdeleteUserpostAuth0Function/MutationdeleteUserpostAuth0Function.AppSyncFunction"
    }
   },
-  "MutationDeleteWritingSessionDataResolverFnMutationDeleteWritingSessionDataResolverFnAppSyncFunction59FD8F0A": {
+  "MutationDeleteUserDataResolverFnMutationDeleteUserDataResolverFnAppSyncFunction0B4F366A": {
    "Type": "AWS::AppSync::FunctionConfiguration",
    "Properties": {
     "ApiId": {
@@ -1479,12 +1445,12 @@
     },
     "DataSourceName": {
      "Fn::GetAtt": [
-      "WritingSessionDataSource",
+      "UserDataSource",
       "Name"
      ]
     },
     "FunctionVersion": "2018-05-29",
-    "Name": "MutationDeleteWritingSessionDataResolverFn",
+    "Name": "MutationDeleteUserDataResolverFn",
     "RequestMappingTemplateS3Location": {
      "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/4f7907d1209a2c9953a0c053df402c634e359546d70c7cc5c2e8e21ea734880f.vtl"
     },
@@ -1493,39 +1459,39 @@
     }
    },
    "DependsOn": [
-    "WritingSessionDataSource"
+    "UserDataSource"
    ],
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete",
    "Metadata": {
-    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/MutationDeleteWritingSessionDataResolverFn/MutationDeleteWritingSessionDataResolverFn.AppSyncFunction"
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/MutationDeleteUserDataResolverFn/MutationDeleteUserDataResolverFn.AppSyncFunction"
    }
   },
-  "DeleteWritingSessionResolver": {
+  "DeleteUserResolver": {
    "Type": "AWS::AppSync::Resolver",
    "Properties": {
     "ApiId": {
      "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId"
     },
-    "FieldName": "deleteWritingSession",
+    "FieldName": "deleteUser",
     "Kind": "PIPELINE",
     "PipelineConfig": {
      "Functions": [
       {
        "Fn::GetAtt": [
-        "MutationdeleteWritingSessionauth0FunctionMutationdeleteWritingSessionauth0FunctionAppSyncFunction51D99232",
+        "MutationdeleteUserauth0FunctionMutationdeleteUserauth0FunctionAppSyncFunction9B900ACD",
         "FunctionId"
        ]
       },
       {
        "Fn::GetAtt": [
-        "MutationdeleteWritingSessionpostAuth0FunctionMutationdeleteWritingSessionpostAuth0FunctionAppSyncFunctionF275A2A3",
+        "MutationdeleteUserpostAuth0FunctionMutationdeleteUserpostAuth0FunctionAppSyncFunction9B804910",
         "FunctionId"
        ]
       },
       {
        "Fn::GetAtt": [
-        "MutationDeleteWritingSessionDataResolverFnMutationDeleteWritingSessionDataResolverFnAppSyncFunction59FD8F0A",
+        "MutationDeleteUserDataResolverFnMutationDeleteUserDataResolverFnAppSyncFunction0B4F366A",
         "FunctionId"
        ]
       }
@@ -1535,7 +1501,7 @@
      "Fn::Join": [
       "",
       [
-       "$util.qr($ctx.stash.put(\"typeName\", \"Mutation\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"deleteWritingSession\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"AMAZON_DYNAMODB\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+       "$util.qr($ctx.stash.put(\"typeName\", \"Mutation\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"deleteUser\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"AMAZON_DYNAMODB\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
        {
         "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId"
        },
@@ -1554,7 +1520,7 @@
                ":",
                {
                 "Fn::GetAtt": [
-                 "WritingSessionTable",
+                 "UserTable",
                  "TableArn"
                 ]
                }
@@ -1604,10 +1570,10 @@
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete",
    "Metadata": {
-    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/mutationDeleteWritingSessionResolver"
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/mutationDeleteUserResolver"
    }
   },
-  "SubscriptiononCreateWritingSessionauth0FunctionSubscriptiononCreateWritingSessionauth0FunctionAppSyncFunctionC1204BF6": {
+  "SubscriptiononCreateUserauth0FunctionSubscriptiononCreateUserauth0FunctionAppSyncFunctionE9B4721A": {
    "Type": "AWS::AppSync::FunctionConfiguration",
    "Properties": {
     "ApiId": {
@@ -1617,7 +1583,7 @@
      "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPINONEDS802F5DFCName"
     },
     "FunctionVersion": "2018-05-29",
-    "Name": "SubscriptiononCreateWritingSessionauth0Function",
+    "Name": "SubscriptiononCreateUserauth0Function",
     "RequestMappingTemplateS3Location": {
      "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/7313b9d304b42b31f7779d73251565621f911cf233e53cca2c808036bda639cc.vtl"
     },
@@ -1626,10 +1592,10 @@
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete",
    "Metadata": {
-    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/SubscriptiononCreateWritingSessionauth0Function/SubscriptiononCreateWritingSessionauth0Function.AppSyncFunction"
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/SubscriptiononCreateUserauth0Function/SubscriptiononCreateUserauth0Function.AppSyncFunction"
    }
   },
-  "SubscriptiononCreateWritingSessionpostAuth0FunctionSubscriptiononCreateWritingSessionpostAuth0FunctionAppSyncFunction4A7403DB": {
+  "SubscriptiononCreateUserpostAuth0FunctionSubscriptiononCreateUserpostAuth0FunctionAppSyncFunction62AE12DA": {
    "Type": "AWS::AppSync::FunctionConfiguration",
    "Properties": {
     "ApiId": {
@@ -1639,7 +1605,7 @@
      "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPINONEDS802F5DFCName"
     },
     "FunctionVersion": "2018-05-29",
-    "Name": "SubscriptiononCreateWritingSessionpostAuth0Function",
+    "Name": "SubscriptiononCreateUserpostAuth0Function",
     "RequestMappingTemplateS3Location": {
      "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/c1721bcd774e27c514d3454b5be4f9bdd094c0161b57ddf053d618e3b0086a77.vtl"
     },
@@ -1648,10 +1614,10 @@
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete",
    "Metadata": {
-    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/SubscriptiononCreateWritingSessionpostAuth0Function/SubscriptiononCreateWritingSessionpostAuth0Function.AppSyncFunction"
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/SubscriptiononCreateUserpostAuth0Function/SubscriptiononCreateUserpostAuth0Function.AppSyncFunction"
    }
   },
-  "SubscriptionOnCreateWritingSessionDataResolverFnSubscriptionOnCreateWritingSessionDataResolverFnAppSyncFunction94763CE1": {
+  "SubscriptionOnCreateUserDataResolverFnSubscriptionOnCreateUserDataResolverFnAppSyncFunction23B2F1B9": {
    "Type": "AWS::AppSync::FunctionConfiguration",
    "Properties": {
     "ApiId": {
@@ -1661,7 +1627,7 @@
      "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPINONEDS802F5DFCName"
     },
     "FunctionVersion": "2018-05-29",
-    "Name": "SubscriptionOnCreateWritingSessionDataResolverFn",
+    "Name": "SubscriptionOnCreateUserDataResolverFn",
     "RequestMappingTemplateS3Location": {
      "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/fe3c43ada4b9d681a5e2312663ef7a73386424d73b73e51f8e2e9d4b50f7c502.vtl"
     },
@@ -1672,34 +1638,34 @@
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete",
    "Metadata": {
-    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/SubscriptionOnCreateWritingSessionDataResolverFn/SubscriptionOnCreateWritingSessionDataResolverFn.AppSyncFunction"
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/SubscriptionOnCreateUserDataResolverFn/SubscriptionOnCreateUserDataResolverFn.AppSyncFunction"
    }
   },
-  "SubscriptiononCreateWritingSessionResolver": {
+  "SubscriptiononCreateUserResolver": {
    "Type": "AWS::AppSync::Resolver",
    "Properties": {
     "ApiId": {
      "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId"
     },
-    "FieldName": "onCreateWritingSession",
+    "FieldName": "onCreateUser",
     "Kind": "PIPELINE",
     "PipelineConfig": {
      "Functions": [
       {
        "Fn::GetAtt": [
-        "SubscriptiononCreateWritingSessionauth0FunctionSubscriptiononCreateWritingSessionauth0FunctionAppSyncFunctionC1204BF6",
+        "SubscriptiononCreateUserauth0FunctionSubscriptiononCreateUserauth0FunctionAppSyncFunctionE9B4721A",
         "FunctionId"
        ]
       },
       {
        "Fn::GetAtt": [
-        "SubscriptiononCreateWritingSessionpostAuth0FunctionSubscriptiononCreateWritingSessionpostAuth0FunctionAppSyncFunction4A7403DB",
+        "SubscriptiononCreateUserpostAuth0FunctionSubscriptiononCreateUserpostAuth0FunctionAppSyncFunction62AE12DA",
         "FunctionId"
        ]
       },
       {
        "Fn::GetAtt": [
-        "SubscriptionOnCreateWritingSessionDataResolverFnSubscriptionOnCreateWritingSessionDataResolverFnAppSyncFunction94763CE1",
+        "SubscriptionOnCreateUserDataResolverFnSubscriptionOnCreateUserDataResolverFnAppSyncFunction23B2F1B9",
         "FunctionId"
        ]
       }
@@ -1709,7 +1675,7 @@
      "Fn::Join": [
       "",
       [
-       "$util.qr($ctx.stash.put(\"typeName\", \"Subscription\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"onCreateWritingSession\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"NONE\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+       "$util.qr($ctx.stash.put(\"typeName\", \"Subscription\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"onCreateUser\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"NONE\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
        {
         "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId"
        },
@@ -1751,10 +1717,10 @@
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete",
    "Metadata": {
-    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/subscriptionOnCreateWritingSessionResolver"
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/subscriptionOnCreateUserResolver"
    }
   },
-  "SubscriptiononUpdateWritingSessionauth0FunctionSubscriptiononUpdateWritingSessionauth0FunctionAppSyncFunction6D8938D8": {
+  "SubscriptiononUpdateUserauth0FunctionSubscriptiononUpdateUserauth0FunctionAppSyncFunction78530C9F": {
    "Type": "AWS::AppSync::FunctionConfiguration",
    "Properties": {
     "ApiId": {
@@ -1764,7 +1730,7 @@
      "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPINONEDS802F5DFCName"
     },
     "FunctionVersion": "2018-05-29",
-    "Name": "SubscriptiononUpdateWritingSessionauth0Function",
+    "Name": "SubscriptiononUpdateUserauth0Function",
     "RequestMappingTemplateS3Location": {
      "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/7313b9d304b42b31f7779d73251565621f911cf233e53cca2c808036bda639cc.vtl"
     },
@@ -1773,10 +1739,10 @@
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete",
    "Metadata": {
-    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/SubscriptiononUpdateWritingSessionauth0Function/SubscriptiononUpdateWritingSessionauth0Function.AppSyncFunction"
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/SubscriptiononUpdateUserauth0Function/SubscriptiononUpdateUserauth0Function.AppSyncFunction"
    }
   },
-  "SubscriptiononUpdateWritingSessionpostAuth0FunctionSubscriptiononUpdateWritingSessionpostAuth0FunctionAppSyncFunction40152E14": {
+  "SubscriptiononUpdateUserpostAuth0FunctionSubscriptiononUpdateUserpostAuth0FunctionAppSyncFunctionF3EF85D1": {
    "Type": "AWS::AppSync::FunctionConfiguration",
    "Properties": {
     "ApiId": {
@@ -1786,7 +1752,7 @@
      "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPINONEDS802F5DFCName"
     },
     "FunctionVersion": "2018-05-29",
-    "Name": "SubscriptiononUpdateWritingSessionpostAuth0Function",
+    "Name": "SubscriptiononUpdateUserpostAuth0Function",
     "RequestMappingTemplateS3Location": {
      "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/c1721bcd774e27c514d3454b5be4f9bdd094c0161b57ddf053d618e3b0086a77.vtl"
     },
@@ -1795,10 +1761,10 @@
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete",
    "Metadata": {
-    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/SubscriptiononUpdateWritingSessionpostAuth0Function/SubscriptiononUpdateWritingSessionpostAuth0Function.AppSyncFunction"
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/SubscriptiononUpdateUserpostAuth0Function/SubscriptiononUpdateUserpostAuth0Function.AppSyncFunction"
    }
   },
-  "SubscriptionOnUpdateWritingSessionDataResolverFnSubscriptionOnUpdateWritingSessionDataResolverFnAppSyncFunctionA8BF197A": {
+  "SubscriptionOnUpdateUserDataResolverFnSubscriptionOnUpdateUserDataResolverFnAppSyncFunction93FA5DF6": {
    "Type": "AWS::AppSync::FunctionConfiguration",
    "Properties": {
     "ApiId": {
@@ -1808,7 +1774,7 @@
      "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPINONEDS802F5DFCName"
     },
     "FunctionVersion": "2018-05-29",
-    "Name": "SubscriptionOnUpdateWritingSessionDataResolverFn",
+    "Name": "SubscriptionOnUpdateUserDataResolverFn",
     "RequestMappingTemplateS3Location": {
      "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/fe3c43ada4b9d681a5e2312663ef7a73386424d73b73e51f8e2e9d4b50f7c502.vtl"
     },
@@ -1819,34 +1785,34 @@
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete",
    "Metadata": {
-    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/SubscriptionOnUpdateWritingSessionDataResolverFn/SubscriptionOnUpdateWritingSessionDataResolverFn.AppSyncFunction"
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/SubscriptionOnUpdateUserDataResolverFn/SubscriptionOnUpdateUserDataResolverFn.AppSyncFunction"
    }
   },
-  "SubscriptiononUpdateWritingSessionResolver": {
+  "SubscriptiononUpdateUserResolver": {
    "Type": "AWS::AppSync::Resolver",
    "Properties": {
     "ApiId": {
      "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId"
     },
-    "FieldName": "onUpdateWritingSession",
+    "FieldName": "onUpdateUser",
     "Kind": "PIPELINE",
     "PipelineConfig": {
      "Functions": [
       {
        "Fn::GetAtt": [
-        "SubscriptiononUpdateWritingSessionauth0FunctionSubscriptiononUpdateWritingSessionauth0FunctionAppSyncFunction6D8938D8",
+        "SubscriptiononUpdateUserauth0FunctionSubscriptiononUpdateUserauth0FunctionAppSyncFunction78530C9F",
         "FunctionId"
        ]
       },
       {
        "Fn::GetAtt": [
-        "SubscriptiononUpdateWritingSessionpostAuth0FunctionSubscriptiononUpdateWritingSessionpostAuth0FunctionAppSyncFunction40152E14",
+        "SubscriptiononUpdateUserpostAuth0FunctionSubscriptiononUpdateUserpostAuth0FunctionAppSyncFunctionF3EF85D1",
         "FunctionId"
        ]
       },
       {
        "Fn::GetAtt": [
-        "SubscriptionOnUpdateWritingSessionDataResolverFnSubscriptionOnUpdateWritingSessionDataResolverFnAppSyncFunctionA8BF197A",
+        "SubscriptionOnUpdateUserDataResolverFnSubscriptionOnUpdateUserDataResolverFnAppSyncFunction93FA5DF6",
         "FunctionId"
        ]
       }
@@ -1856,7 +1822,7 @@
      "Fn::Join": [
       "",
       [
-       "$util.qr($ctx.stash.put(\"typeName\", \"Subscription\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"onUpdateWritingSession\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"NONE\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+       "$util.qr($ctx.stash.put(\"typeName\", \"Subscription\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"onUpdateUser\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"NONE\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
        {
         "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId"
        },
@@ -1898,10 +1864,10 @@
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete",
    "Metadata": {
-    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/subscriptionOnUpdateWritingSessionResolver"
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/subscriptionOnUpdateUserResolver"
    }
   },
-  "SubscriptiononDeleteWritingSessionauth0FunctionSubscriptiononDeleteWritingSessionauth0FunctionAppSyncFunction33B35D9F": {
+  "SubscriptiononDeleteUserauth0FunctionSubscriptiononDeleteUserauth0FunctionAppSyncFunction0C5B7186": {
    "Type": "AWS::AppSync::FunctionConfiguration",
    "Properties": {
     "ApiId": {
@@ -1911,7 +1877,7 @@
      "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPINONEDS802F5DFCName"
     },
     "FunctionVersion": "2018-05-29",
-    "Name": "SubscriptiononDeleteWritingSessionauth0Function",
+    "Name": "SubscriptiononDeleteUserauth0Function",
     "RequestMappingTemplateS3Location": {
      "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/7313b9d304b42b31f7779d73251565621f911cf233e53cca2c808036bda639cc.vtl"
     },
@@ -1920,10 +1886,10 @@
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete",
    "Metadata": {
-    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/SubscriptiononDeleteWritingSessionauth0Function/SubscriptiononDeleteWritingSessionauth0Function.AppSyncFunction"
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/SubscriptiononDeleteUserauth0Function/SubscriptiononDeleteUserauth0Function.AppSyncFunction"
    }
   },
-  "SubscriptiononDeleteWritingSessionpostAuth0FunctionSubscriptiononDeleteWritingSessionpostAuth0FunctionAppSyncFunction65B625F4": {
+  "SubscriptiononDeleteUserpostAuth0FunctionSubscriptiononDeleteUserpostAuth0FunctionAppSyncFunction24A5E815": {
    "Type": "AWS::AppSync::FunctionConfiguration",
    "Properties": {
     "ApiId": {
@@ -1933,7 +1899,7 @@
      "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPINONEDS802F5DFCName"
     },
     "FunctionVersion": "2018-05-29",
-    "Name": "SubscriptiononDeleteWritingSessionpostAuth0Function",
+    "Name": "SubscriptiononDeleteUserpostAuth0Function",
     "RequestMappingTemplateS3Location": {
      "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/c1721bcd774e27c514d3454b5be4f9bdd094c0161b57ddf053d618e3b0086a77.vtl"
     },
@@ -1942,10 +1908,10 @@
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete",
    "Metadata": {
-    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/SubscriptiononDeleteWritingSessionpostAuth0Function/SubscriptiononDeleteWritingSessionpostAuth0Function.AppSyncFunction"
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/SubscriptiononDeleteUserpostAuth0Function/SubscriptiononDeleteUserpostAuth0Function.AppSyncFunction"
    }
   },
-  "SubscriptionOnDeleteWritingSessionDataResolverFnSubscriptionOnDeleteWritingSessionDataResolverFnAppSyncFunctionE6CB0E39": {
+  "SubscriptionOnDeleteUserDataResolverFnSubscriptionOnDeleteUserDataResolverFnAppSyncFunction2BEB0972": {
    "Type": "AWS::AppSync::FunctionConfiguration",
    "Properties": {
     "ApiId": {
@@ -1955,7 +1921,7 @@
      "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPINONEDS802F5DFCName"
     },
     "FunctionVersion": "2018-05-29",
-    "Name": "SubscriptionOnDeleteWritingSessionDataResolverFn",
+    "Name": "SubscriptionOnDeleteUserDataResolverFn",
     "RequestMappingTemplateS3Location": {
      "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/fe3c43ada4b9d681a5e2312663ef7a73386424d73b73e51f8e2e9d4b50f7c502.vtl"
     },
@@ -1966,34 +1932,34 @@
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete",
    "Metadata": {
-    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/SubscriptionOnDeleteWritingSessionDataResolverFn/SubscriptionOnDeleteWritingSessionDataResolverFn.AppSyncFunction"
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/SubscriptionOnDeleteUserDataResolverFn/SubscriptionOnDeleteUserDataResolverFn.AppSyncFunction"
    }
   },
-  "SubscriptiononDeleteWritingSessionResolver": {
+  "SubscriptiononDeleteUserResolver": {
    "Type": "AWS::AppSync::Resolver",
    "Properties": {
     "ApiId": {
      "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId"
     },
-    "FieldName": "onDeleteWritingSession",
+    "FieldName": "onDeleteUser",
     "Kind": "PIPELINE",
     "PipelineConfig": {
      "Functions": [
       {
        "Fn::GetAtt": [
-        "SubscriptiononDeleteWritingSessionauth0FunctionSubscriptiononDeleteWritingSessionauth0FunctionAppSyncFunction33B35D9F",
+        "SubscriptiononDeleteUserauth0FunctionSubscriptiononDeleteUserauth0FunctionAppSyncFunction0C5B7186",
         "FunctionId"
        ]
       },
       {
        "Fn::GetAtt": [
-        "SubscriptiononDeleteWritingSessionpostAuth0FunctionSubscriptiononDeleteWritingSessionpostAuth0FunctionAppSyncFunction65B625F4",
+        "SubscriptiononDeleteUserpostAuth0FunctionSubscriptiononDeleteUserpostAuth0FunctionAppSyncFunction24A5E815",
         "FunctionId"
        ]
       },
       {
        "Fn::GetAtt": [
-        "SubscriptionOnDeleteWritingSessionDataResolverFnSubscriptionOnDeleteWritingSessionDataResolverFnAppSyncFunctionE6CB0E39",
+        "SubscriptionOnDeleteUserDataResolverFnSubscriptionOnDeleteUserDataResolverFnAppSyncFunction2BEB0972",
         "FunctionId"
        ]
       }
@@ -2003,7 +1969,7 @@
      "Fn::Join": [
       "",
       [
-       "$util.qr($ctx.stash.put(\"typeName\", \"Subscription\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"onDeleteWritingSession\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"NONE\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+       "$util.qr($ctx.stash.put(\"typeName\", \"Subscription\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"onDeleteUser\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"NONE\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
        {
         "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId"
        },
@@ -2045,10 +2011,10 @@
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete",
    "Metadata": {
-    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/subscriptionOnDeleteWritingSessionResolver"
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/subscriptionOnDeleteUserResolver"
    }
   },
-  "WritingSessionOwnerDataResolverFnWritingSessionOwnerDataResolverFnAppSyncFunction2F4528DE": {
+  "UserOwnerDataResolverFnUserOwnerDataResolverFnAppSyncFunction78EE3B72": {
    "Type": "AWS::AppSync::FunctionConfiguration",
    "Properties": {
     "ApiId": {
@@ -2058,7 +2024,7 @@
      "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPINONEDS802F5DFCName"
     },
     "FunctionVersion": "2018-05-29",
-    "Name": "WritingSessionOwnerDataResolverFn",
+    "Name": "UserOwnerDataResolverFn",
     "RequestMappingTemplateS3Location": {
      "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/041534e5fd916595f752318f161512d7c7f83b9f2cf32d0f0be381c12253ff68.vtl"
     },
@@ -2069,10 +2035,10 @@
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete",
    "Metadata": {
-    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/WritingSessionOwnerDataResolverFn/WritingSessionOwnerDataResolverFn.AppSyncFunction"
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/UserOwnerDataResolverFn/UserOwnerDataResolverFn.AppSyncFunction"
    }
   },
-  "WritingSessionownerResolver": {
+  "UserownerResolver": {
    "Type": "AWS::AppSync::Resolver",
    "Properties": {
     "ApiId": {
@@ -2084,7 +2050,7 @@
      "Functions": [
       {
        "Fn::GetAtt": [
-        "WritingSessionOwnerDataResolverFnWritingSessionOwnerDataResolverFnAppSyncFunction2F4528DE",
+        "UserOwnerDataResolverFnUserOwnerDataResolverFnAppSyncFunction78EE3B72",
         "FunctionId"
        ]
       }
@@ -2094,7 +2060,7 @@
      "Fn::Join": [
       "",
       [
-       "$util.qr($ctx.stash.put(\"typeName\", \"WritingSession\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"owner\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"NONE\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+       "$util.qr($ctx.stash.put(\"typeName\", \"User\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"owner\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"NONE\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
        {
         "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId"
        },
@@ -2131,12 +2097,12 @@
      ]
     },
     "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)",
-    "TypeName": "WritingSession"
+    "TypeName": "User"
    },
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete",
    "Metadata": {
-    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/writingSessionOwnerResolver"
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/userOwnerResolver"
    }
   },
   "CDKMetadata": {
@@ -2145,17 +2111,17 @@
     "Analytics": "v2:deflate64:H4sIAAAAAAAA/1WQQU/DMAyFfwv31NCNC0fWiiOgjvvkJm6VtU2q2Bmaqv53kg4NcXr+5Cf72TsoX57h6QG/udBmKEbbwvJOLGSOgnpQVec+MeBEQiFD5Z2xYr1TDbGPQZOqIouf/rBz9zqNPS3m6nDypoUvbEc6IJOyOMHS+PHmTroqnGe+Og1LvdnrtkbB433kf3qLTucQKU1n+xhwS/S7ebxQWBXvT8hMwvCaJTEcoh5IcoA1ez+izFHU1k7H9tb1q3LeEJz58bLbQ1mmz5zZ2iJEJ3YiaG76A0rqSlw2AQAA"
    },
    "Metadata": {
-    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/CDKMetadata/Default"
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/CDKMetadata/Default"
    },
    "Condition": "CDKMetadataAvailable"
   }
  },
  "Outputs": {
-  "GetAttWritingSessionTableStreamArn": {
+  "GetAttUserTableStreamArn": {
    "Description": "Your DynamoDB table StreamArn.",
    "Value": {
     "Fn::GetAtt": [
-     "WritingSessionTable",
+     "UserTable",
      "TableStreamArn"
     ]
    },
@@ -2167,19 +2133,19 @@
        {
         "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId"
        },
-       "GetAtt:WritingSessionTable:StreamArn"
+       "GetAtt:UserTable:StreamArn"
       ]
      ]
     }
    }
   },
-  "GetAttWritingSessionTableName": {
+  "GetAttUserTableName": {
    "Description": "Your DynamoDB table name.",
    "Value": {
     "Fn::Join": [
      "",
      [
-      "WritingSession-",
+      "User-",
       {
        "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId"
       },
@@ -2195,24 +2161,24 @@
        {
         "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId"
        },
-       "GetAtt:WritingSessionTable:Name"
+       "GetAtt:UserTable:Name"
       ]
      ]
     }
    }
   },
-  "amplifywritinglivechassesandbox753c548dbbdataamplifyDataWritingSessionWritingSessionDataSource51AA40CAName": {
+  "amplifywritinglivechassesandbox753c548dbbdataamplifyDataUserUserDataSource019DA8C7Name": {
    "Value": {
     "Fn::GetAtt": [
-     "WritingSessionDataSource",
+     "UserDataSource",
      "Name"
     ]
    }
   },
-  "amplifywritinglivechassesandbox753c548dbbdataamplifyDataWritingSessionWritingSessionTable2FB165D3TableArn": {
+  "amplifywritinglivechassesandbox753c548dbbdataamplifyDataUserUserTableAB0BAE67TableArn": {
    "Value": {
     "Fn::GetAtt": [
-     "WritingSessionTable",
+     "UserTable",
      "TableArn"
     ]
    }

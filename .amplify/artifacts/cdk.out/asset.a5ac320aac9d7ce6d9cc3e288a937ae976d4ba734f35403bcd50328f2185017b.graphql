@@ -1,0 +1,443 @@
+type User @aws_iam @aws_cognito_user_pools {
+  email: String
+  username: String
+  role: UserRole
+  bio: String
+  sessions(filter: ModelWritingSessionFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelWritingSessionConnection
+  readingSessions(filter: ModelReadingSessionFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelReadingSessionConnection
+  id: ID!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  owner: String
+}
+
+type WritingSession @aws_iam @aws_cognito_user_pools {
+  title: String
+  content: String
+  lastModified: AWSDateTime
+  isActive: Boolean
+  authorId: String
+  author: User
+  readers(filter: ModelReadingSessionFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelReadingSessionConnection
+  isPublic: Boolean
+  id: ID!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  owner: String
+}
+
+type ReadingSession @aws_iam @aws_cognito_user_pools {
+  readerId: String
+  writingSessionId: String
+  reader: User
+  writingSession: WritingSession
+  lastReadAt: AWSDateTime
+  isAnonymous: Boolean
+  id: ID!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  owner: String
+}
+
+enum UserRole {
+  WRITER
+  READER
+}
+
+input AmplifyAIConversationTurnErrorInput {
+  errorType: String!
+  message: String!
+}
+
+input ModelStringInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelIntInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelFloatInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  between: [Float]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelBooleanInput {
+  ne: Boolean
+  eq: Boolean
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelIDInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelSubscriptionStringInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+  in: [String]
+  notIn: [String]
+}
+
+input ModelSubscriptionIntInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+  in: [Int]
+  notIn: [Int]
+}
+
+input ModelSubscriptionFloatInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  between: [Float]
+  in: [Float]
+  notIn: [Float]
+}
+
+input ModelSubscriptionBooleanInput {
+  ne: Boolean
+  eq: Boolean
+}
+
+input ModelSubscriptionIDInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+  in: [ID]
+  notIn: [ID]
+}
+
+enum ModelAttributeTypes {
+  binary
+  binarySet
+  bool
+  list
+  map
+  number
+  numberSet
+  string
+  stringSet
+  _null
+}
+
+input ModelSizeInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+}
+
+enum ModelSortDirection {
+  ASC
+  DESC
+}
+
+type ModelUserConnection @aws_iam @aws_cognito_user_pools {
+  items: [User]!
+  nextToken: String
+}
+
+input ModelUserRoleInput {
+  eq: UserRole
+  ne: UserRole
+}
+
+input ModelUserFilterInput {
+  email: ModelStringInput
+  username: ModelStringInput
+  role: ModelUserRoleInput
+  bio: ModelStringInput
+  id: ModelIDInput
+  createdAt: ModelStringInput
+  updatedAt: ModelStringInput
+  and: [ModelUserFilterInput]
+  or: [ModelUserFilterInput]
+  not: ModelUserFilterInput
+  owner: ModelStringInput
+}
+
+type Query {
+  getUser(id: ID!): User @aws_iam @aws_cognito_user_pools
+  listUsers(filter: ModelUserFilterInput, limit: Int, nextToken: String): ModelUserConnection @aws_iam @aws_cognito_user_pools
+  getWritingSession(id: ID!): WritingSession @aws_iam @aws_cognito_user_pools
+  listWritingSessions(filter: ModelWritingSessionFilterInput, limit: Int, nextToken: String): ModelWritingSessionConnection @aws_iam @aws_cognito_user_pools
+  getReadingSession(id: ID!): ReadingSession @aws_iam @aws_cognito_user_pools
+  listReadingSessions(filter: ModelReadingSessionFilterInput, limit: Int, nextToken: String): ModelReadingSessionConnection @aws_iam @aws_cognito_user_pools
+}
+
+input ModelUserConditionInput {
+  email: ModelStringInput
+  username: ModelStringInput
+  role: ModelUserRoleInput
+  bio: ModelStringInput
+  and: [ModelUserConditionInput]
+  or: [ModelUserConditionInput]
+  not: ModelUserConditionInput
+  createdAt: ModelStringInput
+  updatedAt: ModelStringInput
+  owner: ModelStringInput
+}
+
+input CreateUserInput {
+  email: String
+  username: String
+  role: UserRole
+  bio: String
+  id: ID
+}
+
+input UpdateUserInput {
+  email: String
+  username: String
+  role: UserRole
+  bio: String
+  id: ID!
+}
+
+input DeleteUserInput {
+  id: ID!
+}
+
+type Mutation {
+  createUser(input: CreateUserInput!, condition: ModelUserConditionInput): User @aws_iam @aws_cognito_user_pools
+  updateUser(input: UpdateUserInput!, condition: ModelUserConditionInput): User @aws_iam @aws_cognito_user_pools
+  deleteUser(input: DeleteUserInput!, condition: ModelUserConditionInput): User @aws_iam @aws_cognito_user_pools
+  createWritingSession(input: CreateWritingSessionInput!, condition: ModelWritingSessionConditionInput): WritingSession @aws_iam @aws_cognito_user_pools
+  updateWritingSession(input: UpdateWritingSessionInput!, condition: ModelWritingSessionConditionInput): WritingSession @aws_iam @aws_cognito_user_pools
+  deleteWritingSession(input: DeleteWritingSessionInput!, condition: ModelWritingSessionConditionInput): WritingSession @aws_iam @aws_cognito_user_pools
+  createReadingSession(input: CreateReadingSessionInput!, condition: ModelReadingSessionConditionInput): ReadingSession @aws_iam @aws_cognito_user_pools
+  updateReadingSession(input: UpdateReadingSessionInput!, condition: ModelReadingSessionConditionInput): ReadingSession @aws_iam @aws_cognito_user_pools
+  deleteReadingSession(input: DeleteReadingSessionInput!, condition: ModelReadingSessionConditionInput): ReadingSession @aws_iam @aws_cognito_user_pools
+}
+
+input ModelSubscriptionUserFilterInput {
+  email: ModelSubscriptionStringInput
+  username: ModelSubscriptionStringInput
+  role: ModelSubscriptionStringInput
+  bio: ModelSubscriptionStringInput
+  id: ModelSubscriptionIDInput
+  createdAt: ModelSubscriptionStringInput
+  updatedAt: ModelSubscriptionStringInput
+  and: [ModelSubscriptionUserFilterInput]
+  or: [ModelSubscriptionUserFilterInput]
+  owner: ModelStringInput
+}
+
+type Subscription {
+  onCreateUser(filter: ModelSubscriptionUserFilterInput, owner: String): User @aws_subscribe(mutations: ["createUser"]) @aws_iam @aws_cognito_user_pools
+  onUpdateUser(filter: ModelSubscriptionUserFilterInput, owner: String): User @aws_subscribe(mutations: ["updateUser"]) @aws_iam @aws_cognito_user_pools
+  onDeleteUser(filter: ModelSubscriptionUserFilterInput, owner: String): User @aws_subscribe(mutations: ["deleteUser"]) @aws_iam @aws_cognito_user_pools
+  onCreateWritingSession(filter: ModelSubscriptionWritingSessionFilterInput, owner: String): WritingSession @aws_subscribe(mutations: ["createWritingSession"]) @aws_iam @aws_cognito_user_pools
+  onUpdateWritingSession(filter: ModelSubscriptionWritingSessionFilterInput, owner: String): WritingSession @aws_subscribe(mutations: ["updateWritingSession"]) @aws_iam @aws_cognito_user_pools
+  onDeleteWritingSession(filter: ModelSubscriptionWritingSessionFilterInput, owner: String): WritingSession @aws_subscribe(mutations: ["deleteWritingSession"]) @aws_iam @aws_cognito_user_pools
+  onCreateReadingSession(filter: ModelSubscriptionReadingSessionFilterInput, owner: String): ReadingSession @aws_subscribe(mutations: ["createReadingSession"]) @aws_iam @aws_cognito_user_pools
+  onUpdateReadingSession(filter: ModelSubscriptionReadingSessionFilterInput, owner: String): ReadingSession @aws_subscribe(mutations: ["updateReadingSession"]) @aws_iam @aws_cognito_user_pools
+  onDeleteReadingSession(filter: ModelSubscriptionReadingSessionFilterInput, owner: String): ReadingSession @aws_subscribe(mutations: ["deleteReadingSession"]) @aws_iam @aws_cognito_user_pools
+}
+
+type ModelWritingSessionConnection @aws_iam @aws_cognito_user_pools {
+  items: [WritingSession]!
+  nextToken: String
+}
+
+input ModelWritingSessionFilterInput {
+  title: ModelStringInput
+  content: ModelStringInput
+  lastModified: ModelStringInput
+  isActive: ModelBooleanInput
+  authorId: ModelStringInput
+  isPublic: ModelBooleanInput
+  id: ModelIDInput
+  createdAt: ModelStringInput
+  updatedAt: ModelStringInput
+  and: [ModelWritingSessionFilterInput]
+  or: [ModelWritingSessionFilterInput]
+  not: ModelWritingSessionFilterInput
+  owner: ModelStringInput
+}
+
+input ModelWritingSessionConditionInput {
+  title: ModelStringInput
+  content: ModelStringInput
+  lastModified: ModelStringInput
+  isActive: ModelBooleanInput
+  authorId: ModelStringInput
+  isPublic: ModelBooleanInput
+  and: [ModelWritingSessionConditionInput]
+  or: [ModelWritingSessionConditionInput]
+  not: ModelWritingSessionConditionInput
+  createdAt: ModelStringInput
+  updatedAt: ModelStringInput
+  owner: ModelStringInput
+}
+
+input CreateWritingSessionInput {
+  title: String
+  content: String
+  lastModified: AWSDateTime
+  isActive: Boolean
+  authorId: String
+  isPublic: Boolean
+  id: ID
+}
+
+input UpdateWritingSessionInput {
+  title: String
+  content: String
+  lastModified: AWSDateTime
+  isActive: Boolean
+  authorId: String
+  isPublic: Boolean
+  id: ID!
+}
+
+input DeleteWritingSessionInput {
+  id: ID!
+}
+
+input ModelSubscriptionWritingSessionFilterInput {
+  title: ModelSubscriptionStringInput
+  content: ModelSubscriptionStringInput
+  lastModified: ModelSubscriptionStringInput
+  isActive: ModelSubscriptionBooleanInput
+  authorId: ModelSubscriptionStringInput
+  isPublic: ModelSubscriptionBooleanInput
+  id: ModelSubscriptionIDInput
+  createdAt: ModelSubscriptionStringInput
+  updatedAt: ModelSubscriptionStringInput
+  and: [ModelSubscriptionWritingSessionFilterInput]
+  or: [ModelSubscriptionWritingSessionFilterInput]
+  owner: ModelStringInput
+}
+
+type ModelReadingSessionConnection @aws_iam @aws_cognito_user_pools {
+  items: [ReadingSession]!
+  nextToken: String
+}
+
+input ModelReadingSessionFilterInput {
+  readerId: ModelStringInput
+  writingSessionId: ModelStringInput
+  lastReadAt: ModelStringInput
+  isAnonymous: ModelBooleanInput
+  id: ModelIDInput
+  createdAt: ModelStringInput
+  updatedAt: ModelStringInput
+  and: [ModelReadingSessionFilterInput]
+  or: [ModelReadingSessionFilterInput]
+  not: ModelReadingSessionFilterInput
+  owner: ModelStringInput
+}
+
+input ModelReadingSessionConditionInput {
+  readerId: ModelStringInput
+  writingSessionId: ModelStringInput
+  lastReadAt: ModelStringInput
+  isAnonymous: ModelBooleanInput
+  and: [ModelReadingSessionConditionInput]
+  or: [ModelReadingSessionConditionInput]
+  not: ModelReadingSessionConditionInput
+  createdAt: ModelStringInput
+  updatedAt: ModelStringInput
+  owner: ModelStringInput
+}
+
+input CreateReadingSessionInput {
+  readerId: String
+  writingSessionId: String
+  lastReadAt: AWSDateTime
+  isAnonymous: Boolean
+  id: ID
+}
+
+input UpdateReadingSessionInput {
+  readerId: String
+  writingSessionId: String
+  lastReadAt: AWSDateTime
+  isAnonymous: Boolean
+  id: ID!
+}
+
+input DeleteReadingSessionInput {
+  id: ID!
+}
+
+input ModelSubscriptionReadingSessionFilterInput {
+  readerId: ModelSubscriptionStringInput
+  writingSessionId: ModelSubscriptionStringInput
+  lastReadAt: ModelSubscriptionStringInput
+  isAnonymous: ModelSubscriptionBooleanInput
+  id: ModelSubscriptionIDInput
+  createdAt: ModelSubscriptionStringInput
+  updatedAt: ModelSubscriptionStringInput
+  and: [ModelSubscriptionReadingSessionFilterInput]
+  or: [ModelSubscriptionReadingSessionFilterInput]
+  owner: ModelStringInput
+}

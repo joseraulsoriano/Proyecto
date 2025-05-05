@@ -20,6 +20,29 @@ Una plataforma que permite a los escritores compartir su proceso creativo en tie
 - AWS AppSync
 - GraphQL
 
+## Variables de Entorno
+
+Para ejecutar este proyecto, necesitarás crear un archivo `.env.local` en la raíz del proyecto con las siguientes variables:
+
+```env
+# NextAuth Configuration
+NEXTAUTH_SECRET=your_nextauth_secret_here
+NEXTAUTH_URL=http://localhost:3000
+
+# AWS Cognito Configuration
+NEXT_PUBLIC_COGNITO_USER_POOL_ID=your_user_pool_id_here
+NEXT_PUBLIC_COGNITO_CLIENT_ID=your_client_id_here
+NEXT_PUBLIC_AWS_REGION=us-east-1
+```
+
+### Configuración de Variables
+
+1. `NEXTAUTH_SECRET`: Un string aleatorio seguro para encriptar las sesiones
+2. `NEXTAUTH_URL`: La URL base de tu aplicación
+3. `NEXT_PUBLIC_COGNITO_USER_POOL_ID`: El ID del User Pool de AWS Cognito
+4. `NEXT_PUBLIC_COGNITO_CLIENT_ID`: El ID del App Client de AWS Cognito
+5. `NEXT_PUBLIC_AWS_REGION`: La región de AWS donde está configurado Cognito
+
 ## Configuración Local
 
 1. Clona el repositorio:
@@ -35,15 +58,7 @@ cd escritura-en-tiempo-real
 npm install
 ```
 
-3. Configura las variables de entorno:
-   Crea un archivo `.env.local` con las siguientes variables:
-
-```
-NEXT_PUBLIC_AWS_REGION=us-east-1
-NEXT_PUBLIC_APPSYNC_ENDPOINT=your-appsync-endpoint
-NEXT_PUBLIC_APPSYNC_API_KEY=your-api-key
-```
-
+3. Crea el archivo `.env.local` con las variables necesarias
 4. Inicia el servidor de desarrollo:
 
 ```bash

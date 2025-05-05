@@ -22,7 +22,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/3dbaae316938a1fe1d72983bb1bf3dfa6bc02e7f5cc1593abfe9adda33e9696b.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/271096a79bca3b67a75af6864bde3de3d5f60e055f12a35c0dddbcdcbed6d211.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -373,6 +373,546 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "amplifyDataAmplifyTableManagerNestedStackAmplifyTableManagerNestedStackResource86290833"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/DynamoDBModelTableReadIOPS": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBModelTableReadIOPS"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/DynamoDBModelTableWriteIOPS": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBModelTableWriteIOPS"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/DynamoDBBillingMode": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBBillingMode"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/DynamoDBEnablePointInTimeRecovery": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBEnablePointInTimeRecovery"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/DynamoDBEnableServerSideEncryption": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBEnableServerSideEncryption"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/HasEnvironmentParameter": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "HasEnvironmentParameter"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/ShouldUsePayPerRequestBilling": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ShouldUsePayPerRequestBilling"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/ShouldUsePointInTimeRecovery": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ShouldUsePointInTimeRecovery"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/UserTable": [
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "User"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/UserTable/Default/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UserTable"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "User"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/CustomTableUserTable": [
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "User"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/GetAttUserTableStreamArn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "GetAttUserTableStreamArn"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/GetAttUserTableName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "GetAttUserTableName"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/UserIAMRole": [
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "UserIAMRole"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/UserIAMRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UserIAMRole93CEE926"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "UserIAMRole"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/UserDataSource": [
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "UserTable"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/UserDataSource/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UserDataSource"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "UserTable"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/QuerygetUserauth0Function/QuerygetUserauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuerygetUserauth0FunctionQuerygetUserauth0FunctionAppSyncFunction9E6250B0"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QuerygetUserauth0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/QuerygetUserpostAuth0Function/QuerygetUserpostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuerygetUserpostAuth0FunctionQuerygetUserpostAuth0FunctionAppSyncFunction2792AC60"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QuerygetUserpostAuth0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/QueryGetUserDataResolverFn/QueryGetUserDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QueryGetUserDataResolverFnQueryGetUserDataResolverFnAppSyncFunction36A3E4CF"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QueryGetUserDataResolverFn"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/queryGetUserResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "GetUserResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Query.getUser"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/QuerylistUsersauth0Function/QuerylistUsersauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuerylistUsersauth0FunctionQuerylistUsersauth0FunctionAppSyncFunctionA1FF61AB"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QuerylistUsersauth0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/QuerylistUserspostAuth0Function/QuerylistUserspostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuerylistUserspostAuth0FunctionQuerylistUserspostAuth0FunctionAppSyncFunction37C5583D"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QuerylistUserspostAuth0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/QueryListUsersDataResolverFn/QueryListUsersDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QueryListUsersDataResolverFnQueryListUsersDataResolverFnAppSyncFunction83574EBA"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QueryListUsersDataResolverFn"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/queryListUsersResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ListUserResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Query.listUsers"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/MutationcreateUserinit0Function/MutationcreateUserinit0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationcreateUserinit0FunctionMutationcreateUserinit0FunctionAppSyncFunctionEDF87EC6"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationcreateUserinit0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/MutationcreateUserauth0Function/MutationcreateUserauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationcreateUserauth0FunctionMutationcreateUserauth0FunctionAppSyncFunction30556A6C"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationcreateUserauth0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/MutationcreateUserpostAuth0Function/MutationcreateUserpostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationcreateUserpostAuth0FunctionMutationcreateUserpostAuth0FunctionAppSyncFunction176E20CB"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationcreateUserpostAuth0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/MutationCreateUserDataResolverFn/MutationCreateUserDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationCreateUserDataResolverFnMutationCreateUserDataResolverFnAppSyncFunction22E7974E"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationCreateUserDataResolverFn"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/mutationCreateUserResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CreateUserResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Mutation.createUser"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/MutationupdateUserinit0Function/MutationupdateUserinit0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationupdateUserinit0FunctionMutationupdateUserinit0FunctionAppSyncFunctionC2E8A924"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationupdateUserinit0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/MutationupdateUserauth0Function/MutationupdateUserauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationupdateUserauth0FunctionMutationupdateUserauth0FunctionAppSyncFunctionDF95DA65"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationupdateUserauth0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/MutationupdateUserpostAuth0Function/MutationupdateUserpostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationupdateUserpostAuth0FunctionMutationupdateUserpostAuth0FunctionAppSyncFunctionD4B80000"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationupdateUserpostAuth0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/MutationUpdateUserDataResolverFn/MutationUpdateUserDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationUpdateUserDataResolverFnMutationUpdateUserDataResolverFnAppSyncFunction6ADF3910"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationUpdateUserDataResolverFn"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/mutationUpdateUserResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UpdateUserResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Mutation.updateUser"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/MutationdeleteUserauth0Function/MutationdeleteUserauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationdeleteUserauth0FunctionMutationdeleteUserauth0FunctionAppSyncFunction9B900ACD"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationdeleteUserauth0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/MutationdeleteUserpostAuth0Function/MutationdeleteUserpostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationdeleteUserpostAuth0FunctionMutationdeleteUserpostAuth0FunctionAppSyncFunction9B804910"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationdeleteUserpostAuth0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/MutationDeleteUserDataResolverFn/MutationDeleteUserDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationDeleteUserDataResolverFnMutationDeleteUserDataResolverFnAppSyncFunction0B4F366A"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationDeleteUserDataResolverFn"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/mutationDeleteUserResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DeleteUserResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Mutation.deleteUser"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/SubscriptiononCreateUserauth0Function/SubscriptiononCreateUserauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononCreateUserauth0FunctionSubscriptiononCreateUserauth0FunctionAppSyncFunctionE9B4721A"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptiononCreateUserauth0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/SubscriptiononCreateUserpostAuth0Function/SubscriptiononCreateUserpostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononCreateUserpostAuth0FunctionSubscriptiononCreateUserpostAuth0FunctionAppSyncFunction62AE12DA"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptiononCreateUserpostAuth0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/SubscriptionOnCreateUserDataResolverFn/SubscriptionOnCreateUserDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptionOnCreateUserDataResolverFnSubscriptionOnCreateUserDataResolverFnAppSyncFunction23B2F1B9"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptionOnCreateUserDataResolverFn"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/subscriptionOnCreateUserResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononCreateUserResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Subscription.onCreateUser"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/SubscriptiononUpdateUserauth0Function/SubscriptiononUpdateUserauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononUpdateUserauth0FunctionSubscriptiononUpdateUserauth0FunctionAppSyncFunction78530C9F"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptiononUpdateUserauth0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/SubscriptiononUpdateUserpostAuth0Function/SubscriptiononUpdateUserpostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononUpdateUserpostAuth0FunctionSubscriptiononUpdateUserpostAuth0FunctionAppSyncFunctionF3EF85D1"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptiononUpdateUserpostAuth0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/SubscriptionOnUpdateUserDataResolverFn/SubscriptionOnUpdateUserDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptionOnUpdateUserDataResolverFnSubscriptionOnUpdateUserDataResolverFnAppSyncFunction93FA5DF6"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptionOnUpdateUserDataResolverFn"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/subscriptionOnUpdateUserResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononUpdateUserResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Subscription.onUpdateUser"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/SubscriptiononDeleteUserauth0Function/SubscriptiononDeleteUserauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononDeleteUserauth0FunctionSubscriptiononDeleteUserauth0FunctionAppSyncFunction0C5B7186"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptiononDeleteUserauth0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/SubscriptiononDeleteUserpostAuth0Function/SubscriptiononDeleteUserpostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononDeleteUserpostAuth0FunctionSubscriptiononDeleteUserpostAuth0FunctionAppSyncFunction24A5E815"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptiononDeleteUserpostAuth0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/SubscriptionOnDeleteUserDataResolverFn/SubscriptionOnDeleteUserDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptionOnDeleteUserDataResolverFnSubscriptionOnDeleteUserDataResolverFnAppSyncFunction2BEB0972"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptionOnDeleteUserDataResolverFn"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/subscriptionOnDeleteUserResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononDeleteUserResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Subscription.onDeleteUser"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/UserOwnerDataResolverFn/UserOwnerDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UserOwnerDataResolverFnUserOwnerDataResolverFnAppSyncFunction78EE3B72"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "UserOwnerDataResolverFn"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/userOwnerResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UserownerResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "User.owner"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/reference-to-amplifywritinglivechassesandbox753c548dbbdataamplifyDataAmplifyTableManagerNestedStackAmplifyTableManagerNestedStackResourceE652A93COutputs.amplifywritinglivechassesandbox753c548dbbdataamplifyDataAmplifyTableManagerTableManagerCustomProviderframeworkonEvent24A25D29Arn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataAmplifyTableManagerNestedStackAmplifyTableManagerNestedStackResourceE652A93COutputsamplifywritinglivechassesandbox753c548dbbdataamplifyDataAmplifyTableManagerTableManagerCus2CC9795D"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/reference-to-amplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/reference-to-amplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPINONEDS802F5DFCName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPINONEDS802F5DFCName"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/reference-to-amplifywritinglivechassesandbox753c548dbbauthNestedStackauthNestedStackResource924BBE0COutputs.amplifywritinglivechassesandbox753c548dbbauthamplifyAuthauthenticatedUserRole934A26C9Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifywritinglivechassesandbox753c548dbbauthNestedStackauthNestedStackResource924BBE0COutputsamplifywritinglivechassesandbox753c548dbbauthamplifyAuthauthenticatedUserRole934A26C9Ref"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/reference-to-amplifywritinglivechassesandbox753c548dbbauthNestedStackauthNestedStackResource924BBE0COutputs.amplifywritinglivechassesandbox753c548dbbauthamplifyAuthunauthenticatedUserRole1D31DC91Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifywritinglivechassesandbox753c548dbbauthNestedStackauthNestedStackResource924BBE0COutputsamplifywritinglivechassesandbox753c548dbbauthamplifyAuthunauthenticatedUserRole1D31DC91Ref"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/reference-to-amplifywritinglivechassesandbox753c548dbbauthNestedStackauthNestedStackResource924BBE0COutputs.amplifywritinglivechassesandbox753c548dbbauthamplifyAuthIdentityPool53F0F256Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifywritinglivechassesandbox753c548dbbauthNestedStackauthNestedStackResource924BBE0COutputsamplifywritinglivechassesandbox753c548dbbauthamplifyAuthIdentityPool53F0F256Ref"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/amplifywritinglivechassesandbox753c548dbbdataamplifyDataUserUserDataSource019DA8C7Name": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifywritinglivechassesandbox753c548dbbdataamplifyDataUserUserDataSource019DA8C7Name"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User/amplifywritinglivechassesandbox753c548dbbdataamplifyDataUserUserTableAB0BAE67TableArn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifywritinglivechassesandbox753c548dbbdataamplifyDataUserUserTableAB0BAE67TableArn"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/User.NestedStack/User.NestedStackResource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyDataUserNestedStackUserNestedStackResource9488907F"
           }
         ],
         "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/DynamoDBModelTableReadIOPS": [
@@ -897,22 +1437,826 @@
             "data": "referencetoamplifywritinglivechassesandbox753c548dbbauthNestedStackauthNestedStackResource924BBE0COutputsamplifywritinglivechassesandbox753c548dbbauthamplifyAuthIdentityPool53F0F256Ref"
           }
         ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/amplifywritinglivechassesandbox753c548dbbdataamplifyDataWritingSessionWritingSessionDataSource51AA40CAName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifywritinglivechassesandbox753c548dbbdataamplifyDataWritingSessionWritingSessionDataSource51AA40CAName"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/amplifywritinglivechassesandbox753c548dbbdataamplifyDataWritingSessionWritingSessionTable2FB165D3TableArn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifywritinglivechassesandbox753c548dbbdataamplifyDataWritingSessionWritingSessionTable2FB165D3TableArn"
+          }
+        ],
         "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession.NestedStack/WritingSession.NestedStackResource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "amplifyDataWritingSessionNestedStackWritingSessionNestedStackResource4D895228"
           }
         ],
-        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/AuthRolePolicy01/Resource": [
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/DynamoDBModelTableReadIOPS": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "amplifyDataAuthRolePolicy01567A5654"
+            "data": "DynamoDBModelTableReadIOPS"
           }
         ],
-        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/UnauthRolePolicy01/Resource": [
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/DynamoDBModelTableWriteIOPS": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "amplifyDataUnauthRolePolicy01355B9DCF"
+            "data": "DynamoDBModelTableWriteIOPS"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/DynamoDBBillingMode": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBBillingMode"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/DynamoDBEnablePointInTimeRecovery": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBEnablePointInTimeRecovery"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/DynamoDBEnableServerSideEncryption": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBEnableServerSideEncryption"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/HasEnvironmentParameter": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "HasEnvironmentParameter"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/ShouldUsePayPerRequestBilling": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ShouldUsePayPerRequestBilling"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/ShouldUsePointInTimeRecovery": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ShouldUsePointInTimeRecovery"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/ReadingSessionTable": [
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "ReadingSession"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/ReadingSessionTable/Default/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ReadingSessionTable"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "ReadingSession"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/CustomTableReadingSessionTable": [
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "ReadingSession"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/GetAttReadingSessionTableStreamArn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "GetAttReadingSessionTableStreamArn"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/GetAttReadingSessionTableName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "GetAttReadingSessionTableName"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/ReadingSessionIAMRole": [
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "ReadingSessionIAMRole"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/ReadingSessionIAMRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ReadingSessionIAMRole6B0DC0C4"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "ReadingSessionIAMRole"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/ReadingSessionDataSource": [
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "ReadingSessionTable"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/ReadingSessionDataSource/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ReadingSessionDataSource"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "ReadingSessionTable"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/QuerygetReadingSessionauth0Function/QuerygetReadingSessionauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuerygetReadingSessionauth0FunctionQuerygetReadingSessionauth0FunctionAppSyncFunction13E0E073"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QuerygetReadingSessionauth0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/QuerygetReadingSessionpostAuth0Function/QuerygetReadingSessionpostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuerygetReadingSessionpostAuth0FunctionQuerygetReadingSessionpostAuth0FunctionAppSyncFunction54DBCEF5"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QuerygetReadingSessionpostAuth0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/QueryGetReadingSessionDataResolverFn/QueryGetReadingSessionDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QueryGetReadingSessionDataResolverFnQueryGetReadingSessionDataResolverFnAppSyncFunctionB38F3469"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QueryGetReadingSessionDataResolverFn"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/queryGetReadingSessionResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "GetReadingSessionResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Query.getReadingSession"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/QuerylistReadingSessionsauth0Function/QuerylistReadingSessionsauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuerylistReadingSessionsauth0FunctionQuerylistReadingSessionsauth0FunctionAppSyncFunction53568F3C"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QuerylistReadingSessionsauth0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/QuerylistReadingSessionspostAuth0Function/QuerylistReadingSessionspostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuerylistReadingSessionspostAuth0FunctionQuerylistReadingSessionspostAuth0FunctionAppSyncFunctionD9289A44"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QuerylistReadingSessionspostAuth0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/QueryListReadingSessionsDataResolverFn/QueryListReadingSessionsDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QueryListReadingSessionsDataResolverFnQueryListReadingSessionsDataResolverFnAppSyncFunction61AF9304"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QueryListReadingSessionsDataResolverFn"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/queryListReadingSessionsResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ListReadingSessionResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Query.listReadingSessions"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/MutationcreateReadingSessioninit0Function/MutationcreateReadingSessioninit0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationcreateReadingSessioninit0FunctionMutationcreateReadingSessioninit0FunctionAppSyncFunctionB023446F"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationcreateReadingSessioninit0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/MutationcreateReadingSessionauth0Function/MutationcreateReadingSessionauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationcreateReadingSessionauth0FunctionMutationcreateReadingSessionauth0FunctionAppSyncFunction3F972917"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationcreateReadingSessionauth0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/MutationcreateReadingSessionpostAuth0Function/MutationcreateReadingSessionpostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationcreateReadingSessionpostAuth0FunctionMutationcreateReadingSessionpostAuth0FunctionAppSyncFunction31B52C96"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationcreateReadingSessionpostAuth0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/MutationCreateReadingSessionDataResolverFn/MutationCreateReadingSessionDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationCreateReadingSessionDataResolverFnMutationCreateReadingSessionDataResolverFnAppSyncFunctionADB86B84"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationCreateReadingSessionDataResolverFn"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/mutationCreateReadingSessionResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CreateReadingSessionResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Mutation.createReadingSession"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/MutationupdateReadingSessioninit0Function/MutationupdateReadingSessioninit0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationupdateReadingSessioninit0FunctionMutationupdateReadingSessioninit0FunctionAppSyncFunction47D9F33D"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationupdateReadingSessioninit0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/MutationupdateReadingSessionauth0Function/MutationupdateReadingSessionauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationupdateReadingSessionauth0FunctionMutationupdateReadingSessionauth0FunctionAppSyncFunctionBE1FDB68"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationupdateReadingSessionauth0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/MutationupdateReadingSessionpostAuth0Function/MutationupdateReadingSessionpostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationupdateReadingSessionpostAuth0FunctionMutationupdateReadingSessionpostAuth0FunctionAppSyncFunction5083611E"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationupdateReadingSessionpostAuth0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/MutationUpdateReadingSessionDataResolverFn/MutationUpdateReadingSessionDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationUpdateReadingSessionDataResolverFnMutationUpdateReadingSessionDataResolverFnAppSyncFunction6D1ECCCA"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationUpdateReadingSessionDataResolverFn"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/mutationUpdateReadingSessionResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UpdateReadingSessionResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Mutation.updateReadingSession"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/MutationdeleteReadingSessionauth0Function/MutationdeleteReadingSessionauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationdeleteReadingSessionauth0FunctionMutationdeleteReadingSessionauth0FunctionAppSyncFunction491B4E86"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationdeleteReadingSessionauth0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/MutationdeleteReadingSessionpostAuth0Function/MutationdeleteReadingSessionpostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationdeleteReadingSessionpostAuth0FunctionMutationdeleteReadingSessionpostAuth0FunctionAppSyncFunctionFC3D3086"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationdeleteReadingSessionpostAuth0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/MutationDeleteReadingSessionDataResolverFn/MutationDeleteReadingSessionDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationDeleteReadingSessionDataResolverFnMutationDeleteReadingSessionDataResolverFnAppSyncFunctionB2898155"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationDeleteReadingSessionDataResolverFn"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/mutationDeleteReadingSessionResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DeleteReadingSessionResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Mutation.deleteReadingSession"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/SubscriptiononCreateReadingSessionauth0Function/SubscriptiononCreateReadingSessionauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononCreateReadingSessionauth0FunctionSubscriptiononCreateReadingSessionauth0FunctionAppSyncFunction7AF1FF55"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptiononCreateReadingSessionauth0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/SubscriptiononCreateReadingSessionpostAuth0Function/SubscriptiononCreateReadingSessionpostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononCreateReadingSessionpostAuth0FunctionSubscriptiononCreateReadingSessionpostAuth0FunctionAppSyncFunction7DAA573A"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptiononCreateReadingSessionpostAuth0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/SubscriptionOnCreateReadingSessionDataResolverFn/SubscriptionOnCreateReadingSessionDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptionOnCreateReadingSessionDataResolverFnSubscriptionOnCreateReadingSessionDataResolverFnAppSyncFunction62D4066A"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptionOnCreateReadingSessionDataResolverFn"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/subscriptionOnCreateReadingSessionResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononCreateReadingSessionResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Subscription.onCreateReadingSession"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/SubscriptiononUpdateReadingSessionauth0Function/SubscriptiononUpdateReadingSessionauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononUpdateReadingSessionauth0FunctionSubscriptiononUpdateReadingSessionauth0FunctionAppSyncFunction10B1CEBE"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptiononUpdateReadingSessionauth0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/SubscriptiononUpdateReadingSessionpostAuth0Function/SubscriptiononUpdateReadingSessionpostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononUpdateReadingSessionpostAuth0FunctionSubscriptiononUpdateReadingSessionpostAuth0FunctionAppSyncFunction521C5690"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptiononUpdateReadingSessionpostAuth0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/SubscriptionOnUpdateReadingSessionDataResolverFn/SubscriptionOnUpdateReadingSessionDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptionOnUpdateReadingSessionDataResolverFnSubscriptionOnUpdateReadingSessionDataResolverFnAppSyncFunction996CD85D"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptionOnUpdateReadingSessionDataResolverFn"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/subscriptionOnUpdateReadingSessionResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononUpdateReadingSessionResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Subscription.onUpdateReadingSession"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/SubscriptiononDeleteReadingSessionauth0Function/SubscriptiononDeleteReadingSessionauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononDeleteReadingSessionauth0FunctionSubscriptiononDeleteReadingSessionauth0FunctionAppSyncFunction75CBB00E"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptiononDeleteReadingSessionauth0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/SubscriptiononDeleteReadingSessionpostAuth0Function/SubscriptiononDeleteReadingSessionpostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononDeleteReadingSessionpostAuth0FunctionSubscriptiononDeleteReadingSessionpostAuth0FunctionAppSyncFunction894C0920"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptiononDeleteReadingSessionpostAuth0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/SubscriptionOnDeleteReadingSessionDataResolverFn/SubscriptionOnDeleteReadingSessionDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptionOnDeleteReadingSessionDataResolverFnSubscriptionOnDeleteReadingSessionDataResolverFnAppSyncFunction7CB95C60"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptionOnDeleteReadingSessionDataResolverFn"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/subscriptionOnDeleteReadingSessionResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononDeleteReadingSessionResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Subscription.onDeleteReadingSession"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/ReadingSessionOwnerDataResolverFn/ReadingSessionOwnerDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ReadingSessionOwnerDataResolverFnReadingSessionOwnerDataResolverFnAppSyncFunction5B7CB36A"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "ReadingSessionOwnerDataResolverFn"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/readingSessionOwnerResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ReadingSessionownerResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "ReadingSession.owner"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/reference-to-amplifywritinglivechassesandbox753c548dbbdataamplifyDataAmplifyTableManagerNestedStackAmplifyTableManagerNestedStackResourceE652A93COutputs.amplifywritinglivechassesandbox753c548dbbdataamplifyDataAmplifyTableManagerTableManagerCustomProviderframeworkonEvent24A25D29Arn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataAmplifyTableManagerNestedStackAmplifyTableManagerNestedStackResourceE652A93COutputsamplifywritinglivechassesandbox753c548dbbdataamplifyDataAmplifyTableManagerTableManagerCus2CC9795D"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/reference-to-amplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/reference-to-amplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPINONEDS802F5DFCName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPINONEDS802F5DFCName"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/reference-to-amplifywritinglivechassesandbox753c548dbbauthNestedStackauthNestedStackResource924BBE0COutputs.amplifywritinglivechassesandbox753c548dbbauthamplifyAuthauthenticatedUserRole934A26C9Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifywritinglivechassesandbox753c548dbbauthNestedStackauthNestedStackResource924BBE0COutputsamplifywritinglivechassesandbox753c548dbbauthamplifyAuthauthenticatedUserRole934A26C9Ref"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/reference-to-amplifywritinglivechassesandbox753c548dbbauthNestedStackauthNestedStackResource924BBE0COutputs.amplifywritinglivechassesandbox753c548dbbauthamplifyAuthunauthenticatedUserRole1D31DC91Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifywritinglivechassesandbox753c548dbbauthNestedStackauthNestedStackResource924BBE0COutputsamplifywritinglivechassesandbox753c548dbbauthamplifyAuthunauthenticatedUserRole1D31DC91Ref"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/reference-to-amplifywritinglivechassesandbox753c548dbbauthNestedStackauthNestedStackResource924BBE0COutputs.amplifywritinglivechassesandbox753c548dbbauthamplifyAuthIdentityPool53F0F256Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifywritinglivechassesandbox753c548dbbauthNestedStackauthNestedStackResource924BBE0COutputsamplifywritinglivechassesandbox753c548dbbauthamplifyAuthIdentityPool53F0F256Ref"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/amplifywritinglivechassesandbox753c548dbbdataamplifyDataReadingSessionReadingSessionDataSourceC7D0BC90Name": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifywritinglivechassesandbox753c548dbbdataamplifyDataReadingSessionReadingSessionDataSourceC7D0BC90Name"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession/amplifywritinglivechassesandbox753c548dbbdataamplifyDataReadingSessionReadingSessionTable2EB42262TableArn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifywritinglivechassesandbox753c548dbbdataamplifyDataReadingSessionReadingSessionTable2EB42262TableArn"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ReadingSession.NestedStack/ReadingSession.NestedStackResource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyDataReadingSessionNestedStackReadingSessionNestedStackResource7F0BFD3E"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ConnectionStack/Usersessionsauth0Function/Usersessionsauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Usersessionsauth0FunctionUsersessionsauth0FunctionAppSyncFunctionD12B3821"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Usersessionsauth0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ConnectionStack/UserSessionsDataResolverFn/UserSessionsDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UserSessionsDataResolverFnUserSessionsDataResolverFnAppSyncFunctionCB093945"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "UserSessionsDataResolverFn"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ConnectionStack/userSessionsResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UsersessionsResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "User.sessions"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ConnectionStack/UserreadingSessionsauth0Function/UserreadingSessionsauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UserreadingSessionsauth0FunctionUserreadingSessionsauth0FunctionAppSyncFunction6BD6EBD7"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "UserreadingSessionsauth0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ConnectionStack/UserReadingSessionsDataResolverFn/UserReadingSessionsDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UserReadingSessionsDataResolverFnUserReadingSessionsDataResolverFnAppSyncFunction63BC5D0C"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "UserReadingSessionsDataResolverFn"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ConnectionStack/userReadingSessionsResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UserreadingSessionsResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "User.readingSessions"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ConnectionStack/WritingSessionreadersauth0Function/WritingSessionreadersauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "WritingSessionreadersauth0FunctionWritingSessionreadersauth0FunctionAppSyncFunction4B6E507E"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "WritingSessionreadersauth0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ConnectionStack/WritingSessionReadersDataResolverFn/WritingSessionReadersDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "WritingSessionReadersDataResolverFnWritingSessionReadersDataResolverFnAppSyncFunctionF1B3A9AB"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "WritingSessionReadersDataResolverFn"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ConnectionStack/writingSessionReadersResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "WritingSessionreadersResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "WritingSession.readers"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ConnectionStack/WritingSessionauthorauth0Function/WritingSessionauthorauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "WritingSessionauthorauth0FunctionWritingSessionauthorauth0FunctionAppSyncFunction080B9C56"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "WritingSessionauthorauth0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ConnectionStack/WritingSessionAuthorDataResolverFn/WritingSessionAuthorDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "WritingSessionAuthorDataResolverFnWritingSessionAuthorDataResolverFnAppSyncFunction855461EF"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "WritingSessionAuthorDataResolverFn"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ConnectionStack/writingSessionAuthorResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "WritingSessionauthorResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "WritingSession.author"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ConnectionStack/ReadingSessionreaderauth0Function/ReadingSessionreaderauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ReadingSessionreaderauth0FunctionReadingSessionreaderauth0FunctionAppSyncFunction82ED8B6E"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "ReadingSessionreaderauth0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ConnectionStack/ReadingSessionReaderDataResolverFn/ReadingSessionReaderDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ReadingSessionReaderDataResolverFnReadingSessionReaderDataResolverFnAppSyncFunctionAE2A80A1"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "ReadingSessionReaderDataResolverFn"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ConnectionStack/readingSessionReaderResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ReadingSessionreaderResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "ReadingSession.reader"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ConnectionStack/ReadingSessionwritingSessionauth0Function/ReadingSessionwritingSessionauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ReadingSessionwritingSessionauth0FunctionReadingSessionwritingSessionauth0FunctionAppSyncFunctionF6CC7F53"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "ReadingSessionwritingSessionauth0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ConnectionStack/ReadingSessionWritingSessionDataResolverFn/ReadingSessionWritingSessionDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ReadingSessionWritingSessionDataResolverFnReadingSessionWritingSessionDataResolverFnAppSyncFunctionD06F8680"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "ReadingSessionWritingSessionDataResolverFn"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ConnectionStack/readingSessionWritingSessionResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ReadingSessionwritingSessionResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "ReadingSession.writingSession"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ConnectionStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ConnectionStack/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ConnectionStack/reference-to-amplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ConnectionStack/reference-to-amplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPINONEDS802F5DFCName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPINONEDS802F5DFCName"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ConnectionStack/reference-to-amplifywritinglivechassesandbox753c548dbbdataamplifyDataWritingSessionNestedStackWritingSessionNestedStackResource89AD7CB8Outputs.amplifywritinglivechassesandbox753c548dbbdataamplifyDataWritingSessionWritingSessionDataSource51AA40CAName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataWritingSessionNestedStackWritingSessionNestedStackResource89AD7CB8Outputsamplifywritinglivechassesandbox753c548dbbdataamplifyDataWritingSessionWritingSessionDataSource51AA40CAName"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ConnectionStack/reference-to-amplifywritinglivechassesandbox753c548dbbdataamplifyDataWritingSessionNestedStackWritingSessionNestedStackResource89AD7CB8Outputs.amplifywritinglivechassesandbox753c548dbbdataamplifyDataWritingSessionWritingSessionTable2FB165D3TableArn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataWritingSessionNestedStackWritingSessionNestedStackResource89AD7CB8Outputsamplifywritinglivechassesandbox753c548dbbdataamplifyDataWritingSessionWritingSessionTable2FB165D3TableArn"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ConnectionStack/reference-to-amplifywritinglivechassesandbox753c548dbbauthNestedStackauthNestedStackResource924BBE0COutputs.amplifywritinglivechassesandbox753c548dbbauthamplifyAuthauthenticatedUserRole934A26C9Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifywritinglivechassesandbox753c548dbbauthNestedStackauthNestedStackResource924BBE0COutputsamplifywritinglivechassesandbox753c548dbbauthamplifyAuthauthenticatedUserRole934A26C9Ref"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ConnectionStack/reference-to-amplifywritinglivechassesandbox753c548dbbauthNestedStackauthNestedStackResource924BBE0COutputs.amplifywritinglivechassesandbox753c548dbbauthamplifyAuthunauthenticatedUserRole1D31DC91Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifywritinglivechassesandbox753c548dbbauthNestedStackauthNestedStackResource924BBE0COutputsamplifywritinglivechassesandbox753c548dbbauthamplifyAuthunauthenticatedUserRole1D31DC91Ref"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ConnectionStack/reference-to-amplifywritinglivechassesandbox753c548dbbauthNestedStackauthNestedStackResource924BBE0COutputs.amplifywritinglivechassesandbox753c548dbbauthamplifyAuthIdentityPool53F0F256Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifywritinglivechassesandbox753c548dbbauthNestedStackauthNestedStackResource924BBE0COutputsamplifywritinglivechassesandbox753c548dbbauthamplifyAuthIdentityPool53F0F256Ref"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ConnectionStack/reference-to-amplifywritinglivechassesandbox753c548dbbdataamplifyDataReadingSessionNestedStackReadingSessionNestedStackResource158A73DDOutputs.amplifywritinglivechassesandbox753c548dbbdataamplifyDataReadingSessionReadingSessionDataSourceC7D0BC90Name": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataReadingSessionNestedStackReadingSessionNestedStackResource158A73DDOutputsamplifywritinglivechassesandbox753c548dbbdataamplifyDataReadingSessionReadingSessionDataSourceC7D0BC90Name"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ConnectionStack/reference-to-amplifywritinglivechassesandbox753c548dbbdataamplifyDataReadingSessionNestedStackReadingSessionNestedStackResource158A73DDOutputs.amplifywritinglivechassesandbox753c548dbbdataamplifyDataReadingSessionReadingSessionTable2EB42262TableArn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataReadingSessionNestedStackReadingSessionNestedStackResource158A73DDOutputsamplifywritinglivechassesandbox753c548dbbdataamplifyDataReadingSessionReadingSessionTable2EB42262TableArn"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ConnectionStack/reference-to-amplifywritinglivechassesandbox753c548dbbdataamplifyDataUserNestedStackUserNestedStackResourceA4295784Outputs.amplifywritinglivechassesandbox753c548dbbdataamplifyDataUserUserDataSource019DA8C7Name": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataUserNestedStackUserNestedStackResourceA4295784Outputsamplifywritinglivechassesandbox753c548dbbdataamplifyDataUserUserDataSource019DA8C7Name"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ConnectionStack/reference-to-amplifywritinglivechassesandbox753c548dbbdataamplifyDataUserNestedStackUserNestedStackResourceA4295784Outputs.amplifywritinglivechassesandbox753c548dbbdataamplifyDataUserUserTableAB0BAE67TableArn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataUserNestedStackUserNestedStackResourceA4295784Outputsamplifywritinglivechassesandbox753c548dbbdataamplifyDataUserUserTableAB0BAE67TableArn"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ConnectionStack.NestedStack/ConnectionStack.NestedStackResource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyDataConnectionStackNestedStackConnectionStackNestedStackResourceAB0F312B"
           }
         ],
         "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/AmplifyCodegenAssets/AmplifyCodegenAssetsBucket/Resource": [

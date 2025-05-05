@@ -1,33 +1,28 @@
-import './config/amplify';
-import type { Metadata } from 'next'
-import { Inter, JetBrains_Mono } from 'next/font/google'
-import './globals.css'
+import './globals.css';
+import { Inter } from 'next/font/google';
+import { NextAuthProvider } from './providers';
+import { configureAmplify } from './lib/amplify';
 
-const inter = Inter({
-  variable: "--font-sans",
-  subsets: ["latin"],
-});
+// Initialize Amplify
+configureAmplify();
 
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-mono",
-  subsets: ["latin"],
-});
+const inter = Inter({ subsets: ['latin'] });
 
-export const metadata: Metadata = {
-  title: 'Escritura en Tiempo Real',
-  description: 'Observa el proceso creativo de escritura en vivo, donde las palabras cobran vida letra por letra.',
-}
+export const metadata = {
+  title: 'Escritura en Vivo',
+  description: 'Plataforma de escritura en tiempo real',
+};
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="es">
-      <body className={`${inter.variable} ${jetbrainsMono.variable} antialiased`}>
-        {children}
+      <body className={inter.className}>
+        <NextAuthProvider>{children}</NextAuthProvider>
       </body>
     </html>
-  )
+  );
 } 

@@ -1,0 +1,39 @@
+type User @model @auth(rules: [{allow: owner, operations: [read, update, delete], ownerField: "owner"},
+  {allow: private, operations: [read]}])
+{
+  email: String
+  username: String
+  role: UserRole
+  bio: String
+  sessions: [WritingSession] @hasMany(references: ["authorId"])
+  readingSessions: [ReadingSession] @hasMany(references: ["readerId"])
+}
+
+type WritingSession @model @auth(rules: [{allow: owner, operations: [create, read, update, delete], ownerField: "owner"},
+  {allow: private, operations: [read]}])
+{
+  title: String
+  content: String
+  lastModified: AWSDateTime
+  isActive: Boolean
+  authorId: String
+  author: User @belongsTo(references: ["authorId"])
+  readers: [ReadingSession] @hasMany(references: ["writingSessionId"])
+  isPublic: Boolean
+}
+
+type ReadingSession @model @auth(rules: [{allow: owner, operations: [create, read, update, delete], ownerField: "owner"},
+  {allow: private, operations: [create, read]}])
+{
+  readerId: String
+  writingSessionId: String
+  reader: User @belongsTo(references: ["readerId"])
+  writingSession: WritingSession @belongsTo(references: ["writingSessionId"])
+  lastReadAt: AWSDateTime
+  isAnonymous: Boolean
+}
+
+enum UserRole {
+  WRITER
+  READER
+}

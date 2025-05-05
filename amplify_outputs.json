@@ -35,6 +35,133 @@
     "model_introspection": {
       "version": 1,
       "models": {
+        "User": {
+          "name": "User",
+          "fields": {
+            "id": {
+              "name": "id",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "email": {
+              "name": "email",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "username": {
+              "name": "username",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "role": {
+              "name": "role",
+              "isArray": false,
+              "type": {
+                "enum": "UserRole"
+              },
+              "isRequired": false,
+              "attributes": []
+            },
+            "bio": {
+              "name": "bio",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "sessions": {
+              "name": "sessions",
+              "isArray": true,
+              "type": {
+                "model": "WritingSession"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true,
+              "association": {
+                "connectionType": "HAS_MANY",
+                "associatedWith": [
+                  "authorId"
+                ]
+              }
+            },
+            "readingSessions": {
+              "name": "readingSessions",
+              "isArray": true,
+              "type": {
+                "model": "ReadingSession"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true,
+              "association": {
+                "connectionType": "HAS_MANY",
+                "associatedWith": [
+                  "readerId"
+                ]
+              }
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            },
+            "updatedAt": {
+              "name": "updatedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            }
+          },
+          "syncable": true,
+          "pluralName": "Users",
+          "attributes": [
+            {
+              "type": "model",
+              "properties": {}
+            },
+            {
+              "type": "auth",
+              "properties": {
+                "rules": [
+                  {
+                    "provider": "userPools",
+                    "ownerField": "owner",
+                    "allow": "owner",
+                    "operations": [
+                      "read",
+                      "update",
+                      "delete"
+                    ],
+                    "identityClaim": "cognito:username"
+                  },
+                  {
+                    "allow": "private",
+                    "operations": [
+                      "read"
+                    ]
+                  }
+                ]
+              }
+            }
+          ],
+          "primaryKeyInfo": {
+            "isCustomPrimaryKey": false,
+            "primaryKeyFieldName": "id",
+            "sortKeyFieldNames": []
+          }
+        },
         "WritingSession": {
           "name": "WritingSession",
           "fields": {
@@ -45,13 +172,6 @@
               "isRequired": true,
               "attributes": []
             },
-            "content": {
-              "name": "content",
-              "isArray": false,
-              "type": "String",
-              "isRequired": false,
-              "attributes": []
-            },
             "title": {
               "name": "title",
               "isArray": false,
@@ -59,8 +179,8 @@
               "isRequired": false,
               "attributes": []
             },
-            "authorId": {
-              "name": "authorId",
+            "content": {
+              "name": "content",
               "isArray": false,
               "type": "String",
               "isRequired": false,
@@ -75,6 +195,51 @@
             },
             "isActive": {
               "name": "isActive",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": false,
+              "attributes": []
+            },
+            "authorId": {
+              "name": "authorId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "author": {
+              "name": "author",
+              "isArray": false,
+              "type": {
+                "model": "User"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "association": {
+                "connectionType": "BELONGS_TO",
+                "targetNames": [
+                  "authorId"
+                ]
+              }
+            },
+            "readers": {
+              "name": "readers",
+              "isArray": true,
+              "type": {
+                "model": "ReadingSession"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true,
+              "association": {
+                "connectionType": "HAS_MANY",
+                "associatedWith": [
+                  "writingSessionId"
+                ]
+              }
+            },
+            "isPublic": {
+              "name": "isPublic",
               "isArray": false,
               "type": "Boolean",
               "isRequired": false,
@@ -109,22 +274,147 @@
               "properties": {
                 "rules": [
                   {
-                    "allow": "public",
-                    "provider": "iam",
+                    "provider": "userPools",
+                    "ownerField": "owner",
+                    "allow": "owner",
+                    "operations": [
+                      "create",
+                      "read",
+                      "update",
+                      "delete"
+                    ],
+                    "identityClaim": "cognito:username"
+                  },
+                  {
+                    "allow": "private",
                     "operations": [
                       "read"
                     ]
-                  },
+                  }
+                ]
+              }
+            }
+          ],
+          "primaryKeyInfo": {
+            "isCustomPrimaryKey": false,
+            "primaryKeyFieldName": "id",
+            "sortKeyFieldNames": []
+          }
+        },
+        "ReadingSession": {
+          "name": "ReadingSession",
+          "fields": {
+            "id": {
+              "name": "id",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "readerId": {
+              "name": "readerId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "writingSessionId": {
+              "name": "writingSessionId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "reader": {
+              "name": "reader",
+              "isArray": false,
+              "type": {
+                "model": "User"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "association": {
+                "connectionType": "BELONGS_TO",
+                "targetNames": [
+                  "readerId"
+                ]
+              }
+            },
+            "writingSession": {
+              "name": "writingSession",
+              "isArray": false,
+              "type": {
+                "model": "WritingSession"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "association": {
+                "connectionType": "BELONGS_TO",
+                "targetNames": [
+                  "writingSessionId"
+                ]
+              }
+            },
+            "lastReadAt": {
+              "name": "lastReadAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": []
+            },
+            "isAnonymous": {
+              "name": "isAnonymous",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": false,
+              "attributes": []
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            },
+            "updatedAt": {
+              "name": "updatedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            }
+          },
+          "syncable": true,
+          "pluralName": "ReadingSessions",
+          "attributes": [
+            {
+              "type": "model",
+              "properties": {}
+            },
+            {
+              "type": "auth",
+              "properties": {
+                "rules": [
                   {
                     "provider": "userPools",
                     "ownerField": "owner",
                     "allow": "owner",
                     "operations": [
                       "create",
+                      "read",
                       "update",
                       "delete"
                     ],
                     "identityClaim": "cognito:username"
+                  },
+                  {
+                    "allow": "private",
+                    "operations": [
+                      "create",
+                      "read"
+                    ]
                   }
                 ]
               }
@@ -137,7 +427,15 @@
           }
         }
       },
-      "enums": {},
+      "enums": {
+        "UserRole": {
+          "name": "UserRole",
+          "values": [
+            "WRITER",
+            "READER"
+          ]
+        }
+      },
       "nonModels": {}
     }
   },

@@ -1,0 +1,1173 @@
+{
+ "Resources": {
+  "Usersessionsauth0FunctionUsersessionsauth0FunctionAppSyncFunctionD12B3821": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPINONEDS802F5DFCName"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "Usersessionsauth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/405f3c9fd08e5756728a01661688cd6c13883e5896fa72d89bdfdaa1b65f1b98.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ConnectionStack/Usersessionsauth0Function/Usersessionsauth0Function.AppSyncFunction"
+   }
+  },
+  "UserSessionsDataResolverFnUserSessionsDataResolverFnAppSyncFunctionCB093945": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataWritingSessionNestedStackWritingSessionNestedStackResource89AD7CB8Outputsamplifywritinglivechassesandbox753c548dbbdataamplifyDataWritingSessionWritingSessionDataSource51AA40CAName"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "UserSessionsDataResolverFn",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/a71047b521f80da7286f0452c4f296dbd3736bf9b0ef19baebe82b5301ad5b08.vtl"
+    },
+    "ResponseMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/49e7a1f2fb4c809b82bed6b0242a2a3bcfa2c5276ebd2539ff330fee36f8fe18.vtl"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ConnectionStack/UserSessionsDataResolverFn/UserSessionsDataResolverFn.AppSyncFunction"
+   }
+  },
+  "UsersessionsResolver": {
+   "Type": "AWS::AppSync::Resolver",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId"
+    },
+    "FieldName": "sessions",
+    "Kind": "PIPELINE",
+    "PipelineConfig": {
+     "Functions": [
+      {
+       "Fn::GetAtt": [
+        "Usersessionsauth0FunctionUsersessionsauth0FunctionAppSyncFunctionD12B3821",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "UserSessionsDataResolverFnUserSessionsDataResolverFnAppSyncFunctionCB093945",
+        "FunctionId"
+       ]
+      }
+     ]
+    },
+    "RequestMappingTemplate": {
+     "Fn::Join": [
+      "",
+      [
+       "$util.qr($ctx.stash.put(\"typeName\", \"User\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"sessions\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"AMAZON_DYNAMODB\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+       {
+        "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"connectionAttributes\", {}))\n$util.qr($ctx.stash.put(\"tableName\", \"",
+       {
+        "Fn::Select": [
+         1,
+         {
+          "Fn::Split": [
+           "/",
+           {
+            "Fn::Select": [
+             5,
+             {
+              "Fn::Split": [
+               ":",
+               {
+                "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataWritingSessionNestedStackWritingSessionNestedStackResource89AD7CB8Outputsamplifywritinglivechassesandbox753c548dbbdataamplifyDataWritingSessionWritingSessionTable2FB165D3TableArn"
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"authRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbauthNestedStackauthNestedStackResource924BBE0COutputsamplifywritinglivechassesandbox753c548dbbauthamplifyAuthauthenticatedUserRole934A26C9Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"unauthRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbauthNestedStackauthNestedStackResource924BBE0COutputsamplifywritinglivechassesandbox753c548dbbauthamplifyAuthunauthenticatedUserRole1D31DC91Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"",
+       {
+        "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbauthNestedStackauthNestedStackResource924BBE0COutputsamplifywritinglivechassesandbox753c548dbbauthamplifyAuthIdentityPool53F0F256Ref"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+      ]
+     ]
+    },
+    "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)",
+    "TypeName": "User"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ConnectionStack/userSessionsResolver"
+   }
+  },
+  "UserreadingSessionsauth0FunctionUserreadingSessionsauth0FunctionAppSyncFunction6BD6EBD7": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPINONEDS802F5DFCName"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "UserreadingSessionsauth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/405f3c9fd08e5756728a01661688cd6c13883e5896fa72d89bdfdaa1b65f1b98.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ConnectionStack/UserreadingSessionsauth0Function/UserreadingSessionsauth0Function.AppSyncFunction"
+   }
+  },
+  "UserReadingSessionsDataResolverFnUserReadingSessionsDataResolverFnAppSyncFunction63BC5D0C": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataReadingSessionNestedStackReadingSessionNestedStackResource158A73DDOutputsamplifywritinglivechassesandbox753c548dbbdataamplifyDataReadingSessionReadingSessionDataSourceC7D0BC90Name"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "UserReadingSessionsDataResolverFn",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/ea908f2c8b6b56526057efb116307e70e8770bf9c887c715333de65eeb54e500.vtl"
+    },
+    "ResponseMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/49e7a1f2fb4c809b82bed6b0242a2a3bcfa2c5276ebd2539ff330fee36f8fe18.vtl"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ConnectionStack/UserReadingSessionsDataResolverFn/UserReadingSessionsDataResolverFn.AppSyncFunction"
+   }
+  },
+  "UserreadingSessionsResolver": {
+   "Type": "AWS::AppSync::Resolver",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId"
+    },
+    "FieldName": "readingSessions",
+    "Kind": "PIPELINE",
+    "PipelineConfig": {
+     "Functions": [
+      {
+       "Fn::GetAtt": [
+        "UserreadingSessionsauth0FunctionUserreadingSessionsauth0FunctionAppSyncFunction6BD6EBD7",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "UserReadingSessionsDataResolverFnUserReadingSessionsDataResolverFnAppSyncFunction63BC5D0C",
+        "FunctionId"
+       ]
+      }
+     ]
+    },
+    "RequestMappingTemplate": {
+     "Fn::Join": [
+      "",
+      [
+       "$util.qr($ctx.stash.put(\"typeName\", \"User\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"readingSessions\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"AMAZON_DYNAMODB\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+       {
+        "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"connectionAttributes\", {}))\n$util.qr($ctx.stash.put(\"tableName\", \"",
+       {
+        "Fn::Select": [
+         1,
+         {
+          "Fn::Split": [
+           "/",
+           {
+            "Fn::Select": [
+             5,
+             {
+              "Fn::Split": [
+               ":",
+               {
+                "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataReadingSessionNestedStackReadingSessionNestedStackResource158A73DDOutputsamplifywritinglivechassesandbox753c548dbbdataamplifyDataReadingSessionReadingSessionTable2EB42262TableArn"
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"authRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbauthNestedStackauthNestedStackResource924BBE0COutputsamplifywritinglivechassesandbox753c548dbbauthamplifyAuthauthenticatedUserRole934A26C9Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"unauthRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbauthNestedStackauthNestedStackResource924BBE0COutputsamplifywritinglivechassesandbox753c548dbbauthamplifyAuthunauthenticatedUserRole1D31DC91Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"",
+       {
+        "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbauthNestedStackauthNestedStackResource924BBE0COutputsamplifywritinglivechassesandbox753c548dbbauthamplifyAuthIdentityPool53F0F256Ref"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+      ]
+     ]
+    },
+    "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)",
+    "TypeName": "User"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ConnectionStack/userReadingSessionsResolver"
+   }
+  },
+  "WritingSessionreadersauth0FunctionWritingSessionreadersauth0FunctionAppSyncFunction4B6E507E": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPINONEDS802F5DFCName"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "WritingSessionreadersauth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/405f3c9fd08e5756728a01661688cd6c13883e5896fa72d89bdfdaa1b65f1b98.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ConnectionStack/WritingSessionreadersauth0Function/WritingSessionreadersauth0Function.AppSyncFunction"
+   }
+  },
+  "WritingSessionReadersDataResolverFnWritingSessionReadersDataResolverFnAppSyncFunctionF1B3A9AB": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataReadingSessionNestedStackReadingSessionNestedStackResource158A73DDOutputsamplifywritinglivechassesandbox753c548dbbdataamplifyDataReadingSessionReadingSessionDataSourceC7D0BC90Name"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "WritingSessionReadersDataResolverFn",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/1cada7e5df1608a2040a80dd019c9574537909bfba1adcd05e169b65083e1c7d.vtl"
+    },
+    "ResponseMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/49e7a1f2fb4c809b82bed6b0242a2a3bcfa2c5276ebd2539ff330fee36f8fe18.vtl"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ConnectionStack/WritingSessionReadersDataResolverFn/WritingSessionReadersDataResolverFn.AppSyncFunction"
+   }
+  },
+  "WritingSessionreadersResolver": {
+   "Type": "AWS::AppSync::Resolver",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId"
+    },
+    "FieldName": "readers",
+    "Kind": "PIPELINE",
+    "PipelineConfig": {
+     "Functions": [
+      {
+       "Fn::GetAtt": [
+        "WritingSessionreadersauth0FunctionWritingSessionreadersauth0FunctionAppSyncFunction4B6E507E",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "WritingSessionReadersDataResolverFnWritingSessionReadersDataResolverFnAppSyncFunctionF1B3A9AB",
+        "FunctionId"
+       ]
+      }
+     ]
+    },
+    "RequestMappingTemplate": {
+     "Fn::Join": [
+      "",
+      [
+       "$util.qr($ctx.stash.put(\"typeName\", \"WritingSession\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"readers\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"AMAZON_DYNAMODB\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+       {
+        "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"connectionAttributes\", {}))\n$util.qr($ctx.stash.put(\"tableName\", \"",
+       {
+        "Fn::Select": [
+         1,
+         {
+          "Fn::Split": [
+           "/",
+           {
+            "Fn::Select": [
+             5,
+             {
+              "Fn::Split": [
+               ":",
+               {
+                "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataReadingSessionNestedStackReadingSessionNestedStackResource158A73DDOutputsamplifywritinglivechassesandbox753c548dbbdataamplifyDataReadingSessionReadingSessionTable2EB42262TableArn"
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"authRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbauthNestedStackauthNestedStackResource924BBE0COutputsamplifywritinglivechassesandbox753c548dbbauthamplifyAuthauthenticatedUserRole934A26C9Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"unauthRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbauthNestedStackauthNestedStackResource924BBE0COutputsamplifywritinglivechassesandbox753c548dbbauthamplifyAuthunauthenticatedUserRole1D31DC91Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"",
+       {
+        "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbauthNestedStackauthNestedStackResource924BBE0COutputsamplifywritinglivechassesandbox753c548dbbauthamplifyAuthIdentityPool53F0F256Ref"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+      ]
+     ]
+    },
+    "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)",
+    "TypeName": "WritingSession"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ConnectionStack/writingSessionReadersResolver"
+   }
+  },
+  "WritingSessionauthorauth0FunctionWritingSessionauthorauth0FunctionAppSyncFunction080B9C56": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPINONEDS802F5DFCName"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "WritingSessionauthorauth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/405f3c9fd08e5756728a01661688cd6c13883e5896fa72d89bdfdaa1b65f1b98.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ConnectionStack/WritingSessionauthorauth0Function/WritingSessionauthorauth0Function.AppSyncFunction"
+   }
+  },
+  "WritingSessionAuthorDataResolverFnWritingSessionAuthorDataResolverFnAppSyncFunction855461EF": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataUserNestedStackUserNestedStackResourceA4295784Outputsamplifywritinglivechassesandbox753c548dbbdataamplifyDataUserUserDataSource019DA8C7Name"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "WritingSessionAuthorDataResolverFn",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/e263f435cc107219917f63d052ca0d1b272319cedffdceb9988a7fc96dd69e83.vtl"
+    },
+    "ResponseMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/dcb70e4856bc9a423e02b8b9e9c2ab3f71479784572d4c04a02d1f5b61a9f9ac.vtl"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ConnectionStack/WritingSessionAuthorDataResolverFn/WritingSessionAuthorDataResolverFn.AppSyncFunction"
+   }
+  },
+  "WritingSessionauthorResolver": {
+   "Type": "AWS::AppSync::Resolver",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId"
+    },
+    "FieldName": "author",
+    "Kind": "PIPELINE",
+    "PipelineConfig": {
+     "Functions": [
+      {
+       "Fn::GetAtt": [
+        "WritingSessionauthorauth0FunctionWritingSessionauthorauth0FunctionAppSyncFunction080B9C56",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "WritingSessionAuthorDataResolverFnWritingSessionAuthorDataResolverFnAppSyncFunction855461EF",
+        "FunctionId"
+       ]
+      }
+     ]
+    },
+    "RequestMappingTemplate": {
+     "Fn::Join": [
+      "",
+      [
+       "$util.qr($ctx.stash.put(\"typeName\", \"WritingSession\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"author\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"AMAZON_DYNAMODB\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+       {
+        "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"connectionAttributes\", {}))\n$util.qr($ctx.stash.put(\"tableName\", \"",
+       {
+        "Fn::Select": [
+         1,
+         {
+          "Fn::Split": [
+           "/",
+           {
+            "Fn::Select": [
+             5,
+             {
+              "Fn::Split": [
+               ":",
+               {
+                "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataUserNestedStackUserNestedStackResourceA4295784Outputsamplifywritinglivechassesandbox753c548dbbdataamplifyDataUserUserTableAB0BAE67TableArn"
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"authRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbauthNestedStackauthNestedStackResource924BBE0COutputsamplifywritinglivechassesandbox753c548dbbauthamplifyAuthauthenticatedUserRole934A26C9Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"unauthRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbauthNestedStackauthNestedStackResource924BBE0COutputsamplifywritinglivechassesandbox753c548dbbauthamplifyAuthunauthenticatedUserRole1D31DC91Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"",
+       {
+        "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbauthNestedStackauthNestedStackResource924BBE0COutputsamplifywritinglivechassesandbox753c548dbbauthamplifyAuthIdentityPool53F0F256Ref"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+      ]
+     ]
+    },
+    "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)",
+    "TypeName": "WritingSession"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ConnectionStack/writingSessionAuthorResolver"
+   }
+  },
+  "ReadingSessionreaderauth0FunctionReadingSessionreaderauth0FunctionAppSyncFunction82ED8B6E": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPINONEDS802F5DFCName"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "ReadingSessionreaderauth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/405f3c9fd08e5756728a01661688cd6c13883e5896fa72d89bdfdaa1b65f1b98.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ConnectionStack/ReadingSessionreaderauth0Function/ReadingSessionreaderauth0Function.AppSyncFunction"
+   }
+  },
+  "ReadingSessionReaderDataResolverFnReadingSessionReaderDataResolverFnAppSyncFunctionAE2A80A1": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataUserNestedStackUserNestedStackResourceA4295784Outputsamplifywritinglivechassesandbox753c548dbbdataamplifyDataUserUserDataSource019DA8C7Name"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "ReadingSessionReaderDataResolverFn",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/ae958cb8254dfdd78d6ba864d352a8c8df2ee04087e613b932d62aa4314cd255.vtl"
+    },
+    "ResponseMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/dcb70e4856bc9a423e02b8b9e9c2ab3f71479784572d4c04a02d1f5b61a9f9ac.vtl"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ConnectionStack/ReadingSessionReaderDataResolverFn/ReadingSessionReaderDataResolverFn.AppSyncFunction"
+   }
+  },
+  "ReadingSessionreaderResolver": {
+   "Type": "AWS::AppSync::Resolver",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId"
+    },
+    "FieldName": "reader",
+    "Kind": "PIPELINE",
+    "PipelineConfig": {
+     "Functions": [
+      {
+       "Fn::GetAtt": [
+        "ReadingSessionreaderauth0FunctionReadingSessionreaderauth0FunctionAppSyncFunction82ED8B6E",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "ReadingSessionReaderDataResolverFnReadingSessionReaderDataResolverFnAppSyncFunctionAE2A80A1",
+        "FunctionId"
+       ]
+      }
+     ]
+    },
+    "RequestMappingTemplate": {
+     "Fn::Join": [
+      "",
+      [
+       "$util.qr($ctx.stash.put(\"typeName\", \"ReadingSession\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"reader\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"AMAZON_DYNAMODB\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+       {
+        "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"connectionAttributes\", {}))\n$util.qr($ctx.stash.put(\"tableName\", \"",
+       {
+        "Fn::Select": [
+         1,
+         {
+          "Fn::Split": [
+           "/",
+           {
+            "Fn::Select": [
+             5,
+             {
+              "Fn::Split": [
+               ":",
+               {
+                "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataUserNestedStackUserNestedStackResourceA4295784Outputsamplifywritinglivechassesandbox753c548dbbdataamplifyDataUserUserTableAB0BAE67TableArn"
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"authRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbauthNestedStackauthNestedStackResource924BBE0COutputsamplifywritinglivechassesandbox753c548dbbauthamplifyAuthauthenticatedUserRole934A26C9Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"unauthRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbauthNestedStackauthNestedStackResource924BBE0COutputsamplifywritinglivechassesandbox753c548dbbauthamplifyAuthunauthenticatedUserRole1D31DC91Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"",
+       {
+        "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbauthNestedStackauthNestedStackResource924BBE0COutputsamplifywritinglivechassesandbox753c548dbbauthamplifyAuthIdentityPool53F0F256Ref"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+      ]
+     ]
+    },
+    "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)",
+    "TypeName": "ReadingSession"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ConnectionStack/readingSessionReaderResolver"
+   }
+  },
+  "ReadingSessionwritingSessionauth0FunctionReadingSessionwritingSessionauth0FunctionAppSyncFunctionF6CC7F53": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPINONEDS802F5DFCName"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "ReadingSessionwritingSessionauth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/405f3c9fd08e5756728a01661688cd6c13883e5896fa72d89bdfdaa1b65f1b98.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ConnectionStack/ReadingSessionwritingSessionauth0Function/ReadingSessionwritingSessionauth0Function.AppSyncFunction"
+   }
+  },
+  "ReadingSessionWritingSessionDataResolverFnReadingSessionWritingSessionDataResolverFnAppSyncFunctionD06F8680": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataWritingSessionNestedStackWritingSessionNestedStackResource89AD7CB8Outputsamplifywritinglivechassesandbox753c548dbbdataamplifyDataWritingSessionWritingSessionDataSource51AA40CAName"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "ReadingSessionWritingSessionDataResolverFn",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/73b1ade9ed748ab071e837559a041ee7b56cf4996b614538c981cec2925024c4.vtl"
+    },
+    "ResponseMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/dcb70e4856bc9a423e02b8b9e9c2ab3f71479784572d4c04a02d1f5b61a9f9ac.vtl"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ConnectionStack/ReadingSessionWritingSessionDataResolverFn/ReadingSessionWritingSessionDataResolverFn.AppSyncFunction"
+   }
+  },
+  "ReadingSessionwritingSessionResolver": {
+   "Type": "AWS::AppSync::Resolver",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId"
+    },
+    "FieldName": "writingSession",
+    "Kind": "PIPELINE",
+    "PipelineConfig": {
+     "Functions": [
+      {
+       "Fn::GetAtt": [
+        "ReadingSessionwritingSessionauth0FunctionReadingSessionwritingSessionauth0FunctionAppSyncFunctionF6CC7F53",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "ReadingSessionWritingSessionDataResolverFnReadingSessionWritingSessionDataResolverFnAppSyncFunctionD06F8680",
+        "FunctionId"
+       ]
+      }
+     ]
+    },
+    "RequestMappingTemplate": {
+     "Fn::Join": [
+      "",
+      [
+       "$util.qr($ctx.stash.put(\"typeName\", \"ReadingSession\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"writingSession\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"AMAZON_DYNAMODB\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+       {
+        "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"connectionAttributes\", {}))\n$util.qr($ctx.stash.put(\"tableName\", \"",
+       {
+        "Fn::Select": [
+         1,
+         {
+          "Fn::Split": [
+           "/",
+           {
+            "Fn::Select": [
+             5,
+             {
+              "Fn::Split": [
+               ":",
+               {
+                "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataWritingSessionNestedStackWritingSessionNestedStackResource89AD7CB8Outputsamplifywritinglivechassesandbox753c548dbbdataamplifyDataWritingSessionWritingSessionTable2FB165D3TableArn"
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"authRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbauthNestedStackauthNestedStackResource924BBE0COutputsamplifywritinglivechassesandbox753c548dbbauthamplifyAuthauthenticatedUserRole934A26C9Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"unauthRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbauthNestedStackauthNestedStackResource924BBE0COutputsamplifywritinglivechassesandbox753c548dbbauthamplifyAuthunauthenticatedUserRole1D31DC91Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"",
+       {
+        "Ref": "referencetoamplifywritinglivechassesandbox753c548dbbauthNestedStackauthNestedStackResource924BBE0COutputsamplifywritinglivechassesandbox753c548dbbauthamplifyAuthIdentityPool53F0F256Ref"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+      ]
+     ]
+    },
+    "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)",
+    "TypeName": "ReadingSession"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ConnectionStack/readingSessionWritingSessionResolver"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/yWOQQ6CMBBFz+K+jAJuXAqJSxd4AFLLQAZwSjotxjTc3aKrl5+XvPwC8ssZTgf9lsx0UzbTE+IdxWP38NpMKok2StlqEfQC1x1KSqiCmdBXWlDpZZEPG4h1z7fAxpPl2nJPQ3B6HyqJBsXOK7ptU79Gqg/Ew6bYdgijHNeihDxPV0YhylxgTy+E5s8vjJK7A6cAAAA="
+   },
+   "Metadata": {
+    "aws:cdk:path": "amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/ConnectionStack/CDKMetadata/Default"
+   },
+   "Condition": "CDKMetadataAvailable"
+  }
+ },
+ "Conditions": {
+  "CDKMetadataAvailable": {
+   "Fn::Or": [
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "af-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-3"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-south-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-3"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-4"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ca-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ca-west-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "cn-north-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "cn-northwest-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-central-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-north-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-south-2"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-3"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "il-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "me-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "me-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "sa-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-east-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-west-1"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Equals": [
+      {
+       "Ref": "AWS::Region"
+      },
+      "us-west-2"
+     ]
+    }
+   ]
+  }
+ },
+ "Parameters": {
+  "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId": {
+   "Type": "String"
+  },
+  "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPINONEDS802F5DFCName": {
+   "Type": "String"
+  },
+  "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataWritingSessionNestedStackWritingSessionNestedStackResource89AD7CB8Outputsamplifywritinglivechassesandbox753c548dbbdataamplifyDataWritingSessionWritingSessionDataSource51AA40CAName": {
+   "Type": "String"
+  },
+  "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataWritingSessionNestedStackWritingSessionNestedStackResource89AD7CB8Outputsamplifywritinglivechassesandbox753c548dbbdataamplifyDataWritingSessionWritingSessionTable2FB165D3TableArn": {
+   "Type": "String"
+  },
+  "referencetoamplifywritinglivechassesandbox753c548dbbauthNestedStackauthNestedStackResource924BBE0COutputsamplifywritinglivechassesandbox753c548dbbauthamplifyAuthauthenticatedUserRole934A26C9Ref": {
+   "Type": "String"
+  },
+  "referencetoamplifywritinglivechassesandbox753c548dbbauthNestedStackauthNestedStackResource924BBE0COutputsamplifywritinglivechassesandbox753c548dbbauthamplifyAuthunauthenticatedUserRole1D31DC91Ref": {
+   "Type": "String"
+  },
+  "referencetoamplifywritinglivechassesandbox753c548dbbauthNestedStackauthNestedStackResource924BBE0COutputsamplifywritinglivechassesandbox753c548dbbauthamplifyAuthIdentityPool53F0F256Ref": {
+   "Type": "String"
+  },
+  "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataReadingSessionNestedStackReadingSessionNestedStackResource158A73DDOutputsamplifywritinglivechassesandbox753c548dbbdataamplifyDataReadingSessionReadingSessionDataSourceC7D0BC90Name": {
+   "Type": "String"
+  },
+  "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataReadingSessionNestedStackReadingSessionNestedStackResource158A73DDOutputsamplifywritinglivechassesandbox753c548dbbdataamplifyDataReadingSessionReadingSessionTable2EB42262TableArn": {
+   "Type": "String"
+  },
+  "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataUserNestedStackUserNestedStackResourceA4295784Outputsamplifywritinglivechassesandbox753c548dbbdataamplifyDataUserUserDataSource019DA8C7Name": {
+   "Type": "String"
+  },
+  "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataUserNestedStackUserNestedStackResourceA4295784Outputsamplifywritinglivechassesandbox753c548dbbdataamplifyDataUserUserTableAB0BAE67TableArn": {
+   "Type": "String"
+  }
+ }
+}
