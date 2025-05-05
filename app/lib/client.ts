@@ -1,47 +1,20 @@
 import { generateClient } from 'aws-amplify/api';
+import { configureAmplify } from './amplifyConfig';
+import type { UserModel, WritingSessionModel, ReadingSessionModel, UserRole } from '../types';
 
-export type UserRole = 'WRITER' | 'READER';
-
-export interface UserModel {
-  id: string;
-  email: string;
-  username: string;
-  role: UserRole;
-  bio?: string;
-  createdAt: string;
-  updatedAt: string;
+// Configure Amplify on the client side
+if (typeof window !== 'undefined') {
+  configureAmplify();
 }
 
-export interface WritingSessionModel {
-  id: string;
-  title: string;
-  content: string;
-  authorId: string;
-  lastModified: string;
-  isActive: boolean;
-  isPublic: boolean;
-  createdAt: string;
-  updatedAt: string;
-}
-
-export interface ReadingSessionModel {
-  id: string;
-  readerId: string;
-  writingSessionId: string;
-  lastReadAt: string;
-  isAnonymous: boolean;
-  createdAt: string;
-  updatedAt: string;
-}
-
-export interface SchemaModel {
-  User: UserModel;
-  WritingSession: WritingSessionModel;
-  ReadingSession: ReadingSessionModel;
-}
-
-// Create a type-safe client
-const client = generateClient();
+// Create a type-safe client with schema
+const client = generateClient<{
+  schema: {
+    User: UserModel;
+    WritingSession: WritingSessionModel;
+    ReadingSession: ReadingSessionModel;
+  }
+}>();
 
 // Create a wrapper for the client to handle type issues
 export const amplifyClient = {
@@ -49,9 +22,24 @@ export const amplifyClient = {
     User: {
       list: async (options?: { filter?: any }) => {
         try {
-          const response = await (client.models as any).User.list(options);
+          const response = await client.graphql({
+            query: `query ListUsers($filter: ModelUserFilterInput) {
+              listUsers(filter: $filter) {
+                items {
+                  id
+                  email
+                  username
+                  role
+                  bio
+                  createdAt
+                  updatedAt
+                }
+              }
+            }`,
+            variables: { filter: options?.filter }
+          });
           return {
-            data: response.data as UserModel[]
+            data: response.data.listUsers.items as UserModel[]
           };
         } catch (error) {
           console.error('Error listing users:', error);
@@ -60,8 +48,21 @@ export const amplifyClient = {
       },
       get: async (id: string) => {
         try {
-          const response = await (client.models as any).User.get({ id });
-          return response as UserModel;
+          const response = await client.graphql({
+            query: `query GetUser($id: ID!) {
+              getUser(id: $id) {
+                id
+                email
+                username
+                role
+                bio
+                createdAt
+                updatedAt
+              }
+            }`,
+            variables: { id }
+          });
+          return response.data.getUser as UserModel;
         } catch (error) {
           console.error('Error getting user:', error);
           return null;
@@ -69,8 +70,21 @@ export const amplifyClient = {
       },
       create: async (input: Partial<UserModel>) => {
         try {
-          const response = await (client.models as any).User.create(input);
-          return response as UserModel;
+          const response = await client.graphql({
+            query: `mutation CreateUser($input: CreateUserInput!) {
+              createUser(input: $input) {
+                id
+                email
+                username
+                role
+                bio
+                createdAt
+                updatedAt
+              }
+            }`,
+            variables: { input }
+          });
+          return response.data.createUser as UserModel;
         } catch (error) {
           console.error('Error creating user:', error);
           throw error;
@@ -80,9 +94,26 @@ export const amplifyClient = {
     WritingSession: {
       list: async (options?: { filter?: any }) => {
         try {
-          const response = await client.models.WritingSession.list(options);
+          const response = await client.graphql({
+            query: `query ListWritingSessions($filter: ModelWritingSessionFilterInput) {
+              listWritingSessions(filter: $filter) {
+                items {
+                  id
+                  title
+                  content
+                  authorId
+                  lastModified
+                  isActive
+                  isPublic
+                  createdAt
+                  updatedAt
+                }
+              }
+            }`,
+            variables: { filter: options?.filter }
+          });
           return {
-            data: response.data as unknown as WritingSessionModel[]
+            data: response.data.listWritingSessions.items as WritingSessionModel[]
           };
         } catch (error) {
           console.error('Error listing writing sessions:', error);
@@ -91,8 +122,23 @@ export const amplifyClient = {
       },
       get: async (id: string) => {
         try {
-          const response = await client.models.WritingSession.get({ id });
-          return response as unknown as WritingSessionModel;
+          const response = await client.graphql({
+            query: `query GetWritingSession($id: ID!) {
+              getWritingSession(id: $id) {
+                id
+                title
+                content
+                authorId
+                lastModified
+                isActive
+                isPublic
+                createdAt
+                updatedAt
+              }
+            }`,
+            variables: { id }
+          });
+          return response.data.getWritingSession as WritingSessionModel;
         } catch (error) {
           console.error('Error getting writing session:', error);
           return null;
@@ -100,8 +146,23 @@ export const amplifyClient = {
       },
       create: async (input: Partial<WritingSessionModel>) => {
         try {
-          const response = await client.models.WritingSession.create(input);
-          return response as unknown as WritingSessionModel;
+          const response = await client.graphql({
+            query: `mutation CreateWritingSession($input: CreateWritingSessionInput!) {
+              createWritingSession(input: $input) {
+                id
+                title
+                content
+                authorId
+                lastModified
+                isActive
+                isPublic
+                createdAt
+                updatedAt
+              }
+            }`,
+            variables: { input }
+          });
+          return response.data.createWritingSession as WritingSessionModel;
         } catch (error) {
           console.error('Error creating writing session:', error);
           throw error;
@@ -111,9 +172,24 @@ export const amplifyClient = {
     ReadingSession: {
       list: async (options?: { filter?: any }) => {
         try {
-          const response = await client.models.ReadingSession.list(options);
+          const response = await client.graphql({
+            query: `query ListReadingSessions($filter: ModelReadingSessionFilterInput) {
+              listReadingSessions(filter: $filter) {
+                items {
+                  id
+                  readerId
+                  writingSessionId
+                  lastReadAt
+                  isAnonymous
+                  createdAt
+                  updatedAt
+                }
+              }
+            }`,
+            variables: { filter: options?.filter }
+          });
           return {
-            data: response.data as unknown as ReadingSessionModel[]
+            data: response.data.listReadingSessions.items as ReadingSessionModel[]
           };
         } catch (error) {
           console.error('Error listing reading sessions:', error);
@@ -122,8 +198,21 @@ export const amplifyClient = {
       },
       get: async (id: string) => {
         try {
-          const response = await client.models.ReadingSession.get({ id });
-          return response as unknown as ReadingSessionModel;
+          const response = await client.graphql({
+            query: `query GetReadingSession($id: ID!) {
+              getReadingSession(id: $id) {
+                id
+                readerId
+                writingSessionId
+                lastReadAt
+                isAnonymous
+                createdAt
+                updatedAt
+              }
+            }`,
+            variables: { id }
+          });
+          return response.data.getReadingSession as ReadingSessionModel;
         } catch (error) {
           console.error('Error getting reading session:', error);
           return null;
@@ -131,8 +220,21 @@ export const amplifyClient = {
       },
       create: async (input: Partial<ReadingSessionModel>) => {
         try {
-          const response = await client.models.ReadingSession.create(input);
-          return response as unknown as ReadingSessionModel;
+          const response = await client.graphql({
+            query: `mutation CreateReadingSession($input: CreateReadingSessionInput!) {
+              createReadingSession(input: $input) {
+                id
+                readerId
+                writingSessionId
+                lastReadAt
+                isAnonymous
+                createdAt
+                updatedAt
+              }
+            }`,
+            variables: { input }
+          });
+          return response.data.createReadingSession as ReadingSessionModel;
         } catch (error) {
           console.error('Error creating reading session:', error);
           throw error;
@@ -143,8 +245,4 @@ export const amplifyClient = {
 };
 
 // Export types for use in other files
-export type { SchemaModel };
-export type User = SchemaModel['User'];
-export type WritingSession = SchemaModel['WritingSession'];
-export type ReadingSession = SchemaModel['ReadingSession'];
-export type UserRole = SchemaModel['UserRole']; 
+export type { UserRole, UserModel as User, WritingSessionModel as WritingSession, ReadingSessionModel as ReadingSession }; 

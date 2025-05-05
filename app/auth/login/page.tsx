@@ -1,13 +1,14 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { signIn } from 'next-auth/react';
+import { useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { signIn } from 'next-auth/react';
 import Link from 'next/link';
+import { Suspense } from 'react';
 import { getRedirectPath } from '@/app/lib/auth';
 import type { UserRole } from '@/app/lib/client';
 
-export default function LoginPage() {
+function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [formData, setFormData] = useState({
@@ -38,9 +39,13 @@ export default function LoginPage() {
         if (result.error === 'USER_NOT_VERIFIED') {
           router.push(`/auth/verify?email=${encodeURIComponent(formData.email)}`);
           return;
+        } else if (result.error === 'INVALID_CREDENTIALS') {
+          setError('Email o contraseña incorrectos');
+          return;
+        } else {
+          setError('Error al iniciar sesión. Por favor intenta de nuevo.');
+          return;
         }
-        setError('Credenciales inválidas');
-        return;
       }
 
       // Obtener el rol del usuario desde la sesión
@@ -53,8 +58,8 @@ export default function LoginPage() {
       router.push(redirectPath);
 
     } catch (error) {
-      console.error('Error al iniciar sesión:', error);
-      setError('Error al iniciar sesión');
+      console.error('Error en el inicio de sesión:', error);
+      setError('Error al iniciar sesión. Por favor intenta de nuevo.');
     } finally {
       setLoading(false);
     }
@@ -150,12 +155,20 @@ export default function LoginPage() {
                 href="/auth/register"
                 className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
               >
-                Registrarse
+                Crear cuenta
               </Link>
             </div>
           </div>
         </div>
       </div>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <LoginForm />
+    </Suspense>
   );
 } 

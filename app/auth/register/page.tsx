@@ -4,7 +4,32 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { signUp } from 'aws-amplify/auth';
-import { amplifyClient, type UserRole } from '@/app/lib/client';
+import { generateClient } from 'aws-amplify/api';
+import type { UserRole } from '@/app/types';
+
+const client = generateClient();
+
+interface PasswordValidation {
+  minLength: boolean;
+  hasUpperCase: boolean;
+  hasLowerCase: boolean;
+  hasNumber: boolean;
+  hasSpecialChar: boolean;
+}
+
+const validatePassword = (password: string): PasswordValidation => {
+  return {
+    minLength: password.length >= 8,
+    hasUpperCase: /[A-Z]/.test(password),
+    hasLowerCase: /[a-z]/.test(password),
+    hasNumber: /\d/.test(password),
+    hasSpecialChar: /[!@#$%^&*(),.?":{}|<>]/.test(password),
+  };
+};
+
+const isPasswordValid = (validation: PasswordValidation): boolean => {
+  return Object.values(validation).every(Boolean);
+};
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -16,14 +41,32 @@ export default function RegisterPage() {
   });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [passwordValidation, setPasswordValidation] = useState<PasswordValidation>({
+    minLength: false,
+    hasUpperCase: false,
+    hasLowerCase: false,
+    hasNumber: false,
+    hasSpecialChar: false,
+  });
+
+  const handlePasswordChange = (password: string) => {
+    const validation = validatePassword(password);
+    setPasswordValidation(validation);
+    setFormData({ ...formData, password });
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     setError('');
 
+    if (!isPasswordValid(passwordValidation)) {
+      setError('Por favor, asegúrate de cumplir todos los requisitos de la contraseña');
+      setLoading(false);
+      return;
+    }
+
     try {
-      // Registrar usuario en Cognito
       const { isSignUpComplete, userId, nextStep } = await signUp({
         username: formData.email,
         password: formData.password,
@@ -31,29 +74,48 @@ export default function RegisterPage() {
           userAttributes: {
             email: formData.email,
           },
-          autoSignIn: true
+          autoSignIn: false
         }
       });
 
       if (!isSignUpComplete) {
         console.log('Siguiente paso:', nextStep);
         if (nextStep.signUpStep === 'CONFIRM_SIGN_UP') {
-          // Crear usuario en la base de datos
-          await amplifyClient.models.User.create({
-            id: userId,
-            email: formData.email,
-            username: formData.username,
-            role: formData.role,
-          });
+          try {
+            await client.graphql({
+              query: `
+                mutation CreateUser($input: CreateUserInput!) {
+                  createUser(input: $input) {
+                    id
+                    email
+                    username
+                    role
+                  }
+                }
+              `,
+              variables: {
+                input: {
+                  id: userId,
+                  email: formData.email,
+                  username: formData.username,
+                  role: formData.role,
+                }
+              }
+            });
 
-          // Redirigir a la página de verificación
-          router.push(`/auth/verify?email=${encodeURIComponent(formData.email)}`);
+            router.push(`/auth/verify?email=${encodeURIComponent(formData.email)}&registration=success`);
+          } catch (error) {
+            console.error('Error creating user in database:', error);
+            setError('Error al crear el usuario en la base de datos');
+          }
         }
       }
     } catch (error: any) {
       console.error('Error en el registro:', error);
       if (error.name === 'UsernameExistsException') {
         setError('Ya existe una cuenta con este email');
+      } else if (error.name === 'InvalidPasswordException') {
+        setError('La contraseña no cumple con los requisitos de seguridad');
       } else {
         setError('Error al crear la cuenta. Por favor intenta de nuevo.');
       }
@@ -120,9 +182,26 @@ export default function RegisterPage() {
                   autoComplete="new-password"
                   required
                   value={formData.password}
-                  onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                  onChange={(e) => handlePasswordChange(e.target.value)}
                   className="appearance-none block w-full px-3 py-2 border border-gray-600 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-gray-700 text-white"
                 />
+              </div>
+              <div className="mt-2 space-y-2 text-sm">
+                <p className={`${passwordValidation.minLength ? 'text-green-400' : 'text-gray-400'}`}>
+                  ✓ Mínimo 8 caracteres
+                </p>
+                <p className={`${passwordValidation.hasUpperCase ? 'text-green-400' : 'text-gray-400'}`}>
+                  ✓ Al menos una mayúscula
+                </p>
+                <p className={`${passwordValidation.hasLowerCase ? 'text-green-400' : 'text-gray-400'}`}>
+                  ✓ Al menos una minúscula
+                </p>
+                <p className={`${passwordValidation.hasNumber ? 'text-green-400' : 'text-gray-400'}`}>
+                  ✓ Al menos un número
+                </p>
+                <p className={`${passwordValidation.hasSpecialChar ? 'text-green-400' : 'text-gray-400'}`}>
+                  ✓ Al menos un carácter especial (!@#$%^&*(),.?":{}|&lt;&gt;)
+                </p>
               </div>
             </div>
 
@@ -153,9 +232,9 @@ export default function RegisterPage() {
             <div>
               <button
                 type="submit"
-                disabled={loading}
+                disabled={loading || !isPasswordValid(passwordValidation)}
                 className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white ${
-                  loading
+                  loading || !isPasswordValid(passwordValidation)
                     ? 'bg-indigo-500 cursor-not-allowed'
                     : 'bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
                 }`}

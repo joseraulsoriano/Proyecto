@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import { getPublicWriters, canComment } from '@/app/lib/auth';
-import type { UserModel } from '@/app/lib/client';
+import type { UserModel } from '@/app/types';
 
 export default function WritersPage() {
   const { data: session } = useSession();

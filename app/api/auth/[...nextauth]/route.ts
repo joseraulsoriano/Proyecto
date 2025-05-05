@@ -5,6 +5,7 @@ import { Amplify } from 'aws-amplify';
 import { type ResourcesConfig } from '@aws-amplify/core';
 import { cognitoUserPoolsTokenProvider } from '@aws-amplify/auth/cognito';
 import { options } from './options';
+import { UserRole } from '@/app/lib/client';
 
 // Extender el tipo DefaultSession para incluir id
 declare module "next-auth" {
@@ -12,6 +13,7 @@ declare module "next-auth" {
     user: {
       id: string;
       email: string;
+      role: UserRole;
       accessToken?: string;
     } & DefaultSession["user"]
   }
@@ -19,6 +21,7 @@ declare module "next-auth" {
   interface User {
     id: string;
     email: string;
+    role: UserRole;
     name?: string;
     accessToken?: string;
   }

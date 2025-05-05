@@ -4,7 +4,7 @@ import { signIn as amplifySignIn, fetchAuthSession, getCurrentUser } from 'aws-a
 import { Amplify } from 'aws-amplify';
 import { type ResourcesConfig } from '@aws-amplify/core';
 import { cognitoUserPoolsTokenProvider } from '@aws-amplify/auth/cognito';
-import { amplifyClient } from '@/app/lib/client';
+import { amplifyClient, UserRole } from '@/app/lib/client';
 
 // Extend the default session type
 declare module "next-auth" {
@@ -12,7 +12,7 @@ declare module "next-auth" {
     user: {
       id: string;
       email: string;
-      role?: 'WRITER' | 'READER';
+      role: UserRole;
       accessToken?: string;
     } & DefaultSession["user"]
   }
@@ -20,7 +20,7 @@ declare module "next-auth" {
   interface User {
     id: string;
     email: string;
-    role?: 'WRITER' | 'READER';
+    role: UserRole;
     name?: string;
     accessToken?: string;
   }

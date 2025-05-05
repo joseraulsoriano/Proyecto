@@ -2,47 +2,62 @@
 
 import { useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { confirmSignUp, resendSignUpCode } from 'aws-amplify/auth';
+import { confirmSignUp, resendSignUpCode, signIn } from 'aws-amplify/auth';
 import Link from 'next/link';
+import { Suspense } from 'react';
 
-export default function VerifyPage() {
+function VerifyForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [formData, setFormData] = useState({
-    email: searchParams.get('email') || '',
-    code: '',
-  });
+  const email = searchParams.get('email');
+  const [password, setPassword] = useState('');
+  const [code, setCode] = useState('');
   const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
+  const [showPasswordField, setShowPasswordField] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setError('');
-    setSuccess('');
+    if (!email) {
+      setError('Email no proporcionado');
+      return;
+    }
+
     setLoading(true);
+    setError('');
 
     try {
       await confirmSignUp({
-        username: formData.email,
-        confirmationCode: formData.code,
+        username: email,
+        confirmationCode: code,
       });
 
-      setSuccess('Email verificado correctamente. Redirigiendo...');
+      setShowPasswordField(true);
       
-      // Esperar un momento antes de redirigir
-      setTimeout(() => {
-        router.push('/auth/login?message=Cuenta verificada. Ya puedes iniciar sesión.');
-      }, 2000);
+      if (password) {
+        // Intentar iniciar sesión automáticamente
+        const result = await signIn({
+          username: email,
+          password,
+          options: {
+            authFlowType: "USER_SRP_AUTH"
+          }
+        });
 
+        if (result.isSignedIn) {
+          router.push('/');
+        } else {
+          router.push('/auth/login');
+        }
+      }
     } catch (error: any) {
-      console.error('Error al verificar:', error);
+      console.error('Error en la verificación:', error);
       if (error.name === 'CodeMismatchException') {
-        setError('Código incorrecto. Por favor, intenta de nuevo.');
+        setError('Código incorrecto');
       } else if (error.name === 'ExpiredCodeException') {
-        setError('El código ha expirado. Solicita uno nuevo.');
+        setError('El código ha expirado');
       } else {
-        setError('Error al verificar el código. Por favor, intenta de nuevo.');
+        setError('Error al verificar la cuenta. Por favor intenta de nuevo.');
       }
     } finally {
       setLoading(false);
@@ -50,120 +65,119 @@ export default function VerifyPage() {
   };
 
   const handleResendCode = async () => {
-    if (!formData.email) {
-      setError('Por favor, ingresa tu email');
-      return;
-    }
-
-    setError('');
-    setSuccess('');
-    setLoading(true);
-
+    if (!email) return;
+    
     try {
-      await resendSignUpCode({
-        username: formData.email,
-      });
-      setSuccess('Se ha enviado un nuevo código a tu email');
-    } catch (error: any) {
-      console.error('Error al reenviar código:', error);
-      setError('Error al enviar el código. Por favor, intenta de nuevo.');
-    } finally {
-      setLoading(false);
+      await resendSignUpCode({ username: email });
+      setError('Se ha enviado un nuevo código a tu email');
+    } catch (error) {
+      console.error('Error al reenviar el código:', error);
+      setError('Error al reenviar el código');
     }
   };
 
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-900">
-      <div className="max-w-md w-full space-y-8 p-8 bg-gray-800 rounded-xl shadow-lg">
-        <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-white">
-            Verificar Email
-          </h2>
-          <p className="mt-2 text-center text-sm text-gray-400">
-            Ingresa el código de verificación que enviamos a tu email
-          </p>
+  if (!email) {
+    return (
+      <div className="min-h-screen bg-gray-900 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+        <div className="sm:mx-auto sm:w-full sm:max-w-md">
+          <div className="bg-gray-800 py-8 px-4 shadow sm:rounded-lg sm:px-10">
+            <p className="text-red-400 text-sm text-center">
+              No se proporcionó un email para verificar
+            </p>
+          </div>
         </div>
+      </div>
+    );
+  }
 
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          {error && (
-            <div className="bg-red-500 text-white p-3 rounded-md text-center">
-              {error}
-            </div>
-          )}
-          {success && (
-            <div className="bg-green-500 text-white p-3 rounded-md text-center">
-              {success}
-            </div>
-          )}
+  return (
+    <div className="min-h-screen bg-gray-900 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+      <div className="sm:mx-auto sm:w-full sm:max-w-md">
+        <h2 className="mt-6 text-center text-3xl font-extrabold text-white">
+          Verificar cuenta
+        </h2>
+        <p className="mt-2 text-center text-sm text-gray-400">
+          Se ha enviado un código de verificación a {email}
+        </p>
+      </div>
 
-          <div className="rounded-md shadow-sm -space-y-px">
+      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+        <div className="bg-gray-800 py-8 px-4 shadow sm:rounded-lg sm:px-10">
+          <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
-              <label htmlFor="email" className="sr-only">
-                Email
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-700 placeholder-gray-500 text-white bg-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                placeholder="Email"
-                value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                disabled={loading}
-              />
-            </div>
-            <div>
-              <label htmlFor="code" className="sr-only">
+              <label htmlFor="code" className="block text-sm font-medium text-gray-300">
                 Código de verificación
               </label>
-              <input
-                id="code"
-                name="code"
-                type="text"
-                required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-700 placeholder-gray-500 text-white bg-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                placeholder="Código de verificación"
-                value={formData.code}
-                onChange={(e) => setFormData({ ...formData, code: e.target.value })}
-                disabled={loading}
-              />
+              <div className="mt-1">
+                <input
+                  id="code"
+                  name="code"
+                  type="text"
+                  required
+                  value={code}
+                  onChange={(e) => setCode(e.target.value)}
+                  className="appearance-none block w-full px-3 py-2 border border-gray-600 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-gray-700 text-white"
+                />
+              </div>
             </div>
-          </div>
 
-          <div className="flex flex-col space-y-3">
-            <button
-              type="submit"
-              disabled={loading}
-              className={`group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white ${
-                loading 
-                  ? 'bg-indigo-400 cursor-not-allowed' 
-                  : 'bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
-              }`}
-            >
-              {loading ? 'Verificando...' : 'Verificar Email'}
-            </button>
+            {showPasswordField && (
+              <div>
+                <label htmlFor="password" className="block text-sm font-medium text-gray-300">
+                  Contraseña
+                </label>
+                <div className="mt-1">
+                  <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    required
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="appearance-none block w-full px-3 py-2 border border-gray-600 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-gray-700 text-white"
+                  />
+                </div>
+              </div>
+            )}
 
-            <button
-              type="button"
-              onClick={handleResendCode}
-              disabled={loading}
-              className="text-sm text-indigo-400 hover:text-indigo-500"
-            >
-              Reenviar código de verificación
-            </button>
-          </div>
-        </form>
+            {error && (
+              <div className="text-red-400 text-sm text-center">
+                {error}
+              </div>
+            )}
 
-        <div className="text-center mt-4">
-          <Link
-            href="/auth/login"
-            className="font-medium text-indigo-400 hover:text-indigo-500"
-          >
-            Volver al inicio de sesión
-          </Link>
+            <div className="flex flex-col space-y-4">
+              <button
+                type="submit"
+                disabled={loading}
+                className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white ${
+                  loading
+                    ? 'bg-indigo-500 cursor-not-allowed'
+                    : 'bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+                }`}
+              >
+                {loading ? 'Verificando...' : 'Verificar'}
+              </button>
+
+              <button
+                type="button"
+                onClick={handleResendCode}
+                className="w-full flex justify-center py-2 px-4 border border-gray-600 rounded-md shadow-sm text-sm font-medium text-white bg-transparent hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+              >
+                Reenviar código
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
+  );
+}
+
+export default function VerifyPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <VerifyForm />
+    </Suspense>
   );
 } 
