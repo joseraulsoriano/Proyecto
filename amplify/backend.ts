@@ -1,31 +1,11 @@
 import { defineBackend } from '@aws-amplify/backend';
-import { Schema } from '@aws-amplify/graphql-api-construct';
+import { auth } from './auth/resource';
+import { data } from './data/resource';
 
-const schema = new Schema({
-  typeDefs: /* GraphQL */ `
-    type TextContent @model @auth(rules: [{ allow: public }]) {
-      id: ID!
-      text: String!
-      timestamp: AWSTimestamp!
-      authorId: String!
-    }
-
-    type Subscription {
-      onTextUpdate(authorId: String!): TextContent
-        @aws_subscribe(mutations: ["updateTextContent"])
-    }
-  `
+/**
+ * @see https://docs.amplify.aws/react/build-a-backend/ to add storage, functions, and more
+ */
+export const backend = defineBackend({
+  auth,
+  data,
 });
-
-const backend = defineBackend({
-  schema,
-  auth: {
-    loginWith: {
-      email: true,
-      phone: false,
-      username: false
-    }
-  }
-});
-
-export default backend; 

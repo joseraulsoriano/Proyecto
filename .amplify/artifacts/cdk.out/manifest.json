@@ -1,0 +1,1223 @@
+{
+  "version": "41.0.0",
+  "artifacts": {
+    "amplify-writinglive-chasse-sandbox-753c548dbb.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "amplify-writinglive-chasse-sandbox-753c548dbb.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "amplify-writinglive-chasse-sandbox-753c548dbb": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "amplify-writinglive-chasse-sandbox-753c548dbb.template.json",
+        "terminationProtection": false,
+        "tags": {
+          "amplify:deployment-type": "sandbox",
+          "created-by": "amplify"
+        },
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/3dbaae316938a1fe1d72983bb1bf3dfa6bc02e7f5cc1593abfe9adda33e9696b.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "amplify-writinglive-chasse-sandbox-753c548dbb.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "amplify-writinglive-chasse-sandbox-753c548dbb.assets"
+      ],
+      "metadata": {
+        "/amplify-writinglive-chasse-sandbox-753c548dbb": [
+          {
+            "type": "aws:cdk:stack-tags",
+            "data": [
+              {
+                "Key": "amplify:deployment-type",
+                "Value": "sandbox"
+              },
+              {
+                "Key": "created-by",
+                "Value": "amplify"
+              }
+            ]
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/deploymentType": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "deploymentType"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/region": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "region"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/auth/amplifyAuth/UserPool/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyAuthUserPool4BA7F805"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/auth/amplifyAuth/UserPoolAppClient/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyAuthUserPoolAppClient2626C6F8"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/auth/amplifyAuth/IdentityPool": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyAuthIdentityPool3FDE84CC"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/auth/amplifyAuth/authenticatedUserRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyAuthauthenticatedUserRoleD8DA3689"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/auth/amplifyAuth/unauthenticatedUserRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyAuthunauthenticatedUserRole2B524D9E"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/auth/amplifyAuth/IdentityPoolRoleAttachment": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyAuthIdentityPoolRoleAttachment045F17C8"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/auth/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/auth/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/auth/amplifywritinglivechassesandbox753c548dbbauthamplifyAuthUserPoolEBE4BF52Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifywritinglivechassesandbox753c548dbbauthamplifyAuthUserPoolEBE4BF52Ref"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/auth/amplifywritinglivechassesandbox753c548dbbauthamplifyAuthUserPoolAppClient8E80ED03Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifywritinglivechassesandbox753c548dbbauthamplifyAuthUserPoolAppClient8E80ED03Ref"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/auth/amplifywritinglivechassesandbox753c548dbbauthamplifyAuthIdentityPool53F0F256Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifywritinglivechassesandbox753c548dbbauthamplifyAuthIdentityPool53F0F256Ref"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/auth/amplifywritinglivechassesandbox753c548dbbauthamplifyAuthauthenticatedUserRole934A26C9Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifywritinglivechassesandbox753c548dbbauthamplifyAuthauthenticatedUserRole934A26C9Ref"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/auth/amplifywritinglivechassesandbox753c548dbbauthamplifyAuthunauthenticatedUserRole1D31DC91Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifywritinglivechassesandbox753c548dbbauthamplifyAuthunauthenticatedUserRole1D31DC91Ref"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/auth.NestedStack/auth.NestedStackResource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "auth179371D7"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/userPoolId": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "userPoolId"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/webClientId": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "webClientId"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/identityPoolId": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "identityPoolId"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/authRegion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "authRegion"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/allowUnauthenticatedIdentities": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "allowUnauthenticatedIdentities"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/signupAttributes": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "signupAttributes"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/usernameAttributes": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "usernameAttributes"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/verificationMechanisms": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "verificationMechanisms"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/passwordPolicyMinLength": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "passwordPolicyMinLength"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/passwordPolicyRequirements": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "passwordPolicyRequirements"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/mfaConfiguration": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "mfaConfiguration"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/mfaTypes": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "mfaTypes"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/socialProviders": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "socialProviders"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/oauthCognitoDomain": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "oauthCognitoDomain"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/oauthScope": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "oauthScope"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/oauthRedirectSignIn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "oauthRedirectSignIn"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/oauthRedirectSignOut": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "oauthRedirectSignOut"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/oauthResponseType": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "oauthResponseType"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/oauthClientId": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "oauthClientId"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/groups": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "groups"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/GraphQLAPI/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyDataGraphQLAPI42A6FA33"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/GraphQLAPI/TransformerSchema": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyDataGraphQLAPITransformerSchemaFF50A789"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/GraphQLAPI/NONE_DS": [
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "NONE_DS"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/GraphQLAPI/NONE_DS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyDataGraphQLAPINONEDS684BF699"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "NONE_DS"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/AmplifyTableManager/AmplifyManagedTableIsCompleteRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AmplifyManagedTableIsCompleteRoleF825222C"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/AmplifyTableManager/AmplifyManagedTableOnEventRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AmplifyManagedTableOnEventRoleB4E71DEA"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/AmplifyTableManager/AmplifyManagedTableOnEventRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AmplifyManagedTableOnEventRoleDefaultPolicyF6DABCB6"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/AmplifyTableManager/TableManagerCustomProvider/framework-onEvent/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TableManagerCustomProviderframeworkonEvent1DFC2ECC"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/AmplifyTableManager/TableManagerCustomProvider/framework-isComplete/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TableManagerCustomProviderframeworkisComplete2E51021B"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/AmplifyTableManager/AmplifyTableWaiterStateMachine/Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AmplifyTableWaiterStateMachineRole470BE899"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/AmplifyTableManager/AmplifyTableWaiterStateMachine/Role/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AmplifyTableWaiterStateMachineRoleDefaultPolicy89F3836A"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/AmplifyTableManager/AmplifyTableWaiterStateMachine/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AmplifyTableWaiterStateMachine060600BC"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/AmplifyTableManager/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/AmplifyTableManager/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/AmplifyTableManager/reference-to-amplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/AmplifyTableManager/amplifywritinglivechassesandbox753c548dbbdataamplifyDataAmplifyTableManagerTableManagerCustomProviderframeworkonEvent24A25D29Arn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifywritinglivechassesandbox753c548dbbdataamplifyDataAmplifyTableManagerTableManagerCustomProviderframeworkonEvent24A25D29Arn"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/AmplifyTableManager.NestedStack/AmplifyTableManager.NestedStackResource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyDataAmplifyTableManagerNestedStackAmplifyTableManagerNestedStackResource86290833"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/DynamoDBModelTableReadIOPS": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBModelTableReadIOPS"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/DynamoDBModelTableWriteIOPS": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBModelTableWriteIOPS"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/DynamoDBBillingMode": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBBillingMode"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/DynamoDBEnablePointInTimeRecovery": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBEnablePointInTimeRecovery"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/DynamoDBEnableServerSideEncryption": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBEnableServerSideEncryption"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/HasEnvironmentParameter": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "HasEnvironmentParameter"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/ShouldUsePayPerRequestBilling": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ShouldUsePayPerRequestBilling"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/ShouldUsePointInTimeRecovery": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ShouldUsePointInTimeRecovery"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/WritingSessionTable": [
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "WritingSession"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/WritingSessionTable/Default/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "WritingSessionTable"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "WritingSession"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/CustomTableWritingSessionTable": [
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "WritingSession"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/GetAttWritingSessionTableStreamArn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "GetAttWritingSessionTableStreamArn"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/GetAttWritingSessionTableName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "GetAttWritingSessionTableName"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/WritingSessionIAMRole": [
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "WritingSessionIAMRole"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/WritingSessionIAMRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "WritingSessionIAMRoleAB3A3871"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "WritingSessionIAMRole"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/WritingSessionDataSource": [
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "WritingSessionTable"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/WritingSessionDataSource/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "WritingSessionDataSource"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "WritingSessionTable"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/QuerygetWritingSessionauth0Function/QuerygetWritingSessionauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuerygetWritingSessionauth0FunctionQuerygetWritingSessionauth0FunctionAppSyncFunctionF53CF709"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QuerygetWritingSessionauth0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/QuerygetWritingSessionpostAuth0Function/QuerygetWritingSessionpostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuerygetWritingSessionpostAuth0FunctionQuerygetWritingSessionpostAuth0FunctionAppSyncFunctionB9E97365"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QuerygetWritingSessionpostAuth0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/QueryGetWritingSessionDataResolverFn/QueryGetWritingSessionDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QueryGetWritingSessionDataResolverFnQueryGetWritingSessionDataResolverFnAppSyncFunctionB0A11053"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QueryGetWritingSessionDataResolverFn"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/queryGetWritingSessionResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "GetWritingSessionResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Query.getWritingSession"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/QuerylistWritingSessionsauth0Function/QuerylistWritingSessionsauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuerylistWritingSessionsauth0FunctionQuerylistWritingSessionsauth0FunctionAppSyncFunction92D03D84"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QuerylistWritingSessionsauth0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/QuerylistWritingSessionspostAuth0Function/QuerylistWritingSessionspostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuerylistWritingSessionspostAuth0FunctionQuerylistWritingSessionspostAuth0FunctionAppSyncFunctionD2548B0B"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QuerylistWritingSessionspostAuth0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/QueryListWritingSessionsDataResolverFn/QueryListWritingSessionsDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QueryListWritingSessionsDataResolverFnQueryListWritingSessionsDataResolverFnAppSyncFunction2E32084C"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QueryListWritingSessionsDataResolverFn"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/queryListWritingSessionsResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ListWritingSessionResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Query.listWritingSessions"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/MutationcreateWritingSessioninit0Function/MutationcreateWritingSessioninit0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationcreateWritingSessioninit0FunctionMutationcreateWritingSessioninit0FunctionAppSyncFunctionA4A72AE1"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationcreateWritingSessioninit0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/MutationcreateWritingSessionauth0Function/MutationcreateWritingSessionauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationcreateWritingSessionauth0FunctionMutationcreateWritingSessionauth0FunctionAppSyncFunction859AD4BC"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationcreateWritingSessionauth0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/MutationcreateWritingSessionpostAuth0Function/MutationcreateWritingSessionpostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationcreateWritingSessionpostAuth0FunctionMutationcreateWritingSessionpostAuth0FunctionAppSyncFunction01532472"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationcreateWritingSessionpostAuth0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/MutationCreateWritingSessionDataResolverFn/MutationCreateWritingSessionDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationCreateWritingSessionDataResolverFnMutationCreateWritingSessionDataResolverFnAppSyncFunction0E752CBE"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationCreateWritingSessionDataResolverFn"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/mutationCreateWritingSessionResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CreateWritingSessionResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Mutation.createWritingSession"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/MutationupdateWritingSessioninit0Function/MutationupdateWritingSessioninit0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationupdateWritingSessioninit0FunctionMutationupdateWritingSessioninit0FunctionAppSyncFunction024F69E3"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationupdateWritingSessioninit0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/MutationupdateWritingSessionauth0Function/MutationupdateWritingSessionauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationupdateWritingSessionauth0FunctionMutationupdateWritingSessionauth0FunctionAppSyncFunction9E579EE0"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationupdateWritingSessionauth0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/MutationupdateWritingSessionpostAuth0Function/MutationupdateWritingSessionpostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationupdateWritingSessionpostAuth0FunctionMutationupdateWritingSessionpostAuth0FunctionAppSyncFunctionD3D33706"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationupdateWritingSessionpostAuth0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/MutationUpdateWritingSessionDataResolverFn/MutationUpdateWritingSessionDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationUpdateWritingSessionDataResolverFnMutationUpdateWritingSessionDataResolverFnAppSyncFunction5CC3767D"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationUpdateWritingSessionDataResolverFn"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/mutationUpdateWritingSessionResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UpdateWritingSessionResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Mutation.updateWritingSession"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/MutationdeleteWritingSessionauth0Function/MutationdeleteWritingSessionauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationdeleteWritingSessionauth0FunctionMutationdeleteWritingSessionauth0FunctionAppSyncFunction51D99232"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationdeleteWritingSessionauth0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/MutationdeleteWritingSessionpostAuth0Function/MutationdeleteWritingSessionpostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationdeleteWritingSessionpostAuth0FunctionMutationdeleteWritingSessionpostAuth0FunctionAppSyncFunctionF275A2A3"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationdeleteWritingSessionpostAuth0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/MutationDeleteWritingSessionDataResolverFn/MutationDeleteWritingSessionDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationDeleteWritingSessionDataResolverFnMutationDeleteWritingSessionDataResolverFnAppSyncFunction59FD8F0A"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationDeleteWritingSessionDataResolverFn"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/mutationDeleteWritingSessionResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DeleteWritingSessionResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Mutation.deleteWritingSession"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/SubscriptiononCreateWritingSessionauth0Function/SubscriptiononCreateWritingSessionauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononCreateWritingSessionauth0FunctionSubscriptiononCreateWritingSessionauth0FunctionAppSyncFunctionC1204BF6"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptiononCreateWritingSessionauth0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/SubscriptiononCreateWritingSessionpostAuth0Function/SubscriptiononCreateWritingSessionpostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononCreateWritingSessionpostAuth0FunctionSubscriptiononCreateWritingSessionpostAuth0FunctionAppSyncFunction4A7403DB"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptiononCreateWritingSessionpostAuth0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/SubscriptionOnCreateWritingSessionDataResolverFn/SubscriptionOnCreateWritingSessionDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptionOnCreateWritingSessionDataResolverFnSubscriptionOnCreateWritingSessionDataResolverFnAppSyncFunction94763CE1"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptionOnCreateWritingSessionDataResolverFn"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/subscriptionOnCreateWritingSessionResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononCreateWritingSessionResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Subscription.onCreateWritingSession"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/SubscriptiononUpdateWritingSessionauth0Function/SubscriptiononUpdateWritingSessionauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononUpdateWritingSessionauth0FunctionSubscriptiononUpdateWritingSessionauth0FunctionAppSyncFunction6D8938D8"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptiononUpdateWritingSessionauth0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/SubscriptiononUpdateWritingSessionpostAuth0Function/SubscriptiononUpdateWritingSessionpostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononUpdateWritingSessionpostAuth0FunctionSubscriptiononUpdateWritingSessionpostAuth0FunctionAppSyncFunction40152E14"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptiononUpdateWritingSessionpostAuth0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/SubscriptionOnUpdateWritingSessionDataResolverFn/SubscriptionOnUpdateWritingSessionDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptionOnUpdateWritingSessionDataResolverFnSubscriptionOnUpdateWritingSessionDataResolverFnAppSyncFunctionA8BF197A"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptionOnUpdateWritingSessionDataResolverFn"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/subscriptionOnUpdateWritingSessionResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononUpdateWritingSessionResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Subscription.onUpdateWritingSession"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/SubscriptiononDeleteWritingSessionauth0Function/SubscriptiononDeleteWritingSessionauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononDeleteWritingSessionauth0FunctionSubscriptiononDeleteWritingSessionauth0FunctionAppSyncFunction33B35D9F"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptiononDeleteWritingSessionauth0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/SubscriptiononDeleteWritingSessionpostAuth0Function/SubscriptiononDeleteWritingSessionpostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononDeleteWritingSessionpostAuth0FunctionSubscriptiononDeleteWritingSessionpostAuth0FunctionAppSyncFunction65B625F4"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptiononDeleteWritingSessionpostAuth0Function"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/SubscriptionOnDeleteWritingSessionDataResolverFn/SubscriptionOnDeleteWritingSessionDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptionOnDeleteWritingSessionDataResolverFnSubscriptionOnDeleteWritingSessionDataResolverFnAppSyncFunctionE6CB0E39"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptionOnDeleteWritingSessionDataResolverFn"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/subscriptionOnDeleteWritingSessionResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononDeleteWritingSessionResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Subscription.onDeleteWritingSession"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/WritingSessionOwnerDataResolverFn/WritingSessionOwnerDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "WritingSessionOwnerDataResolverFnWritingSessionOwnerDataResolverFnAppSyncFunction2F4528DE"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "WritingSessionOwnerDataResolverFn"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/writingSessionOwnerResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "WritingSessionownerResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "WritingSession.owner"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/reference-to-amplifywritinglivechassesandbox753c548dbbdataamplifyDataAmplifyTableManagerNestedStackAmplifyTableManagerNestedStackResourceE652A93COutputs.amplifywritinglivechassesandbox753c548dbbdataamplifyDataAmplifyTableManagerTableManagerCustomProviderframeworkonEvent24A25D29Arn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataAmplifyTableManagerNestedStackAmplifyTableManagerNestedStackResourceE652A93COutputsamplifywritinglivechassesandbox753c548dbbdataamplifyDataAmplifyTableManagerTableManagerCus2CC9795D"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/reference-to-amplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/reference-to-amplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPINONEDS802F5DFCName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPINONEDS802F5DFCName"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/reference-to-amplifywritinglivechassesandbox753c548dbbauthNestedStackauthNestedStackResource924BBE0COutputs.amplifywritinglivechassesandbox753c548dbbauthamplifyAuthauthenticatedUserRole934A26C9Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifywritinglivechassesandbox753c548dbbauthNestedStackauthNestedStackResource924BBE0COutputsamplifywritinglivechassesandbox753c548dbbauthamplifyAuthauthenticatedUserRole934A26C9Ref"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/reference-to-amplifywritinglivechassesandbox753c548dbbauthNestedStackauthNestedStackResource924BBE0COutputs.amplifywritinglivechassesandbox753c548dbbauthamplifyAuthunauthenticatedUserRole1D31DC91Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifywritinglivechassesandbox753c548dbbauthNestedStackauthNestedStackResource924BBE0COutputsamplifywritinglivechassesandbox753c548dbbauthamplifyAuthunauthenticatedUserRole1D31DC91Ref"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession/reference-to-amplifywritinglivechassesandbox753c548dbbauthNestedStackauthNestedStackResource924BBE0COutputs.amplifywritinglivechassesandbox753c548dbbauthamplifyAuthIdentityPool53F0F256Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifywritinglivechassesandbox753c548dbbauthNestedStackauthNestedStackResource924BBE0COutputsamplifywritinglivechassesandbox753c548dbbauthamplifyAuthIdentityPool53F0F256Ref"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/WritingSession.NestedStack/WritingSession.NestedStackResource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyDataWritingSessionNestedStackWritingSessionNestedStackResource4D895228"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/AuthRolePolicy01/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyDataAuthRolePolicy01567A5654"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/UnauthRolePolicy01/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyDataUnauthRolePolicy01355B9DCF"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/AmplifyCodegenAssets/AmplifyCodegenAssetsBucket/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyDataAmplifyCodegenAssetsAmplifyCodegenAssetsBucket9CCB4ACA"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/AmplifyCodegenAssets/AmplifyCodegenAssetsBucket/Policy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyDataAmplifyCodegenAssetsAmplifyCodegenAssetsBucketPolicyF1C1C548"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/AmplifyCodegenAssets/AmplifyCodegenAssetsBucket/AutoDeleteObjectsCustomResource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyDataAmplifyCodegenAssetsAmplifyCodegenAssetsBucketAutoDeleteObjectsCustomResource437F26F5"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/AmplifyCodegenAssets/AmplifyCodegenAssetsDeployment/AwsCliLayer/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyDataAmplifyCodegenAssetsAmplifyCodegenAssetsDeploymentAwsCliLayerE322F905"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifyData/AmplifyCodegenAssets/AmplifyCodegenAssetsDeployment/CustomResource-1536MiB/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyDataAmplifyCodegenAssetsAmplifyCodegenAssetsDeploymentCustomResource1536MiB21775929"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/DynamoDBModelTableReadIOPS": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBModelTableReadIOPS"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/DynamoDBModelTableWriteIOPS": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBModelTableWriteIOPS"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/DynamoDBBillingMode": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBBillingMode"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/DynamoDBEnablePointInTimeRecovery": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBEnablePointInTimeRecovery"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/DynamoDBEnableServerSideEncryption": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBEnableServerSideEncryption"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/LatestNodeRuntimeMap": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LatestNodeRuntimeMap"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/Custom::S3AutoDeleteObjectsCustomResourceProvider": [
+          {
+            "type": "aws:cdk:is-custom-resource-handler-customResourceProvider",
+            "data": true
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/Custom::S3AutoDeleteObjectsCustomResourceProvider/Role": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/Custom::S3AutoDeleteObjectsCustomResourceProvider/Handler": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C1536MiB": [
+          {
+            "type": "aws:cdk:is-custom-resource-handler-singleton",
+            "data": true
+          },
+          {
+            "type": "aws:cdk:is-custom-resource-handler-runtime-family",
+            "data": 2
+          },
+          {
+            "type": "aws:cdk:is-custom-resource-handler-singleton",
+            "data": true
+          },
+          {
+            "type": "aws:cdk:is-custom-resource-handler-runtime-family",
+            "data": 2
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C1536MiB/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C1536MiBServiceRoleA41FC8C2"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C1536MiB/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C1536MiBServiceRoleDefaultPolicyFF1C635B"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C1536MiB/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C1536MiBC5D8AB21"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/modelIntrospectionSchemaBucket/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "modelIntrospectionSchemaBucketF566B665"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/modelIntrospectionSchemaBucket/Policy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "modelIntrospectionSchemaBucketPolicy4DAB0D15"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/modelIntrospectionSchemaBucket/AutoDeleteObjectsCustomResource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "modelIntrospectionSchemaBucketAutoDeleteObjectsCustomResourceFE57309F"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/modelIntrospectionSchemaBucketDeployment/AwsCliLayer/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "modelIntrospectionSchemaBucketDeploymentAwsCliLayer13C432F7"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/modelIntrospectionSchemaBucketDeployment/CustomResource-1536MiB/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "modelIntrospectionSchemaBucketDeploymentCustomResource1536MiB104B97EC"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/AMPLIFY_DATA_GRAPHQL_ENDPOINTParameter/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AMPLIFYDATAGRAPHQLENDPOINTParameter1C2CBB16"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/AMPLIFY_DATA_MODEL_INTROSPECTION_SCHEMA_BUCKET_NAMEParameter/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AMPLIFYDATAMODELINTROSPECTIONSCHEMABUCKETNAMEParameter47BF4F44"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/AMPLIFY_DATA_MODEL_INTROSPECTION_SCHEMA_KEYParameter/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AMPLIFYDATAMODELINTROSPECTIONSCHEMAKEYParameterB6AEAE8A"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/AMPLIFY_DATA_DEFAULT_NAMEParameter/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AMPLIFYDATADEFAULTNAMEParameterE7C23CC4"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/reference-to-amplifywritinglivechassesandbox753c548dbbauthNestedStackauthNestedStackResource924BBE0COutputs.amplifywritinglivechassesandbox753c548dbbauthamplifyAuthUserPoolEBE4BF52Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifywritinglivechassesandbox753c548dbbauthNestedStackauthNestedStackResource924BBE0COutputsamplifywritinglivechassesandbox753c548dbbauthamplifyAuthUserPoolEBE4BF52Ref"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/reference-to-amplifywritinglivechassesandbox753c548dbbauthNestedStackauthNestedStackResource924BBE0COutputs.amplifywritinglivechassesandbox753c548dbbauthamplifyAuthauthenticatedUserRole934A26C9Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifywritinglivechassesandbox753c548dbbauthNestedStackauthNestedStackResource924BBE0COutputsamplifywritinglivechassesandbox753c548dbbauthamplifyAuthauthenticatedUserRole934A26C9Ref"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/reference-to-amplifywritinglivechassesandbox753c548dbbauthNestedStackauthNestedStackResource924BBE0COutputs.amplifywritinglivechassesandbox753c548dbbauthamplifyAuthunauthenticatedUserRole1D31DC91Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifywritinglivechassesandbox753c548dbbauthNestedStackauthNestedStackResource924BBE0COutputsamplifywritinglivechassesandbox753c548dbbauthamplifyAuthunauthenticatedUserRole1D31DC91Ref"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/reference-to-amplifywritinglivechassesandbox753c548dbbauthNestedStackauthNestedStackResource924BBE0COutputs.amplifywritinglivechassesandbox753c548dbbauthamplifyAuthIdentityPool53F0F256Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifywritinglivechassesandbox753c548dbbauthNestedStackauthNestedStackResource924BBE0COutputsamplifywritinglivechassesandbox753c548dbbauthamplifyAuthIdentityPool53F0F256Ref"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725ApiId"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725GraphQLUrl": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifywritinglivechassesandbox753c548dbbdataamplifyDataGraphQLAPI6931D725GraphQLUrl"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data/amplifywritinglivechassesandbox753c548dbbdataamplifyDataAmplifyCodegenAssetsAmplifyCodegenAssetsDeploymentCustomResource1536MiB4B3CB05FDestinationBucketArn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifywritinglivechassesandbox753c548dbbdataamplifyDataAmplifyCodegenAssetsAmplifyCodegenAssetsDeploymentCustomResource1536MiB4B3CB05FDestinationBucketArn"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/data.NestedStack/data.NestedStackResource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "data7552DF31"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/awsAppsyncApiId": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsAppsyncApiId"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/awsAppsyncApiEndpoint": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsAppsyncApiEndpoint"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/awsAppsyncAuthenticationType": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsAppsyncAuthenticationType"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/awsAppsyncRegion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsAppsyncRegion"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/amplifyApiModelSchemaS3Uri": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyApiModelSchemaS3Uri"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/awsAppsyncAdditionalAuthenticationTypes": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsAppsyncAdditionalAuthenticationTypes"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/amplify-writinglive-chasse-sandbox-753c548dbb/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "amplify-writinglive-chasse-sandbox-753c548dbb"
+    },
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    }
+  },
+  "minimumCliVersion": "2.1005.0"
+}

@@ -1,0 +1,9 @@
+type WritingSession @model @auth(rules: [{allow: public, provider: iam, operations: [read]},
+  {allow: owner, operations: [create, update, delete], ownerField: "owner"}])
+{
+  content: String
+  title: String
+  authorId: String
+  lastModified: AWSDateTime
+  isActive: Boolean
+}
