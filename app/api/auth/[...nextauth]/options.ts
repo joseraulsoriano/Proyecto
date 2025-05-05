@@ -4,10 +4,7 @@ import { signIn as amplifySignIn, fetchAuthSession, getCurrentUser } from 'aws-a
 import { Amplify } from 'aws-amplify';
 import { type ResourcesConfig } from '@aws-amplify/core';
 import { cognitoUserPoolsTokenProvider } from '@aws-amplify/auth/cognito';
-import { generateClient } from 'aws-amplify/api';
-
-// Generate the API client
-const client = generateClient();
+import { amplifyClient } from '@/app/lib/client';
 
 // Extend the default session type
 declare module "next-auth" {
@@ -119,7 +116,7 @@ export const options: AuthOptions = {
             const currentUser = await getCurrentUser();
             
             // Obtener el rol del usuario desde la base de datos
-            const userFromDB = await client.models.User.get({ id: currentUser.userId });
+            const userFromDB = await amplifyClient.models.User.get(currentUser.userId);
             if (!userFromDB) {
               throw new Error('Usuario no encontrado en la base de datos');
             }
@@ -170,7 +167,7 @@ export const options: AuthOptions = {
       if (session.user) {
         session.user.email = token.email as string;
         session.user.id = token.id as string;
-        session.user.role = token.role as 'WRITER' | 'READER';
+        session.user.role = token.role;
         session.user.accessToken = token.accessToken as string;
       }
       return session;

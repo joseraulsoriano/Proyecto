@@ -4,16 +4,11 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import { getPublicWriters, canComment } from '@/app/lib/auth';
-
-interface Writer {
-  id: string;
-  username: string;
-  bio?: string;
-}
+import type { UserModel } from '@/app/lib/client';
 
 export default function WritersPage() {
   const { data: session } = useSession();
-  const [writers, setWriters] = useState<Writer[]>([]);
+  const [writers, setWriters] = useState<UserModel[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
