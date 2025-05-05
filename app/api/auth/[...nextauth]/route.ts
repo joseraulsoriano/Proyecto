@@ -1,66 +1,36 @@
-import NextAuth, { AuthOptions, DefaultSession } from 'next-auth';
-import CredentialsProvider from 'next-auth/providers/credentials';
-import { signIn as amplifySignIn, fetchAuthSession, getCurrentUser, type SignInOutput } from 'aws-amplify/auth';
-import { Amplify } from 'aws-amplify';
-import { type ResourcesConfig } from '@aws-amplify/core';
-import { cognitoUserPoolsTokenProvider } from '@aws-amplify/auth/cognito';
-import { options } from './options';
-import { UserRole } from '@/app/lib/client';
+import NextAuth from "next-auth";
+import { AuthOptions } from "next-auth";
+import CognitoProvider from "next-auth/providers/cognito";
 
-// Extender el tipo DefaultSession para incluir id
-declare module "next-auth" {
-  interface Session {
-    user: {
-      id: string;
-      email: string;
-      role: UserRole;
-      accessToken?: string;
-    } & DefaultSession["user"]
-  }
-
-  interface User {
-    id: string;
-    email: string;
-    role: UserRole;
-    name?: string;
-    accessToken?: string;
-  }
-}
-
-// Configuración de Amplify para el servidor
-const config: ResourcesConfig = {
-  Auth: {
-    Cognito: {
-      userPoolId: process.env.NEXT_PUBLIC_COGNITO_USER_POOL_ID!,
-      userPoolClientId: process.env.NEXT_PUBLIC_COGNITO_CLIENT_ID!,
-      signUpVerificationMethod: 'code',
-      loginWith: {
-        email: true,
-        phone: false,
-        username: false
+export const authOptions: AuthOptions = {
+  providers: [
+    CognitoProvider({
+      clientId: process.env.NEXT_PUBLIC_COGNITO_CLIENT_ID!,
+      clientSecret: process.env.COGNITO_CLIENT_SECRET!,
+      issuer: process.env.NEXT_PUBLIC_COGNITO_DOMAIN,
+    }),
+  ],
+  callbacks: {
+    async session({ session, token }) {
+      if (session.user) {
+        session.user.id = token.sub as string;
+        session.user.accessToken = token.accessToken as string;
       }
-    }
-  }
+      return session;
+    },
+    async jwt({ token, account }) {
+      if (account) {
+        token.accessToken = account.access_token;
+      }
+      return token;
+    },
+  },
+  pages: {
+    signIn: '/auth/signin',
+    error: '/auth/error',
+  },
 };
 
-// Configurar Amplify para el servidor
-Amplify.configure(config);
-
-// Configurar el proveedor de tokens
-cognitoUserPoolsTokenProvider.setKeyValueStorage({
-  getItem: () => Promise.resolve(null),
-  setItem: () => Promise.resolve(),
-  removeItem: () => Promise.resolve(),
-  clear: () => Promise.resolve()
-});
-
-// Log environment variables (excluding sensitive values)
-console.log('Auth Route Environment:', {
-  hasUserPoolId: !!process.env.NEXT_PUBLIC_COGNITO_USER_POOL_ID,
-  hasClientId: !!process.env.NEXT_PUBLIC_COGNITO_CLIENT_ID,
-  region: process.env.NEXT_PUBLIC_AWS_REGION
-});
-
-const handler = NextAuth(options);
+const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST }; 

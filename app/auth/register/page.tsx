@@ -2,12 +2,8 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Link from 'next/link';
 import { signUp } from 'aws-amplify/auth';
-import { generateClient } from 'aws-amplify/api';
-import type { UserRole } from '@/app/types';
-
-const client = generateClient();
+import Link from 'next/link';
 
 interface PasswordValidation {
   minLength: boolean;
@@ -17,19 +13,7 @@ interface PasswordValidation {
   hasSpecialChar: boolean;
 }
 
-const validatePassword = (password: string): PasswordValidation => {
-  return {
-    minLength: password.length >= 8,
-    hasUpperCase: /[A-Z]/.test(password),
-    hasLowerCase: /[a-z]/.test(password),
-    hasNumber: /\d/.test(password),
-    hasSpecialChar: /[!@#$%^&*(),.?":{}|<>]/.test(password),
-  };
-};
-
-const isPasswordValid = (validation: PasswordValidation): boolean => {
-  return Object.values(validation).every(Boolean);
-};
+type UserRole = 'WRITER' | 'READER';
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -37,7 +21,7 @@ export default function RegisterPage() {
     email: '',
     password: '',
     username: '',
-    role: 'READER' as UserRole,
+    role: 'READER' as UserRole
   });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -46,13 +30,17 @@ export default function RegisterPage() {
     hasUpperCase: false,
     hasLowerCase: false,
     hasNumber: false,
-    hasSpecialChar: false,
+    hasSpecialChar: false
   });
 
-  const handlePasswordChange = (password: string) => {
-    const validation = validatePassword(password);
-    setPasswordValidation(validation);
-    setFormData({ ...formData, password });
+  const validatePassword = (password: string) => {
+    setPasswordValidation({
+      minLength: password.length >= 8,
+      hasUpperCase: /[A-Z]/.test(password),
+      hasLowerCase: /[a-z]/.test(password),
+      hasNumber: /[0-9]/.test(password),
+      hasSpecialChar: /[!@#$%^&*(),.?":{}|<>]/.test(password)
+    });
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -60,8 +48,9 @@ export default function RegisterPage() {
     setLoading(true);
     setError('');
 
-    if (!isPasswordValid(passwordValidation)) {
-      setError('Por favor, asegúrate de cumplir todos los requisitos de la contraseña');
+    const isPasswordValid = Object.values(passwordValidation).every(Boolean);
+    if (!isPasswordValid) {
+      setError('La contraseña no cumple con todos los requisitos');
       setLoading(false);
       return;
     }
@@ -73,49 +62,22 @@ export default function RegisterPage() {
         options: {
           userAttributes: {
             email: formData.email,
+            preferred_username: formData.username,
+            name: `${formData.role.toLowerCase()}_${formData.username}`
           },
           autoSignIn: false
         }
       });
 
       if (!isSignUpComplete) {
-        console.log('Siguiente paso:', nextStep);
         if (nextStep.signUpStep === 'CONFIRM_SIGN_UP') {
-          try {
-            await client.graphql({
-              query: `
-                mutation CreateUser($input: CreateUserInput!) {
-                  createUser(input: $input) {
-                    id
-                    email
-                    username
-                    role
-                  }
-                }
-              `,
-              variables: {
-                input: {
-                  id: userId,
-                  email: formData.email,
-                  username: formData.username,
-                  role: formData.role,
-                }
-              }
-            });
-
-            router.push(`/auth/verify?email=${encodeURIComponent(formData.email)}&registration=success`);
-          } catch (error) {
-            console.error('Error creating user in database:', error);
-            setError('Error al crear el usuario en la base de datos');
-          }
+          router.push(`/auth/verify?email=${encodeURIComponent(formData.email)}&role=${formData.role.toLowerCase()}`);
         }
       }
     } catch (error: any) {
       console.error('Error en el registro:', error);
       if (error.name === 'UsernameExistsException') {
         setError('Ya existe una cuenta con este email');
-      } else if (error.name === 'InvalidPasswordException') {
-        setError('La contraseña no cumple con los requisitos de seguridad');
       } else {
         setError('Error al crear la cuenta. Por favor intenta de nuevo.');
       }
@@ -125,146 +87,152 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-      <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <h2 className="mt-6 text-center text-3xl font-extrabold text-white">
-          Crear una cuenta
+    <div className="min-h-screen bg-[#0f1623] flex items-center justify-center p-4">
+      <div className="w-full max-w-md bg-[#1a2231] rounded-lg shadow-xl p-8">
+        <h2 className="text-2xl font-bold text-white text-center mb-8">
+          Crear Cuenta
         </h2>
-      </div>
+        
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div>
+            <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
+              Email
+            </label>
+            <input
+              id="email"
+              type="email"
+              required
+              className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              value={formData.email}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            />
+          </div>
 
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-gray-800 py-8 px-4 shadow sm:rounded-lg sm:px-10">
-          <form className="space-y-6" onSubmit={handleSubmit}>
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-300">
-                Email
-              </label>
-              <div className="mt-1">
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  required
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="appearance-none block w-full px-3 py-2 border border-gray-600 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-gray-700 text-white"
-                />
-              </div>
-            </div>
+          <div>
+            <label htmlFor="username" className="block text-sm font-medium text-gray-300 mb-2">
+              Nombre de usuario
+            </label>
+            <input
+              id="username"
+              type="text"
+              required
+              className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              value={formData.username}
+              onChange={(e) => setFormData({ ...formData, username: e.target.value })}
+            />
+          </div>
 
-            <div>
-              <label htmlFor="username" className="block text-sm font-medium text-gray-300">
-                Nombre de usuario
-              </label>
-              <div className="mt-1">
-                <input
-                  id="username"
-                  name="username"
-                  type="text"
-                  required
-                  value={formData.username}
-                  onChange={(e) => setFormData({ ...formData, username: e.target.value })}
-                  className="appearance-none block w-full px-3 py-2 border border-gray-600 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-gray-700 text-white"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-300">
-                Contraseña
-              </label>
-              <div className="mt-1">
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  autoComplete="new-password"
-                  required
-                  value={formData.password}
-                  onChange={(e) => handlePasswordChange(e.target.value)}
-                  className="appearance-none block w-full px-3 py-2 border border-gray-600 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-gray-700 text-white"
-                />
-              </div>
-              <div className="mt-2 space-y-2 text-sm">
-                <p className={`${passwordValidation.minLength ? 'text-green-400' : 'text-gray-400'}`}>
-                  ✓ Mínimo 8 caracteres
-                </p>
-                <p className={`${passwordValidation.hasUpperCase ? 'text-green-400' : 'text-gray-400'}`}>
-                  ✓ Al menos una mayúscula
-                </p>
-                <p className={`${passwordValidation.hasLowerCase ? 'text-green-400' : 'text-gray-400'}`}>
-                  ✓ Al menos una minúscula
-                </p>
-                <p className={`${passwordValidation.hasNumber ? 'text-green-400' : 'text-gray-400'}`}>
-                  ✓ Al menos un número
-                </p>
-                <p className={`${passwordValidation.hasSpecialChar ? 'text-green-400' : 'text-gray-400'}`}>
-                  ✓ Al menos un carácter especial (!@#$%^&*(),.?":{}|&lt;&gt;)
-                </p>
-              </div>
-            </div>
-
-            <div>
-              <label htmlFor="role" className="block text-sm font-medium text-gray-300">
-                Tipo de cuenta
-              </label>
-              <div className="mt-1">
-                <select
-                  id="role"
-                  name="role"
-                  value={formData.role}
-                  onChange={(e) => setFormData({ ...formData, role: e.target.value as UserRole })}
-                  className="block w-full px-3 py-2 border border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-gray-700 text-white"
-                >
-                  <option value="READER">Lector</option>
-                  <option value="WRITER">Escritor</option>
-                </select>
-              </div>
-            </div>
-
-            {error && (
-              <div className="text-red-400 text-sm text-center">
-                {error}
-              </div>
-            )}
-
-            <div>
+          <div>
+            <label htmlFor="role" className="block text-sm font-medium text-gray-300 mb-2">
+              Tipo de cuenta
+            </label>
+            <div className="grid grid-cols-2 gap-4">
               <button
-                type="submit"
-                disabled={loading || !isPasswordValid(passwordValidation)}
-                className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white ${
-                  loading || !isPasswordValid(passwordValidation)
-                    ? 'bg-indigo-500 cursor-not-allowed'
-                    : 'bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+                type="button"
+                className={`px-4 py-3 rounded-md text-sm font-medium transition-colors ${
+                  formData.role === 'WRITER'
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
                 }`}
+                onClick={() => setFormData({ ...formData, role: 'WRITER' })}
               >
-                {loading ? 'Creando cuenta...' : 'Crear cuenta'}
+                <div className="flex items-center justify-center space-x-2">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                  </svg>
+                  <span>Escritor</span>
+                </div>
+              </button>
+              <button
+                type="button"
+                className={`px-4 py-3 rounded-md text-sm font-medium transition-colors ${
+                  formData.role === 'READER'
+                    ? 'bg-green-600 text-white'
+                    : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                }`}
+                onClick={() => setFormData({ ...formData, role: 'READER' })}
+              >
+                <div className="flex items-center justify-center space-x-2">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                  </svg>
+                  <span>Lector</span>
+                </div>
               </button>
             </div>
-          </form>
+          </div>
 
-          <div className="mt-6">
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-gray-600" />
-              </div>
-              <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-gray-800 text-gray-400">
-                  ¿Ya tienes una cuenta?
-                </span>
-              </div>
-            </div>
-
-            <div className="mt-6">
-              <Link
-                href="/auth/login"
-                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
-              >
-                Iniciar Sesión
-              </Link>
+          <div>
+            <label htmlFor="password" className="block text-sm font-medium text-gray-300 mb-2">
+              Contraseña
+            </label>
+            <input
+              id="password"
+              type="password"
+              required
+              className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              value={formData.password}
+              onChange={(e) => {
+                setFormData({ ...formData, password: e.target.value });
+                validatePassword(e.target.value);
+              }}
+            />
+            <div className="mt-2 space-y-1">
+              <p className={`text-sm ${passwordValidation.minLength ? 'text-green-400' : 'text-gray-400'}`}>
+                ✓ Mínimo 8 caracteres
+              </p>
+              <p className={`text-sm ${passwordValidation.hasUpperCase ? 'text-green-400' : 'text-gray-400'}`}>
+                ✓ Al menos una mayúscula
+              </p>
+              <p className={`text-sm ${passwordValidation.hasLowerCase ? 'text-green-400' : 'text-gray-400'}`}>
+                ✓ Al menos una minúscula
+              </p>
+              <p className={`text-sm ${passwordValidation.hasNumber ? 'text-green-400' : 'text-gray-400'}`}>
+                ✓ Al menos un número
+              </p>
+              <p className={`text-sm ${passwordValidation.hasSpecialChar ? 'text-green-400' : 'text-gray-400'}`}>
+                ✓ Al menos un carácter especial
+              </p>
             </div>
           </div>
+
+          {error && (
+            <div className="bg-red-900/50 border border-red-500 text-red-200 px-4 py-3 rounded relative" role="alert">
+              <span className="block sm:inline">{error}</span>
+            </div>
+          )}
+
+          <button
+            type="submit"
+            disabled={loading}
+            className={`w-full py-3 px-4 rounded-md text-white font-medium ${
+              loading 
+                ? 'bg-blue-600/50 cursor-not-allowed' 
+                : 'bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500'
+            }`}
+          >
+            {loading ? 'Creando cuenta...' : 'Crear cuenta'}
+          </button>
+        </form>
+
+        <div className="mt-8 text-center">
+          <div className="relative">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-gray-600"></div>
+            </div>
+            <div className="relative flex justify-center text-sm">
+              <span className="px-2 bg-[#1a2231] text-gray-400">
+                ¿Ya tienes una cuenta?
+              </span>
+            </div>
+          </div>
+
+          <Link
+            href="/auth/login"
+            className="mt-6 inline-block w-full text-center py-3 px-4 border border-transparent rounded-md text-white font-medium bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+          >
+            Iniciar Sesión
+          </Link>
         </div>
       </div>
     </div>

@@ -1,174 +1,215 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { signIn } from 'next-auth/react';
+import { signIn, getCurrentUser, signOut } from 'aws-amplify/auth';
+import { SignInInput, AuthUser, SignInOutput } from '@aws-amplify/auth';
 import Link from 'next/link';
-import { Suspense } from 'react';
-import { getRedirectPath } from '@/app/lib/auth';
-import type { UserRole } from '@/app/lib/client';
 
-function LoginForm() {
+interface FormData {
+  email: string;
+  password: string;
+}
+
+interface UserAttributes {
+  name?: string;
+  [key: string]: any;
+}
+
+export default function LoginPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [formData, setFormData] = useState({
+  const verified = searchParams.get('verified');
+  
+  const [formData, setFormData] = useState<FormData>({
     email: '',
     password: '',
   });
-  const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
+  const [message, setMessage] = useState<string>('');
 
-  // Mostrar mensaje de registro exitoso si existe
-  const message = searchParams.get('message');
-  const rawCallbackUrl = searchParams.get('callbackUrl');
-  const callbackUrl = rawCallbackUrl ? decodeURIComponent(rawCallbackUrl) : '/';
+  useEffect(() => {
+    if (verified) {
+      setMessage('Email verificado correctamente. Por favor, inicia sesión.');
+    }
+    
+    // Verificar si hay una sesión activa
+    checkCurrentSession();
+  }, [verified]);
+
+  const checkCurrentSession = async () => {
+    try {
+      const user = await getCurrentUser();
+      if (user) {
+        // Si hay una sesión activa, primero cerramos sesión
+        await signOut();
+      }
+    } catch (error) {
+      // Si no hay sesión, no hacemos nada
+      console.log('No hay sesión activa');
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     setError('');
+    setMessage('');
 
     try {
-      const result = await signIn('credentials', {
-        email: formData.email,
+      const signInInput: SignInInput = {
+        username: formData.email,
         password: formData.password,
-        redirect: false,
-      });
-
-      if (result?.error) {
-        if (result.error === 'USER_NOT_VERIFIED') {
-          router.push(`/auth/verify?email=${encodeURIComponent(formData.email)}`);
-          return;
-        } else if (result.error === 'INVALID_CREDENTIALS') {
-          setError('Email o contraseña incorrectos');
-          return;
-        } else {
-          setError('Error al iniciar sesión. Por favor intenta de nuevo.');
-          return;
+        options: {
+          authFlowType: "USER_SRP_AUTH"
         }
+      };
+
+      const { isSignedIn, nextStep } = await signIn(signInInput);
+
+      if (isSignedIn) {
+        const user = await getCurrentUser();
+        // Get user attributes from the token
+        const session = await (user as any).getSignInUserSession();
+        const attributes = session?.getAccessToken()?.payload as UserAttributes;
+        const name = attributes?.name || '';
+        
+        if (name.startsWith('writer_')) {
+          router.push('/writer');
+        } else {
+          router.push('/reader');
+        }
+      } else if (nextStep?.signInStep === 'CONFIRM_SIGN_IN') {
+        router.push(`/auth/verify?email=${encodeURIComponent(formData.email)}`);
       }
-
-      // Obtener el rol del usuario desde la sesión
-      const response = await fetch('/api/auth/session');
-      const session = await response.json();
-      const role = session?.user?.role as UserRole;
-
-      // Redirigir según el rol
-      const redirectPath = getRedirectPath(role);
-      router.push(redirectPath);
-
-    } catch (error) {
-      console.error('Error en el inicio de sesión:', error);
-      setError('Error al iniciar sesión. Por favor intenta de nuevo.');
+    } catch (error: unknown) {
+      console.error('Error de inicio de sesión:', error);
+      
+      if (error instanceof Error) {
+        switch (error.name) {
+          case 'UserNotConfirmedException':
+            router.push(`/auth/verify?email=${encodeURIComponent(formData.email)}`);
+            break;
+          case 'NotAuthorizedException':
+            setError('Email o contraseña incorrectos');
+            break;
+          case 'UserNotFoundException':
+            setError('No existe una cuenta con este email');
+            break;
+          case 'UserAlreadyAuthenticatedException':
+            try {
+              await signOut();
+              const { isSignedIn } = await signIn(signInInput);
+              
+              if (isSignedIn) {
+                const user = await getCurrentUser();
+                const session = await (user as any).getSignInUserSession();
+                const attributes = session?.getAccessToken()?.payload as UserAttributes;
+                const name = attributes?.name || '';
+                
+                if (name.startsWith('writer_')) {
+                  router.push('/writer');
+                } else {
+                  router.push('/reader');
+                }
+              }
+            } catch (retryError) {
+              setError('Error al iniciar sesión. Por favor, recarga la página e intenta de nuevo.');
+            }
+            break;
+          default:
+            setError('Error al iniciar sesión. Por favor intenta de nuevo.');
+        }
+      } else {
+        setError('Error al iniciar sesión. Por favor intenta de nuevo.');
+      }
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-      <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <h2 className="mt-6 text-center text-3xl font-extrabold text-white">
+    <div className="min-h-screen bg-[#0f1623] flex items-center justify-center p-4">
+      <div className="w-full max-w-md bg-[#1a2231] rounded-lg shadow-xl p-8">
+        <h2 className="text-2xl font-bold text-white text-center mb-8">
           Iniciar Sesión
         </h2>
+        
         {message && (
-          <div className="mt-2 text-center text-sm text-green-400">
-            {message}
+          <div className="mb-6 bg-green-900/50 border border-green-500 text-green-200 px-4 py-3 rounded relative">
+            <span className="block sm:inline">{message}</span>
           </div>
         )}
-      </div>
 
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-gray-800 py-8 px-4 shadow sm:rounded-lg sm:px-10">
-          <form className="space-y-6" onSubmit={handleSubmit}>
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-300">
-                Email
-              </label>
-              <div className="mt-1">
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  required
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="appearance-none block w-full px-3 py-2 border border-gray-600 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-gray-700 text-white"
-                />
-              </div>
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div>
+            <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
+              Email
+            </label>
+            <input
+              id="email"
+              type="email"
+              required
+              className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              value={formData.email}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            />
+          </div>
+
+          <div>
+            <label htmlFor="password" className="block text-sm font-medium text-gray-300 mb-2">
+              Contraseña
+            </label>
+            <input
+              id="password"
+              type="password"
+              required
+              className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              value={formData.password}
+              onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+            />
+          </div>
+
+          {error && (
+            <div className="bg-red-900/50 border border-red-500 text-red-200 px-4 py-3 rounded relative" role="alert">
+              <span className="block sm:inline">{error}</span>
             </div>
+          )}
 
-            <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-300">
-                Contraseña
-              </label>
-              <div className="mt-1">
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  autoComplete="current-password"
-                  required
-                  value={formData.password}
-                  onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                  className="appearance-none block w-full px-3 py-2 border border-gray-600 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-gray-700 text-white"
-                />
-              </div>
+          <button
+            type="submit"
+            disabled={loading}
+            className={`w-full py-3 px-4 rounded-md text-white font-medium ${
+              loading 
+                ? 'bg-blue-600/50 cursor-not-allowed' 
+                : 'bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500'
+            }`}
+          >
+            {loading ? 'Iniciando sesión...' : 'Iniciar Sesión'}
+          </button>
+        </form>
+
+        <div className="mt-8 text-center">
+          <div className="relative">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-gray-600"></div>
             </div>
-
-            {error && (
-              <div className="text-red-400 text-sm text-center">
-                {error}
-              </div>
-            )}
-
-            <div>
-              <button
-                type="submit"
-                disabled={loading}
-                className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white ${
-                  loading
-                    ? 'bg-indigo-500 cursor-not-allowed'
-                    : 'bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
-                }`}
-              >
-                {loading ? 'Iniciando sesión...' : 'Iniciar Sesión'}
-              </button>
-            </div>
-          </form>
-
-          <div className="mt-6">
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-gray-600" />
-              </div>
-              <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-gray-800 text-gray-400">
-                  ¿No tienes una cuenta?
-                </span>
-              </div>
-            </div>
-
-            <div className="mt-6">
-              <Link
-                href="/auth/register"
-                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
-              >
-                Crear cuenta
-              </Link>
+            <div className="relative flex justify-center text-sm">
+              <span className="px-2 bg-[#1a2231] text-gray-400">
+                ¿No tienes una cuenta?
+              </span>
             </div>
           </div>
+
+          <Link
+            href="/auth/register"
+            className="mt-6 inline-block w-full text-center py-3 px-4 border border-transparent rounded-md text-white font-medium bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+          >
+            Crear cuenta
+          </Link>
         </div>
       </div>
     </div>
-  );
-}
-
-export default function LoginPage() {
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <LoginForm />
-    </Suspense>
   );
 } 
