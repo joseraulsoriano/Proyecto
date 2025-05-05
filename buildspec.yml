@@ -1,0 +1,31 @@
+version: 0.2
+env:
+  variables:
+    NODE_OPTIONS: "--max-old-space-size=8192"
+phases:
+  install:
+    runtime-versions:
+      nodejs: 20
+    commands:
+      - n 20.11.1
+      - node -v
+      - npm -v
+  pre_build:
+    commands:
+      - echo Installing dependencies...
+      - npm ci --legacy-peer-deps
+  build:
+    commands:
+      - echo Building...
+      - npm run build
+  post_build:
+    commands:
+      - echo Build completed
+artifacts:
+  baseDirectory: .next
+  files:
+    - '**/*'
+cache:
+  paths:
+    - 'node_modules/**/*'
+    - '.next/cache/**/*' 
